@@ -30,6 +30,9 @@ class App extends BaseConfig
      * @var list<string>
      */
     public array $allowedHostnames = [];
+    public $sessionDriver = 'CodeIgniter\Session\Handlers\FileHandler';
+    public $sessionCookieName = 'ci_session';
+
 
     /**
      * --------------------------------------------------------------------------

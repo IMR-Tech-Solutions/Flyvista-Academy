@@ -1,0 +1,81 @@
+ body {
+     font-family: 'Inter', sans-serif;
+     background-color: #ffffff;
+     color: #333;
+     margin: 0;
+     padding: 0;
+
+ }
+/* < ---------- construction Site Styles Start ---------- > */
+ .construction-hero-slide {
+     background-size: cover;
+     background-position: center;
+     background-repeat: no-repeat;
+     transition: opacity 0.8s ease-in-out;
+ }
+
+ .topbar {
+     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+ }
+
+ .topbar-hidden {
+     transform: translateY(-100%);
+     opacity: 0;
+ }
+
+ .header-scrolled {
+     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+     background-color: rgba(255, 255, 255, 0.95);
+     backdrop-filter: blur(10px);
+ }
+
+ .active-slide {
+     opacity: 1;
+     z-index: 1;
+ }
+
+ .inactive-slide {
+     opacity: 0;
+     z-index: 0;
+ }
+
+ .slider-dot {
+     transition: all 0.3s ease;
+ }
+
+ .slider-dot.active {
+     background-color: #FF6B00;
+     width: 24px;
+ }
+
+ .faq-item {
+     transition: all 0.3s ease;
+ }
+
+ .faq-answer {
+     max-height: 45px;
+     overflow: hidden;
+     transition: max-height 0.3s ease;
+ }
+
+ .faq-item.active .faq-answer {
+     max-height: 500px;
+ }
+
+ .faq-item.active .faq-toggle {
+     transform: rotate(180deg);
+ }
+
+ /* < ---------- construction Site Styles End ---------- > */
+
+/* < ---------- Finance Site Styles Start ---------- > */
+
+
+
+    .header-scrolled {
+        @apply bg-white shadow-md !backdrop-blur-none;
+    }
+    .topbar-hidden {
+        @apply -translate-y-full opacity-0 transition-all duration-300;
+    }
+
