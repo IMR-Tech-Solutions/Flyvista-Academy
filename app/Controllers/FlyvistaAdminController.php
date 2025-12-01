@@ -636,6 +636,12 @@ class FlyvistaAdminController extends BaseController
             'image'             => $imageName,
             'icon'              => $this->request->getPost('icon'),
             'short_description' => $this->request->getPost('short_description'),
+
+            // NEW FIELDS
+            'duration'          => $this->request->getPost('duration'),
+            'level'             => $this->request->getPost('level'),
+            'progress'          => $this->request->getPost('progress'),
+
             'status'            => $this->request->getPost('status'),
         ];
 
@@ -680,6 +686,7 @@ class FlyvistaAdminController extends BaseController
                 $oldPath = $uploadPath . $oldData['image'];
                 if (file_exists($oldPath)) unlink($oldPath);
             }
+
             $imageName = $file->getRandomName();
             $file->move($uploadPath, $imageName);
         }
@@ -693,6 +700,12 @@ class FlyvistaAdminController extends BaseController
             'image'             => $imageName,
             'icon'              => $this->request->getPost('icon'),
             'short_description' => $this->request->getPost('short_description'),
+
+            // NEW FIELDS
+            'duration'          => $this->request->getPost('duration'),
+            'level'             => $this->request->getPost('level'),
+            'progress'          => $this->request->getPost('progress'),
+
             'status'            => $this->request->getPost('status'),
         ];
 

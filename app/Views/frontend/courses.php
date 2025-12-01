@@ -43,9 +43,9 @@
     </div>
 </section>
 
-<section class="py-10 mb bg-white relative overflow-hidden fade-in-section">
+<section class="py-10 bg-white relative overflow-hidden fade-in-section">
     <div class="container mx-auto px-6">
-        
+
         <!-- Section Title -->
         <div class="text-center mb-20">
             <span class="uppercase inline-block px-6 py-2 bg-secondary/10 text-secondary rounded-full font-semibold text-sm tracking-wider border border-secondary/20 mb-4">
@@ -53,7 +53,7 @@
             </span>
 
             <h2 class="text-3xl lg:text-4xl font-bold text-primary mt-3 mb-[8rem]">
-                <?= ($sectionTitle->heading ?? 'Empowering Aviation Careers with FlyVista') ?>
+                <?= esc($sectionTitle->heading ?? 'Empowering Aviation Careers with FlyVista') ?>
 
                 <div class="w-full flex items-center justify-center mt-2 gap-3">
                     <div class="w-16 h-[2px] bg-gradient-to-r from-transparent to-primary"></div>
@@ -70,20 +70,15 @@
         <!-- Course Cards Grid -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mt-8 sm:mt-12">
 
-            <?php 
-            $durations = ['3 Months', '6 Months', '12 Months', '18 Months', '4 Weeks', '8 Weeks'];
-            $levels = ['Beginner', 'Intermediate', 'Advanced', 'Professional'];
-            ?>
-
             <?php if (!empty($courses)): ?>
                 <?php foreach ($courses as $i => $course): ?>
                     <div class="group relative bg-white border-gray-300 mt-12 sm:mt-12 border-2 rounded-2xl pt-24 pb-16 px-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:bg-gradient-to-r hover:from-[#335B95] hover:to-[#142947] overflow-visible text-left">
 
                         <!-- Course Image -->
                         <div class="absolute -top-16 left-1/2 transform -translate-x-1/2 w-[90%] rounded-xl overflow-hidden shadow-lg">
-                            <img src="<?= base_url('assets/img/courses/' . $course->image) ?>" 
-                                 alt="<?= esc($course->title) ?>" 
-                                 class="w-full h-48 object-cover rounded-xl transition-transform duration-500 group-hover:scale-105">
+                            <img src="<?= base_url('assets/img/courses/' . $course->image) ?>"
+                                alt="<?= esc($course->title) ?>"
+                                class="w-full h-48 object-cover rounded-xl transition-transform duration-500 group-hover:scale-105">
                         </div>
 
                         <!-- Icon -->
@@ -96,8 +91,9 @@
 
                             <span class="block w-12 h-[2px] bg-gray-300 group-hover:bg-white transition-all duration-500 mb-3"></span>
 
+                            <!-- Category/Subheading -->
                             <p class="text-sm text-gray-500 uppercase tracking-wide group-hover:text-white transition-all duration-500">
-                                <?= esc($course->subheading ?: 'Course') ?>
+                                <?= esc($course->subheading ?: $course->category) ?>
                             </p>
 
                             <h3 class="text-xl font-bold text-primary group-hover:text-white mt-1 transition-all duration-500">
@@ -108,20 +104,20 @@
                                 <?= esc($course->short_description) ?>
                             </p>
 
-                            <!-- EXTRA DETAILS SECTION -->
+                            <!-- EXTRA DETAILS (DYNAMIC NOW) -->
                             <div class="mt-5 space-y-3">
 
                                 <!-- Certified / Duration / Level -->
                                 <div class="flex items-center justify-between text-sm">
 
                                     <span class="flex items-center gap-1 text-gray-600 group-hover:text-white">
-                                        <i class="fa-solid fa-certificate text-secondary text-xs"></i>
-                                        Certified
+                                        <i class="fa-solid fa-layer-group text-secondary text-xs"></i>
+                                        <?= esc($course->level ?: 'Not Specified') ?>
                                     </span>
-
+                                    <!-- DYNAMIC DURATION -->
                                     <span class="flex items-center gap-1 text-gray-600 group-hover:text-white">
                                         <i class="fa-solid fa-clock text-secondary text-xs"></i>
-                                        <?= $durations[$i % count($durations)] ?>
+                                        <?= esc($course->duration ?: 'N/A') ?>
                                     </span>
 
                                 </div>
@@ -130,11 +126,13 @@
                                 <div class="space-y-1 mt-3">
                                     <div class="flex justify-between text-xs text-gray-600 group-hover:text-white">
                                         <span>Course Progress</span>
-                                        <span>65%</span>
+                                        <span><?= esc($course->progress ?: 0) ?>%</span>
                                     </div>
 
                                     <div class="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
-                                        <div class="h-2 w-[45%] group-hover:w-[65%] bg-gradient-to-r from-secondary-light to-secondary rounded-full transition-all duration-700"></div>
+                                        <div class="h-2 bg-gradient-to-r from-secondary-light to-secondary rounded-full transition-all duration-700"
+                                            style="width: <?= esc($course->progress ?: 0) ?>%">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -188,92 +186,36 @@
         <!-- Section Header -->
         <div class="text-center mb-16">
             <span class="uppercase inline-block px-6 py-2 bg-secondary/10 text-secondary rounded-full font-semibold text-sm tracking-wider border border-secondary/20 mb-4">
-                Success Stories
+                Case Stories
             </span>
+
             <h2 class="text-3xl md:text-4xl font-bold text-primary mb-6">
-                Our Students Soaring High
+                Real Success Stories from Our Aviation Graduates
                 <div class="w-full flex items-center justify-center mt-2 gap-3">
-
-                <!-- Left Gradient Line -->
-                <div class="w-16 h-[2px] bg-gradient-to-r from-transparent to-primary"></div>
-
-                <!-- Left Dot -->
-                <span class="h-1 w-1 bg-primary rounded-full"></span>
-
-                <!-- Center Circle -->
-                <span class="h-3 w-3 border-2 border-primary rounded-full flex items-center justify-center">
+                    <div class="w-16 h-[2px] bg-gradient-to-r from-transparent to-primary"></div>
                     <span class="h-1 w-1 bg-primary rounded-full"></span>
-                </span>
-
-                <!-- Right Dot -->
-                <span class="h-1 w-1 bg-primary rounded-full"></span>
-
-                <!-- Right Gradient Line -->
-                <div class="w-16 h-[2px] bg-gradient-to-l from-transparent to-primary"></div>
-
-            </div>
+                    <span class="h-3 w-3 border-2 border-primary rounded-full flex items-center justify-center">
+                        <span class="h-1 w-1 bg-primary rounded-full"></span>
+                    </span>
+                    <span class="h-1 w-1 bg-primary rounded-full"></span>
+                    <div class="w-16 h-[2px] bg-gradient-to-l from-transparent to-primary"></div>
+                </div>
             </h2>
+
             <p class="text-lg text-gray-600 max-w-3xl mx-auto">
-                Discover how FlyVista has transformed dreams into reality.
-                Our graduates are making their mark in the aviation industry worldwide.
+                Each student at Flyvista begins with a dream and graduates with a career. 
+                These case stories highlight real journeys how students overcame challenges, 
+                enhanced their skills, and secured reputable positions in the aviation industry 
+                through structured training, mentorship, and hands-on exposure at Flyvista.
             </p>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
-            <!-- Featured Story (Image remains fixed) -->
-            <div class="relative">
-                <div class="bg-white rounded-2xl shadow-xl overflow-hidden transform transition-all duration-500 hover:shadow-2xl">
-                    <div class="relative h-80 overflow-hidden">
-                        <img
-                            src="<?= base_url('assets/img/courses/' . $featuredStory->image) ?>"
-                            alt="<?= esc($featuredStory->name) ?>"
-                            class="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                            id="featuredImage">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-                        <?php if ($featuredStory->is_featured): ?>
-                            <div class="absolute bottom-4 left-6">
-                                <span class="inline-block px-3 py-1 bg-secondary-light text-white text-sm font-medium rounded-full">
-                                    Featured Graduate
-                                </span>
-                            </div>
-                        <?php endif; ?>
-                    </div>
+            <!-- FEATURED STORY CONTAINER (JS will replace content here) -->
+            <div id="featuredContainer"></div>
 
-                    <div class="p-8">
-                        <div class="flex items-center mb-4">
-                            <div id="featuredInitials" class="w-12 h-12 bg-[#20406C] rounded-full flex items-center justify-center text-white font-bold text-lg mr-4">
-                                <?php
-                                $names = explode(' ', $featuredStory->name);
-                                echo strtoupper(substr($names[0], 0, 1) . (isset($names[1]) ? substr($names[1], 0, 1) : ''));
-                                ?>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-bold text-gray-900" id="featuredName"><?= esc($featuredStory->name) ?></h3>
-                                <p class="text-secondary font-medium" id="featuredRole"><?= esc($featuredStory->role) ?></p>
-                            </div>
-                        </div>
-
-                        <p class="text-gray-600 mb-6 leading-relaxed" id="featuredQuote"><?= esc($featuredStory->quote) ?></p>
-
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-2 text-sm text-gray-500">
-                                <i class="fas fa-graduation-cap text-[#20406C]"></i>
-                                <span id="featuredCourse"><?= esc($featuredStory->course) ?></span>
-                            </div>
-                            <?php if (!empty($featuredStory->linkedin_url)): ?>
-                                <div class="flex space-x-2">
-                                    <a href="<?= esc($featuredStory->linkedin_url) ?>" target="_blank" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-[#20406C] hover:text-white transition-colors">
-                                        <i class="fab fa-linkedin-in text-xs"></i>
-                                    </a>
-                                </div>
-                            <?php endif; ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Other Stories -->
+            <!-- OTHER STORIES (Right side) -->
             <div id="otherStories" class="space-y-8">
                 <?php foreach ($allStories as $story): ?>
                     <div class="story-card bg-white rounded-xl shadow-lg p-6 cursor-pointer"
@@ -284,13 +226,15 @@
                         data-course="<?= esc($story->course) ?>"
                         data-image="<?= base_url('assets/img/courses/' . $story->image) ?>"
                         data-linkedin="<?= esc($story->linkedin_url) ?>">
+
                         <div class="flex items-start">
                             <div class="flex-shrink-0 w-16 h-16 bg-[#20406C] rounded-full flex items-center justify-center text-white font-bold text-lg mr-4">
                                 <?php
-                                $names = explode(' ', $story->name);
-                                echo strtoupper(substr($names[0], 0, 1) . (isset($names[1]) ? substr($names[1], 0, 1) : ''));
+                                $parts = explode(" ", $story->name);
+                                echo strtoupper(substr($parts[0], 0, 1) . ($parts[1] ?? '')[0]);
                                 ?>
                             </div>
+
                             <div class="flex-1">
                                 <h4 class="text-lg font-semibold text-gray-900"><?= esc($story->name) ?></h4>
                                 <p class="text-secondary text-sm font-medium mb-2"><?= esc($story->role) ?></p>
@@ -301,152 +245,111 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 <?php endforeach; ?>
             </div>
 
         </div>
 
+        <!-- JavaScript -->
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const featuredName = document.getElementById('featuredName');
-                const featuredRole = document.getElementById('featuredRole');
-                const featuredQuote = document.getElementById('featuredQuote');
-                const featuredCourse = document.getElementById('featuredCourse');
-                const featuredInitials = document.getElementById('featuredInitials');
-                const featuredImage = document.getElementById('featuredImage'); // <-- add this
+            document.addEventListener("DOMContentLoaded", () => {
 
-                document.querySelectorAll('.story-card').forEach(card => {
-                    card.addEventListener('click', function() {
-                        featuredName.textContent = this.getAttribute('data-name');
-                        featuredRole.textContent = this.getAttribute('data-role');
-                        featuredQuote.textContent = this.getAttribute('data-quote');
-                        featuredCourse.textContent = this.getAttribute('data-course');
-                        featuredInitials.textContent = this.getAttribute('data-initials');
-
-                        // Update featured image
-                        const newImage = this.getAttribute('data-image');
-                        if (newImage) {
-                            // Optional: smooth fade
-                            featuredImage.style.opacity = 0;
-                            setTimeout(() => {
-                                featuredImage.src = newImage;
-                                featuredImage.style.opacity = 1;
-                            }, 200);
-                        }
-
-                        // Update LinkedIn button
-                        const linkedin = this.getAttribute('data-linkedin');
-                        let linkedinBtn = featuredInitials.closest('.p-8').querySelector('a');
-                        if (linkedin) {
-                            if (!linkedinBtn) {
-                                linkedinBtn = document.createElement('a');
-                                linkedinBtn.className = "w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-[#20406C] hover:text-white transition-colors";
-                                linkedinBtn.innerHTML = '<i class="fab fa-linkedin-in text-xs"></i>';
-                                featuredInitials.closest('.p-8').querySelector('div.flex.items-center.justify-between').appendChild(linkedinBtn);
-                            }
-                            linkedinBtn.href = linkedin;
-                            linkedinBtn.style.display = 'flex';
-                        } else if (linkedinBtn) {
-                            linkedinBtn.style.display = 'none';
-                        }
-
-                        // Highlight selected story
-                        document.querySelectorAll('.story-card').forEach(c => c.classList.remove('border-2', 'border-[#D4A85D]'));
-                        this.classList.add('border-2', 'border-[#D4A85D]');
-                    });
-                });
-            });
-            document.addEventListener('DOMContentLoaded', function() {
-                const featuredContainer = document.getElementById('featuredContainer');
-                const otherStories = document.getElementById('otherStories');
+                const featuredContainer = document.getElementById("featuredContainer");
+                const otherStories = document.getElementById("otherStories");
 
                 let allStories = [];
 
-                // Gather all stories from HTML
-                document.querySelectorAll('.story-card').forEach(card => {
+                // Collect stories from HTML
+                document.querySelectorAll(".story-card").forEach(card => {
                     allStories.push({
-                        id: card.getAttribute('data-id'),
-                        name: card.getAttribute('data-name'),
-                        role: card.getAttribute('data-role'),
-                        quote: card.getAttribute('data-quote'),
-                        course: card.getAttribute('data-course'),
-                        image: card.getAttribute('data-image'),
-                        linkedin: card.getAttribute('data-linkedin')
+                        id: card.dataset.id,
+                        name: card.dataset.name,
+                        role: card.dataset.role,
+                        quote: card.dataset.quote.replace(/\n/g, "<br>"),
+                        course: card.dataset.course,
+                        image: card.dataset.image,
+                        linkedin: card.dataset.linkedin,
                     });
                 });
 
-                // Initialize featured story as first in the array
+                // First story is featured initially
                 let activeStory = allStories[0];
 
-                // Function to render featured story
+                // ---- Featured Renderer ----
                 function renderFeatured(story) {
                     featuredContainer.innerHTML = `
-            <div class="bg-white rounded-2xl shadow-xl overflow-hidden transform transition-all duration-500 hover:shadow-2xl">
-                <div class="relative h-80 overflow-hidden">
-                    <img src="${story.image}" alt="${story.name}" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105" id="featuredImage">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-                </div>
-                <div class="p-8">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-[#20406C] rounded-full flex items-center justify-center text-white font-bold text-lg mr-4">
-                            ${story.name.split(' ').map(n=>n[0]).join('').substring(0,2).toUpperCase()}
+                        <div class="bg-white rounded-2xl shadow-xl overflow-hidden transform transition-all duration-500 hover:shadow-2xl">
+                            <div class="relative h-80 overflow-hidden">
+                                <img src="${story.image}" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                            </div>
+
+                            <div class="p-8">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 bg-[#20406C] rounded-full flex items-center justify-center text-white font-bold text-lg mr-4">
+                                        ${story.name.split(" ").map(n => n[0]).join("").substring(0,2).toUpperCase()}
+                                    </div>
+
+                                    <div>
+                                        <h3 class="text-xl font-bold text-gray-900">${story.name}</h3>
+                                        <p class="text-secondary font-medium">${story.role}</p>
+                                    </div>
+                                </div>
+
+                                <p class="text-gray-600 mb-6 leading-relaxed text-justify">${story.quote}</p>
+
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-2 text-sm text-gray-500">
+                                        <i class="fas fa-graduation-cap text-[#20406C]"></i>
+                                        <span>${story.course}</span>
+                                    </div>
+
+                                    ${story.linkedin ? `
+                                        <a href="${story.linkedin}" target="_blank"
+                                            class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-[#20406C] hover:text-white transition-colors">
+                                            <i class="fab fa-linkedin-in text-xs"></i>
+                                        </a>` : ""}
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-900">${story.name}</h3>
-                            <p class="text-[#D4A85D] font-medium">${story.role}</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 mb-6 leading-relaxed">${story.quote}</p>
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center space-x-2 text-sm text-gray-500">
-                            <i class="fas fa-graduation-cap text-[#20406C]"></i>
-                            <span>${story.course}</span>
-                        </div>
-                        ${story.linkedin ? `<a href="${story.linkedin}" target="_blank" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-[#20406C] hover:text-white transition-colors">
-                            <i class="fab fa-linkedin-in text-xs"></i>
-                        </a>` : ''}
-                    </div>
-                </div>
-            </div>
-        `;
+                    `;
                 }
 
-                // Function to render right column (other stories)
+                // ---- Right column renderer ----
                 function renderOtherStories() {
-                    otherStories.innerHTML = '';
-                    allStories.forEach(story => {
-                        if (story.id == activeStory.id) return; // skip active story
-                        const card = document.createElement('div');
-                        card.className = "story-card bg-white rounded-xl shadow-lg p-6 cursor-pointer";
-                        card.setAttribute('data-id', story.id);
-                        card.setAttribute('data-name', story.name);
-                        card.setAttribute('data-role', story.role);
-                        card.setAttribute('data-quote', story.quote);
-                        card.setAttribute('data-course', story.course);
-                        card.setAttribute('data-image', story.image);
-                        card.setAttribute('data-linkedin', story.linkedin);
+                    otherStories.innerHTML = "";
 
-                        const initials = story.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+                    allStories.forEach(story => {
+                        if (story.id == activeStory.id) return;
+
+                        const card = document.createElement("div");
+                        card.className = "story-card bg-white rounded-xl shadow-lg p-6 cursor-pointer";
+                        card.dataset.id = story.id;
+
+                        const initials = story.name.split(" ").map(n => n[0]).join("").substring(0,2).toUpperCase();
 
                         card.innerHTML = `
-                <div class="flex items-start">
-                    <div class="flex-shrink-0 w-16 h-16 bg-[#20406C] rounded-full flex items-center justify-center text-white font-bold text-lg mr-4">
-                        ${initials}
-                    </div>
-                    <div class="flex-1">
-                        <h4 class="text-lg font-semibold text-gray-900">${story.name}</h4>
-                        <p class="text-[#D4A85D] text-sm font-medium mb-2">${story.role}</p>
-                        <p class="text-gray-600 text-sm line-clamp-2">${story.quote}</p>
-                        <div class="flex items-center mt-3 text-xs text-gray-500">
-                            <i class="fas fa-graduation-cap text-[#20406C] mr-1"></i>
-                            <span>${story.course}</span>
-                        </div>
-                    </div>
-                </div>
-            `;
+                            <div class="flex items-start">
+                                <div class="w-16 h-16 bg-[#20406C] rounded-full flex items-center justify-center text-white font-bold text-lg mr-4">
+                                    ${initials}
+                                </div>
 
-                        card.addEventListener('click', () => {
+                                <div class="flex-1">
+                                    <h4 class="text-lg font-semibold text-gray-900">${story.name}</h4>
+                                    <p class="text-secondary text-sm font-medium mb-2">${story.role}</p>
+                                    <p class="text-gray-600 text-sm line-clamp-2">${story.quote}</p>
+                                    <div class="flex items-center mt-3 text-xs text-gray-500">
+                                        <i class="fas fa-graduation-cap text-[#20406C] mr-1"></i>
+                                        <span>${story.course}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+
+                        // Click Event
+                        card.addEventListener("click", () => {
                             activeStory = story;
                             renderFeatured(activeStory);
                             renderOtherStories();
@@ -456,9 +359,10 @@
                     });
                 }
 
-                // Initial render
+                // INITIAL RENDER
                 renderFeatured(activeStory);
                 renderOtherStories();
+
             });
         </script>
 

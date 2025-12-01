@@ -63,7 +63,7 @@
 </section>
 
 <!-- Main Content -->
-<section class="bg-graylight fade-in-section">
+<section class="bg-graylight">
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
 
         <div class="flex flex-col lg:flex-row gap-10">
@@ -84,14 +84,14 @@
                 <section id="about" class="section-fade mb-14 scroll-mt-20">
                     <div class="flex items-center mb-6">
                         <div class="h-8 w-1 bg-secondary rounded-full mr-4"></div>
-                        <h2 class="text-3xl font-bold text-primary dark:text-heading-dark">
+                        <h2 class="text-3xl font-bold text-primary">
                             <?= esc($detail->about_title) ?>
                         </h2>
                     </div>
 
                     <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition floating-card">
-                        <p class="text-lg leading-relaxed text-textbody-light dark:text-textbody-dark">
-                            <?= ($detail->about_description) ?>
+                        <p class="text-lg leading-relaxed text-textbody-light">
+                            <?= nl2br($detail->about_description) ?>
                         </p>
                     </div>
                 </section>
@@ -100,23 +100,37 @@
                 <section id="skills" class="section-fade mb-14 scroll-mt-20">
                     <div class="flex items-center mb-6">
                         <div class="h-10 w-1 bg-secondary rounded-full mr-4"></div>
-                        <h2 class="text-3xl font-bold text-primary dark:text-heading-dark">Skills You Will Learn</h2>
+                        <h2 class="text-3xl font-bold text-primary">Skills You Will Learn</h2>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                        <?php foreach ($detail->skills as $skill): ?>
-                            <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl floating-card group transition border border-transparent hover:border-secondary/20">
-                                <div class="flex items-center mb-4">
-                                    <div class="w-14 h-14 bg-primary/10 rounded-xl border border-primary flex items-center justify-center mr-4 group-hover:bg-primary/20 transition">
-                                        <i class="<?= esc($skill['icon']) ?> text-primary text-xl"></i>
+                        <?php if (!empty($detail->skills) && is_array($detail->skills)): ?>
+                            <?php foreach ($detail->skills as $skill): ?>
+                                <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl floating-card group transition border border-transparent hover:border-secondary/20">
+
+                                    <div class="flex items-center mb-4">
+                                        <div class="w-14 h-14 bg-primary/10 rounded-xl border border-primary flex items-center justify-center mr-4 group-hover:bg-primary/20 transition">
+                                            <i class="<?= esc($skill['icon']) ?> text-primary text-xl"></i>
+                                        </div>
+                                        <h3 class="text-xl font-semibold text-primary group-hover:text-secondary transition">
+                                            <?= esc($skill['title']) ?>
+                                        </h3>
                                     </div>
-                                    <h3 class="text-xl font-semibold text-primary group-hover:text-secondary transition">
-                                        <?= esc($skill['title']) ?>
-                                    </h3>
+
+                                    <?php if (!empty($skill['items']) && is_array($skill['items'])): ?>
+                                        <ul class="text-textbody-light space-y-1 group-hover:text-primary transition">
+                                            <?php foreach ($skill['items'] as $item): ?>
+                                                <li class="flex items-start">
+                                                    <i class="fa-solid fa-circle text-secondary text-[6px] mt-2 mr-2"></i>
+                                                    <span><?= esc(trim($item)) ?></span>
+                                                </li>
+                                            <?php endforeach; ?>
+                                        </ul>
+                                    <?php endif; ?>
+
                                 </div>
-                                <p class="text-textbody-light group-hover:text-primary transition"><?= esc($skill['description']) ?></p>
-                            </div>
-                        <?php endforeach; ?>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
                     </div>
                 </section>
 
@@ -124,19 +138,29 @@
                 <section id="training-methods" class="section-fade mb-14 scroll-mt-20">
                     <div class="flex items-center mb-6">
                         <div class="h-10 w-1 bg-secondary rounded-full mr-4"></div>
-                        <h2 class="text-3xl font-bold text-primary dark:text-heading-dark">Training Methods</h2>
+                        <h2 class="text-3xl font-bold text-primary">Training Methods</h2>
                     </div>
 
-                    <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg floating-card">
+                    <div class="bg-white rounded-2xl p-8 shadow-lg floating-card">
                         <div class="space-y-6">
                             <?php foreach ($detail->training_methods as $tm): ?>
-                                <div class="flex items-start">
+                                <div class="flex items-start mb-6">
                                     <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center shadow-md">
                                         <i class="<?= esc($tm['icon']) ?> text-white text-lg"></i>
                                     </div>
                                     <div class="ml-5">
                                         <h4 class="text-xl font-semibold text-primary"><?= esc($tm['title']) ?></h4>
-                                        <p class="mt-1 text-textbody-light"><?= esc($tm['description']) ?></p>
+
+                                        <?php if (!empty($tm['items']) && is_array($tm['items'])): ?>
+                                            <ul class="mt-2 text-textbody-light space-y-1">
+                                                <?php foreach ($tm['items'] as $item): ?>
+                                                    <li class="flex items-start">
+                                                        <i class="fa-solid fa-circle text-secondary text-[6px] mt-2 mr-2"></i>
+                                                        <span><?= esc(trim($item)) ?></span>
+                                                    </li>
+                                                <?php endforeach; ?>
+                                            </ul>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             <?php endforeach; ?>
@@ -148,40 +172,70 @@
                 <section id="duration" class="section-fade mb-14 scroll-mt-20">
                     <div class="flex items-center mb-6">
                         <div class="h-10 w-1 bg-secondary rounded-full mr-4"></div>
-                        <h2 class="text-3xl font-bold text-primary dark:text-heading-dark">Duration & Eligibility</h2>
+                        <h2 class="text-3xl font-bold text-primary">Duration & Eligibility</h2>
                     </div>
 
                     <div class="grid md:grid-cols-2 gap-8">
                         <!-- Program Details -->
-                        <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg floating-card">
+                        <div class="bg-white rounded-2xl p-8 shadow-lg floating-card">
                             <h3 class="text-xl font-bold text-primary mb-4">Program Details</h3>
-                            <div class="space-y-4">
-                                <?php
-                                $details = [
-                                    "Duration" => "6 Months",
-                                    "Training Hours" => "480 Hours",
-                                    "Batch Size" => "20-25 Students",
-                                    "Certification" => "Internationally Recognized"
-                                ];
-                                foreach ($details as $label => $value): ?>
-                                    <div class="flex justify-between border-b pb-3 border-gray-200 dark:border-gray-700">
-                                        <span class="font-medium"><?= $label ?></span>
-                                        <span><?= $value ?></span>
-                                    </div>
-                                <?php endforeach; ?>
+
+                            <div class="space-y-5">
+
+                                <?php if (!empty($detail->program_details) && is_array($detail->program_details)): ?>
+                                    <?php $i = 0;
+                                    $total = count($detail->program_details); ?>
+
+                                    <?php foreach ($detail->program_details as $label => $value): ?>
+
+                                        <div>
+
+                                            <!-- Title -->
+                                            <p class="font-semibold text-primary mb-1"><?= esc($label) ?>:</p>
+
+                                            <?php if (is_array($value)): ?>
+                                                <!-- Sub list -->
+                                                <ul class="ml-5 space-y-1">
+                                                    <?php foreach ($value as $item): ?>
+                                                        <li class="flex items-start">
+                                                            <i class="fa-solid fa-circle text-secondary text-[6px] mt-2 mr-2"></i>
+                                                            <span><?= esc(trim($item)) ?></span>
+                                                        </li>
+                                                    <?php endforeach; ?>
+                                                </ul>
+                                            <?php else: ?>
+                                                <!-- Single bullet -->
+                                                <div class="flex items-start">
+                                                    <i class="fa-solid fa-circle text-secondary text-[6px] mt-2 mr-2"></i>
+                                                    <span><?= esc($value) ?></span>
+                                                </div>
+                                            <?php endif; ?>
+
+                                        </div>
+
+                                        <!-- Divider Line (Not after last item) -->
+                                        <?php if (++$i < $total): ?>
+                                            <div class="border-b border-gray-200 my-3"></div>
+                                        <?php endif; ?>
+
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+
                             </div>
                         </div>
 
                         <!-- Eligibility -->
-                        <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg floating-card">
+                        <div class="bg-white rounded-2xl p-8 shadow-lg floating-card">
                             <h3 class="text-xl font-bold text-primary mb-4">Eligibility Criteria</h3>
                             <ul class="space-y-3">
-                                <?php foreach ($detail->eligibility as $e): ?>
-                                    <li class="flex items-start">
-                                        <i class="fa-regular fa-circle-dot text-secondary mt-1 mr-3"></i>
-                                        <span><?= esc($e) ?></span>
-                                    </li>
-                                <?php endforeach; ?>
+                                <?php if (!empty($detail->eligibility) && is_array($detail->eligibility)): ?>
+                                    <?php foreach ($detail->eligibility as $e): ?>
+                                        <li class="flex items-start">
+                                            <i class="fa-regular fa-circle-dot text-secondary mt-1 mr-3"></i>
+                                            <span><?= esc($e) ?></span>
+                                        </li>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
                             </ul>
                         </div>
                     </div>
@@ -193,7 +247,7 @@
             <div class="lg:w-4/12">
 
                 <!-- All Courses -->
-                <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg floating-card mb-10">
+                <div class="bg-white rounded-2xl p-6 shadow-lg floating-card mb-10">
                     <h3 class="text-2xl font-bold text-primary mb-4">Our Courses</h3>
                     <ul class="space-y-3">
                         <?php foreach ($courses as $c): ?>
@@ -223,7 +277,7 @@
                     </div>
 
                     <!-- Brochure -->
-                    <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg floating-card">
+                    <div class="bg-white rounded-2xl p-8 shadow-lg floating-card">
                         <h3 class="text-xl font-bold text-primary mb-3">Course Brochure</h3>
                         <p class="mb-4 text-textbody-light leading-relaxed">Download our detailed brochure to explore curriculum, fees, benefits, and more.</p>
 

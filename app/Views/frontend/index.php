@@ -3,18 +3,6 @@
 <?= $this->section('content') ?>
 
 <style>
-  .fade-in-section {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-    will-change: opacity, transform;
-  }
-
-  .fade-in-section.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
   /* Pagination container positioning */
   .courseSwiper .swiper-pagination {
     position: relative !important;
@@ -51,13 +39,13 @@
           </div>
 
           <!-- Gradient Overlay -->
-          <div class="absolute inset-0 bg-gradient-to-r from-background-light/80 to-transparent dark:from-background-dark/80"></div>
+          <div class="absolute inset-0 bg-gradient-to-r from-background-light/80 to-transparent"></div>
 
           <!-- CONTENT -->
           <div class="relative z-10 h-full flex items-center">
             <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 px-4 sm:px-6 gap-6 sm:gap-10">
 
-              <div class="text-heading-light dark:text-heading-dark space-y-6">
+              <div class="text-heading-light space-y-6">
 
                 <!-- Tagline -->
                 <div class="inline-flex items-center bg-primary/10 px-4 py-2 rounded-full" data-animate="slide-up">
@@ -350,8 +338,8 @@
         </span>
 
         <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary leading-snug">
-          <?= esc($about->heading) ?>
-          <div class="w-full flex items-center mt-2 gap-3">
+          <?= ($about->heading) ?>
+          <div class="w-full flex items-center justify-center md:justify-start mt-2 gap-3">
 
             <!-- Left Gradient Line -->
             <div class="w-16 h-[2px] bg-gradient-to-r from-transparent to-primary"></div>
@@ -373,7 +361,7 @@
           </div>
         </h2>
 
-        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">
+        <p class="text-gray-600 leading-relaxed text-sm sm:text-base text-justify">
           <?= ($about->description) ?>
         </p>
 
@@ -383,18 +371,14 @@
           <?php if (!empty($about->feature1_icon)): ?>
             <?php for ($i = 0; $i < count($about->feature1_icon); $i++): ?>
               <div class="flex items-start gap-3 sm:gap-4">
-                <div class="bg-[#E8EEF7] p-2 sm:p-3 rounded-lg">
-                  <i class="<?= esc($about->feature1_icon[$i]) ?> text-primary text-xl sm:text-2xl"></i>
+                <div class="bg-[#E8EEF7] rounded-lg p-1.5">
+                  <i class="<?= esc($about->feature1_icon[$i]) ?> text-primary text-lg sm:text-lg"></i>
                 </div>
 
                 <div>
                   <h5 class="font-semibold text-gray-900 text-sm sm:text-lg">
                     <?= esc($about->feature1_title[$i]) ?>
                   </h5>
-
-                  <p class="text-gray-600 text-xs sm:text-sm leading-relaxed">
-                    <?= esc($about->feature1_description[$i]) ?>
-                  </p>
                 </div>
               </div>
             <?php endfor; ?>
@@ -489,7 +473,7 @@
 <?php endif; ?>
 
 <!-- courses section -->
-<section class="py-16 bg-graylight relative overflow-hidden fade-in-section">
+<section class="py-10 bg-graylight relative overflow-hidden fade-in-section">
   <div class="container mx-auto px-6 lg:px-12 fade-up delay-1">
     <!-- Section Header -->
     <div class="text-center mb-16 fade-up delay-2">
@@ -532,21 +516,16 @@
       <div class="swiper-wrapper">
 
         <?php if (!empty($courses)): ?>
-          <?php
-          $courseDurations = ['3 Months', '6 Months', '12 Months', '18 Months', '4 Weeks', '8 Weeks'];
-          $courseLevels = ['Beginner', 'Intermediate', 'Advanced', 'Professional'];
-          ?>
 
           <?php foreach ($courses as $index => $course): ?>
             <div class="swiper-slide">
 
-              <!-- Course Card -->
               <div class="group relative bg-white rounded-3xl mt-16 pt-32 pb-8 px-6 shadow-lg hover:shadow-2xl 
-                          transition-all duration-500 border border-gray-100 hover:border-primary/20 
-                          overflow-visible fade-up delay-<?= $index ?> hover:scale-[1.02]"
+                transition-all duration-500 border border-gray-100 hover:border-primary/20 
+                overflow-visible fade-up delay-<?= $index ?>"
                 data-animate="fade-up" data-delay="<?= 300 + ($index * 100) ?>">
 
-                <!-- Course Image -->
+                <!-- Image -->
                 <div class="absolute -top-12 left-1/2 transform -translate-x-1/2 w-[95%] rounded-2xl overflow-hidden shadow-xl">
                   <img src="<?= base_url('assets/img/courses/' . $course->image) ?>"
                     alt="<?= esc($course->title) ?>"
@@ -556,26 +535,27 @@
 
                 <!-- Icon -->
                 <div class="absolute top-20 right-6 bg-white text-primary rounded-2xl p-3 shadow-xl border border-gray-100 
-                            transition-all duration-500 group-hover:bg-secondary group-hover:text-white 
-                            group-hover:scale-110 z-10 fade-up delay-<?= $index ?>">
+                    transition-all duration-500 group-hover:bg-secondary group-hover:text-white 
+                    group-hover:scale-110 z-10">
                   <i class="<?= esc($course->icon) ?> text-xl"></i>
                 </div>
 
                 <!-- Content -->
-                <div class="mt-8 space-y-4 fade-up delay-<?= $index + 1 ?>">
+                <div class="mt-8 space-y-2">
+
                   <div class="flex items-center justify-between">
-                    <span class="text-xs font-semibold text-gray-500 uppercase tracking-widest">
-                      Aviation Course
-                    </span>
+                    <span class="text-xs font-semibold text-gray-500 uppercase tracking-widest"><?= esc($course->category) ?></span>
+
                     <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded-full text-xs font-medium">
-                      <?= $courseLevels[$index % count($courseLevels)] ?>
+                      <?= esc($course->level) ?>
                     </span>
                   </div>
 
-                  <h3 class="text-lg font-bold text-primary group-hover:text-primary-dark transition-colors duration-300 leading-tight min-h-[56px]">
+                  <h3 class="text-lg font-bold text-primary group-hover:text-primary-dark transition-colors duration-300 leading-tight min-h-[40px]">
                     <?= esc($course->title) ?>
                   </h3>
 
+                  <!-- Duration -->
                   <div class="flex items-center justify-between text-sm text-gray-600">
                     <div class="flex items-center gap-1">
                       <i class="fa-solid fa-certificate text-secondary text-xs"></i>
@@ -583,32 +563,38 @@
                     </div>
                     <div class="flex items-center gap-1">
                       <i class="fa-solid fa-clock text-secondary text-xs"></i>
-                      <span><?= $courseDurations[$index % count($courseDurations)] ?></span>
+                      <span><?= esc($course->duration) ?></span>
                     </div>
                   </div>
 
+                  <!-- Progress Bar -->
                   <div class="space-y-2 pt-2">
                     <div class="flex justify-between text-xs text-gray-500">
                       <span>Course Progress</span>
-                      <span>65%</span>
+                      <span><?= esc($course->progress) ?>%</span>
                     </div>
+
                     <div class="w-full bg-gray-200 rounded-full h-2">
-                      <div class="bg-gradient-to-r from-secondary-light/80 to-secondary h-2 rounded-full transition-all duration-1000 group-hover:w-[65%] w-[45%]"></div>
+                      <div class="bg-gradient-to-r from-secondary-light/80 to-secondary h-2 rounded-full 
+                                transition-all duration-1000 group-hover:w-[<?= esc($course->progress) ?>%] 
+                                w-[<?= esc($course->progress) ?>%]">
+                      </div>
                     </div>
                   </div>
                 </div>
 
-                <div class="mt-6 pt-4 border-t border-gray-200 fade-up delay-<?= $index + 2 ?>">
+                <div class="mt-6 pt-4 border-t border-gray-200">
                   <a href="<?= base_url('courses/' . $course->slug) ?>"
                     class="group/btn w-full bg-gradient-to-r from-primary to-primary-light text-white py-3 px-4 rounded-xl 
-                           font-semibold flex items-center justify-center gap-2 hover:shadow-lg transition-all duration-300 
-                           hover:scale-[1.02] text-sm btn-pulse">
+                      font-semibold flex items-center justify-center gap-2 hover:shadow-lg transition-all duration-300 
+                      hover:scale-[1.02] text-sm">
                     <span>Explore Course</span>
                     <i class="fa-solid fa-arrow-right transition-transform duration-300 group-hover/btn:translate-x-1 text-xs"></i>
                   </a>
                 </div>
 
-                <div class="absolute inset-0 rounded-3xl border-2 border-transparent group-hover:border-primary/10 transition-all duration-500 pointer-events-none"></div>
+                <div class="absolute inset-0 rounded-3xl border-2 border-transparent group-hover:border-primary/10 
+                    transition-all duration-500 pointer-events-none"></div>
               </div>
 
             </div>
@@ -742,7 +728,7 @@
           <?= esc($admission_heading->subheading) ?>
         </span>
 
-        <h2 class="text-3xl lg:text-4xl font-bold text-primary mt-4 mb-[8rem] mx-auto max-w-2xl animate-title"
+        <h2 class="text-3xl lg:text-4xl font-bold text-primary mt-4 mb-[4rem] mx-auto max-w-2xl animate-title"
           data-animate="fade-up" data-delay="200">
           <?= esc($admission_heading->heading) ?>
           <div class="w-full flex items-center justify-center mt-2 gap-3">
@@ -776,55 +762,51 @@
         <?php foreach ($admission_steps as $step): ?>
 
           <!-- Step Card -->
-          <div class="group relative text-center opacity-0 admission-step"
-            style="animation-delay: <?= ($step->step_number - 1) * 0.25 ?>s"
-            data-animate="zoom-in" data-delay="<?= 300 + (($step->step_number - 1) * 100) ?>">
+          <div class="group relative text-center opacity-0 admission-step h-full flex flex-col"
+            style="animation-delay: <?= ($step->step_number - 1) * 0.25 ?>s">
 
-            <div class="flex flex-col items-center">
+            <div class="flex flex-col items-center h-full">
 
-              <!-- Icon Container -->
+              <!-- Icon -->
               <div class="relative mb-6">
-                <div class="dark:bg-primary-dark flex items-center justify-center shadow-lg border border-gray-200 dark:border-gray-700
-                            transform transition-all duration-500 step-icon-box group-hover:scale-110 group-hover:rotate-3">
+                <div class="flex items-center justify-center shadow-lg border border-gray-200
+                        transform transition-all duration-500 step-icon-box group-hover:scale-110 group-hover:rotate-3">
 
-                  <div class="w-14 h-14 bg-gradient-primary rounded-md flex items-center justify-center animate-step-icon">
+                  <div class="w-14 h-14 bg-gradient-primary rounded-md flex items-center justify-center">
                     <i class="<?= esc($step->icon) ?> text-white text-lg"></i>
                   </div>
 
-                  <!-- Step Number -->
-                  <div class="absolute -top-2 -left-2 w-7 h-7 bg-secondary rounded-md flex items-center justify-center 
-                              shadow-md transform transition-all duration-500 group-hover:scale-125 animate-bounce-subtle">
+                  <div class="absolute -top-2 -left-2 w-7 h-7 bg-secondary rounded-md flex items-center justify-center shadow-md">
                     <span class="text-white text-sm font-bold"><?= esc($step->step_number) ?></span>
                   </div>
                 </div>
               </div>
-
-              <!-- Arrow Connector (Desktop) -->
               <?php if ($step->step_number != end($admission_steps)->step_number): ?>
                 <div class="hidden lg:block absolute top-7 left-[80%] w-32 fade-up delay-1"
-                  data-animate="fade-right" data-delay="<?= 400 + (($step->step_number - 1) * 100) ?>">
+                  data-animate="fade-right" data-delay="400">
                   <div class="border-t-2 border-dashed border-gray-400 relative">
                     <span class="absolute -right-2 -top-2 opacity-70">
                       <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="2"
                         viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
                       </svg>
                     </span>
                   </div>
                 </div>
               <?php endif; ?>
 
-              <!-- Text Box -->
-              <div class="dark:bg-primary-dark rounded-2xl p-6 transition-all duration-500 group-hover:shadow-xl group-hover:-translate-y-1 animate-step-text"
-                data-animate="fade-up" data-delay="<?= 500 + (($step->step_number - 1) * 100) ?>">
-                <h3 class="text-primary dark:text-white text-xl font-bold mb-3"><?= esc($step->title) ?></h3>
-                <p class="text-textbody-light dark:text-textbody-dark text-sm leading-relaxed">
+              <!-- Text Box (Equal Height for All Cards) -->
+              <div class="rounded-2xl p-6 flex flex-col flex-grow h-full
+                    transition-all duration-500 group-hover:shadow-xl group-hover:-translate-y-1">
+
+                <h3 class="text-primary text-xl font-bold mb-3"><?= esc($step->title) ?></h3>
+
+                <p class="text-textbody-light text-sm leading-relaxed flex-grow text-justify">
                   <?= esc($step->description) ?>
                 </p>
               </div>
             </div>
           </div>
-
         <?php endforeach; ?>
       <?php endif; ?>
 
@@ -1070,7 +1052,7 @@
 
               <h3 class="text-xl font-bold"><?= esc($t->name) ?></h3>
               <p class="text-secondary font-medium"><?= esc($t->designation) ?></p>
-              <p class="text-textbody-light mt-2">"<?= esc($t->feedback) ?>"</p>
+              <p class="text-textbody-light mt-2 text-justify">"<?= esc($t->feedback) ?>"</p>
             </div>
 
           </div>
@@ -1231,12 +1213,12 @@
 
       <!-- Floating Contact Card -->
       <div class="hidden lg:block absolute top-1/2 -left-8 -translate-y-1/2 
-                  bg-background-light dark:bg-primary-dark shadow-2xl rounded-2xl p-8 w-72 
-                  border border-gray-100 dark:border-gray-800
+                  bg-background-light shadow-2xl rounded-2xl p-8 w-72 
+                  border border-gray-100
                   transition-all duration-500"
         data-animate="fade-left" data-delay="300">
 
-        <h3 class="font-heading text-primary dark:text-white text-xl font-bold mb-6 flex items-center gap-2">
+        <h3 class="font-heading text-primary text-xl font-bold mb-6 flex items-center gap-2">
           <div class="w-2 h-6 bg-secondary rounded-full"></div>
           Contact Info
         </h3>
@@ -1244,44 +1226,44 @@
         <div class="space-y-5">
           <!-- Location -->
           <div class="flex items-start gap-3 group/item">
-            <div class="w-10 h-10 bg-primary/10 dark:bg-secondary/20 rounded-lg flex items-center justify-center 
+            <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center 
                         group-hover/item:bg-primary/20 transition-colors duration-300">
-              <svg class="w-5 h-5 text-primary dark:text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
             </div>
             <div>
-              <p class="font-medium text-heading-light dark:text-heading-dark text-sm">Location</p>
-              <p class="text-textbody-light dark:text-textbody-dark text-sm mt-1"><?= esc($contact_info->location) ?></p>
+              <p class="font-medium text-heading-light text-sm">Location</p>
+              <p class="text-textbody-light text-sm mt-1"><?= esc($contact_info->location) ?></p>
             </div>
           </div>
 
           <!-- Phone -->
           <div class="flex items-start gap-3 group/item">
-            <div class="w-10 h-10 bg-primary/10 dark:bg-secondary/20 rounded-lg flex items-center justify-center 
+            <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center 
                         group-hover/item:bg-primary/20 transition-colors duration-300">
-              <svg class="w-5 h-5 text-primary dark:text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
               </svg>
             </div>
             <div>
-              <p class="font-medium text-heading-light dark:text-heading-dark text-sm">Phone</p>
-              <p class="text-textbody-light dark:text-textbody-dark text-sm mt-1"><?= esc($contact_info->phone) ?></p>
+              <p class="font-medium text-heading-light text-sm">Phone</p>
+              <p class="text-textbody-light text-sm mt-1"><?= esc($contact_info->phone) ?></p>
             </div>
           </div>
 
           <!-- Email -->
           <div class="flex items-start gap-3 group/item">
-            <div class="w-10 h-10 bg-primary/10 dark:bg-secondary/20 rounded-lg flex items-center justify-center 
+            <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center 
                         group-hover/item:bg-primary/20 transition-colors duration-300">
-              <svg class="w-5 h-5 text-primary dark:text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
             </div>
             <div>
-              <p class="font-medium text-heading-light dark:text-heading-dark text-sm">Email</p>
-              <p class="text-textbody-light dark:text-textbody-dark text-sm mt-1"><?= esc($contact_info->email) ?></p>
+              <p class="font-medium text-heading-light text-sm">Email</p>
+              <p class="text-textbody-light text-sm mt-1"><?= esc($contact_info->email) ?></p>
             </div>
           </div>
         </div>
@@ -1291,13 +1273,13 @@
     <!-- RIGHT SIDE: FORM -->
     <div class="flex animate-slide-in-right">
       <form action="<?= base_url('submit-contact') ?>" method="post"
-        class="w-full max-w-md bg-graylight dark:bg-gray-800 shadow-2xl rounded-r-2xl p-8 
-             border border-gray-100 dark:border-gray-700">
+        class="w-full max-w-md bg-graylight shadow-2xl rounded-r-2xl p-8 
+             border border-gray-100">
 
         <?= csrf_field() ?>
 
         <div class="mb-8">
-          <h2 class="font-heading text-primary dark:text-white text-3xl font-bold mb-8"
+          <h2 class="font-heading text-primary text-3xl font-bold mb-8"
             data-animate="fade-up" data-delay="100">Contact Form
             <div class="w-full flex items-center mt-2 gap-3">
 
@@ -1339,32 +1321,32 @@
           <div class="group">
             <input type="text" name="full_name" placeholder="Full Name"
               required
-              class="w-full border border-gray-300 dark:border-gray-600 rounded-xl p-4"
+              class="w-full border border-gray-300 rounded-xl p-4"
               data-animate="fade-up" data-delay="400" />
           </div>
 
           <div class="group">
             <input type="email" name="email" placeholder="Email"
               required
-              class="w-full border border-gray-300 dark:border-gray-600 rounded-xl p-4"
+              class="w-full border border-gray-300 rounded-xl p-4"
               data-animate="fade-up" data-delay="500" />
           </div>
 
           <div class="group">
             <input type="text" name="phone" placeholder="Phone Number"
-              class="w-full border border-gray-300 dark:border-gray-600 rounded-xl p-4"
+              class="w-full border border-gray-300 rounded-xl p-4"
               data-animate="fade-up" data-delay="600" />
           </div>
 
           <div class="group">
             <input type="text" name="subject" placeholder="Subject"
-              class="w-full border border-gray-300 dark:border-gray-600 rounded-xl p-4"
+              class="w-full border border-gray-300 rounded-xl p-4"
               data-animate="fade-up" data-delay="700" />
           </div>
 
           <div class="group">
             <textarea name="message" placeholder="Your Message" rows="4"
-              class="w-full border border-gray-300 dark:border-gray-600 rounded-xl p-4"
+              class="w-full border border-gray-300 rounded-xl p-4"
               data-animate="fade-up" data-delay="800"></textarea>
           </div>
 

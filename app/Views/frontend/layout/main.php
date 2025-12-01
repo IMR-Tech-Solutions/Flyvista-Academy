@@ -18,6 +18,9 @@
     <!-- TailwindCSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="34x34" href="<?= base_url('favicon.png') ?>">
+
     <!-- Tailwind Config -->
     <script>
         tailwind.config = {
@@ -28,9 +31,9 @@
                     },
                     colors: {
                         primary: {
-                            DEFAULT: '#20416C',
-                            light: '#253D6B',
-                            dark: '#142947'
+                            DEFAULT: '#0F3D5F',
+                            light: '#155A85',
+                            dark: '#0A2A44'
                         },
                         secondary: {
                             DEFAULT: '#D83030',
@@ -398,7 +401,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gradient-to-r from-[#253D6B] via-[#234578] to-[#142947] text-white py-10 relative overflow-hidden fade-in-section slide-in-left">
+    <footer class="bg-gradient-to-r from-primary-light via-primary to-primary-dark text-white py-10 relative overflow-hidden fade-in-section slide-in-left">
 
         <!-- Background decorative elements -->
         <div class="absolute inset-0 overflow-hidden">
@@ -414,7 +417,7 @@
                 <div class="transform transition-transform duration-500 hover:-translate-y-1">
                     <div class="flex items-center space-x-3 mb-6">
                         <div class="relative">
-                            <img src="<?= base_url('assets/img/flyvista-logo.png') ?>" alt="FlyVista Logo" class="w-auto h-20">
+                            <img src="<?= base_url('assets/img/Flyvista-Logo-White.png') ?>" alt="FlyVista Logo" class="w-auto h-20">
                         </div>
                     </div>
 

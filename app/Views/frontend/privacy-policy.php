@@ -22,20 +22,21 @@
         <nav class="text-white flex items-center space-x-2 animate-slide-in-right">
             <a href="<?= base_url('/') ?>" class="hover:text-secondary transition-colors">Home</a>
             <span class="text-white">➤</span>
-            <span class="text-secondary font-semibold">
-                <?= isset($breadcrumb->heading) ? esc($breadcrumb->heading) : 'Privacy Policy' ?>
+            <span class="text-white font-bold relative pb-1">
+                <?= isset($breadcrumb->heading) ? esc($breadcrumb->heading) : 'privacy policy' ?>
+                <span class="absolute left-0 bottom-0 w-full border-b-2 border border-secondary-light opacity-70"></span>
             </span>
         </nav>
     </div>
 </section>
 
 <!-- Quick Navigation -->
-<section class="py-8 bg-gradient-to-r from-primary/5 to-secondary/5 dark:from-primary/10 dark:to-secondary/10">
+<section class="py-8 bg-gradient-to-r from-primary/5 to-secondary/5">
     <div class="container mx-auto px-4">
         <div class="flex flex-wrap justify-center gap-4">
             <?php foreach ($sections as $section): ?>
                 <a href="#<?= strtolower(str_replace(' ', '-', $section)) ?>"
-                    class="nav-btn group px-6 py-3 bg-white dark:bg-gray-800 rounded-xl font-medium hover:bg-primary hover:text-white transition-all duration-300 flex items-center">
+                    class="nav-btn group px-6 py-3 bg-white rounded-xl font-medium hover:bg-primary hover:text-white transition-all duration-300 flex items-center">
                     <i class="fas fa-circle mr-2 group-hover:scale-110 transition-transform"></i>
                     <?= esc($section) ?>
                 </a>
@@ -75,19 +76,19 @@
                 <div class="text-center mb-12">
                     <h2 class="text-4xl font-bold mb-4 text-primary"><?= esc($section->heading) ?></h2>
                     <div class="section-divider w-24 mx-auto mb-6"></div>
-                    <p class="text-xl text-textbody-light dark:text-textbody-dark max-w-3xl mx-auto">
+                    <p class="text-xl text-textbody-light max-w-3xl mx-auto">
                         <?= esc($section->short_desc) ?>
                     </p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 stagger-animation">
                     <?php for ($i = 0; $i < $cardCount; $i++): ?>
-                        <div class="policy-card bg-background-light dark:bg-primary-dark rounded-2xl p-8 text-center border border-gray-100 dark:border-gray-800">
+                        <div class="policy-card bg-background-light rounded-2xl p-8 text-center border border-gray-100">
                             <div class="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mx-auto mb-6">
                                 <i class="<?= esc($cardIcons[$i]) ?> text-2xl"></i>
                             </div>
-                            <h3 class="text-xl font-bold mb-4 text-heading-light dark:text-heading-dark"><?= esc($cardTitles[$i]) ?></h3>
-                            <p class="text-textbody-light dark:text-textbody-dark"><?= esc($cardContents[$i]) ?></p>
+                            <h3 class="text-xl font-bold mb-4 text-heading-light"><?= esc($cardTitles[$i]) ?></h3>
+                            <p class="text-textbody-light"><?= esc($cardContents[$i]) ?></p>
                         </div>
                     <?php endfor; ?>
                 </div>
@@ -99,7 +100,7 @@
             <div class="text-center mb-12">
                 <h2 class="text-4xl font-bold mb-4 text-primary">Data We Collect</h2>
                 <div class="section-divider w-24 mx-auto mb-6"></div>
-                <p class="text-xl text-textbody-light dark:text-textbody-dark max-w-3xl mx-auto">
+                <p class="text-xl text-textbody-light max-w-3xl mx-auto">
                     To offer world-class aviation training and provide seamless student services, FlyVista collects certain personal and technical information.
                 </p>
             </div>
@@ -121,17 +122,17 @@
                         // Card color: primary for first, secondary for second
                         $bgClass = $index === 1
                             ? 'bg-primary/10 text-primary'
-                            : 'bg-secondary/10 dark:bg-secondary/20 text-secondary';
+                            : 'bg-secondary/10 text-secondary';
                 ?>
-                        <div class="policy-card rounded-2xl p-8 border border-primary/20 dark:border-primary/30 <?= $bgClass ?>">
+                        <div class="policy-card rounded-2xl p-8 border border-primary/20 <?= $bgClass ?>">
                             <!-- Top: Icon + Heading + Short Desc -->
                             <div class="flex items-start mb-6">
                                 <div class="w-12 h-12 rounded-xl flex items-center justify-center mr-4 <?= $index === 1 ? 'bg-primary/10 text-primary' : 'bg-secondary/20 text-secondary' ?>">
                                     <i class="<?= esc($icon) ?>"></i>
                                 </div>
                                 <div>
-                                    <h3 class="text-2xl font-bold text-heading-light dark:text-heading-dark"><?= esc($section->heading) ?></h3>
-                                    <p class="text-textbody-light dark:text-textbody-dark mt-2"><?= esc($section->short_desc) ?></p>
+                                    <h3 class="text-2xl font-bold text-heading-light"><?= esc($section->heading) ?></h3>
+                                    <p class="text-textbody-light mt-2"><?= esc($section->short_desc) ?></p>
                                 </div>
                             </div>
 
@@ -146,8 +147,8 @@
                                     <li class="flex items-start">
                                         <span class="text-lg mr-3 mt-1">●</span>
                                         <div class="mt-1">
-                                            <span class="font-medium text-heading-light dark:text-heading-dark"><?= esc($title) ?></span>
-                                            <p class="text-textbody-light dark:text-textbody-dark text-sm mt-1"><?= nl2br(esc($content)) ?></p>
+                                            <span class="font-medium text-heading-light"><?= esc($title) ?></span>
+                                            <p class="text-textbody-light text-sm mt-1"><?= nl2br(esc($content)) ?></p>
                                         </div>
                                     </li>
                                 <?php endfor; ?>
@@ -165,7 +166,7 @@
             <div class="text-center mb-12">
                 <h2 class="text-4xl font-bold mb-4 text-primary">How We Use Your Data</h2>
                 <div class="section-divider w-24 mx-auto mb-6"></div>
-                <p class="text-xl text-textbody-light dark:text-textbody-dark max-w-3xl mx-auto">
+                <p class="text-xl text-textbody-light max-w-3xl mx-auto">
                     Your information helps FlyVista deliver high-quality aviation training and improve your learning experience.
                 </p>
             </div>
@@ -185,8 +186,8 @@
 
                         // Card colors: first → primary, second → secondary
                         $bgGradient = $index === 0
-                            ? 'bg-gradient-to-br from-primary/5 to-secondary/5 dark:from-primary/10 dark:to-secondary/10'
-                            : 'bg-gradient-to-br from-secondary/5 to-primary/5 dark:from-secondary/10 dark:to-primary/10';
+                            ? 'bg-gradient-to-br from-primary/5 to-secondary/5'
+                            : 'bg-gradient-to-br from-secondary/5 to-primary/5';
 
                         $borderClass = $index === 0 ? 'border-primary/20' : 'border-secondary/20';
                         $iconBgClass = $index === 0 ? 'bg-primary text-white' : 'bg-secondary text-white';
@@ -194,7 +195,7 @@
                         <div class="policy-card <?= $bgGradient ?> rounded-2xl p-8 border <?= $borderClass ?>">
                             <!-- Card Heading -->
                             <div class="flex items-center justify-center mb-6">
-                                <h3 class="text-2xl font-bold text-heading-light dark:text-heading-dark text-center"><?= esc($section->heading) ?></h3>
+                                <h3 class="text-2xl font-bold text-heading-light text-center"><?= esc($section->heading) ?></h3>
                             </div>
 
                             <!-- Card Content -->
@@ -210,8 +211,8 @@
                                             <i class="<?= esc($icon) ?>"></i>
                                         </div>
                                         <div>
-                                            <h4 class="font-bold text-lg text-heading-light dark:text-heading-dark"><?= esc($title) ?></h4>
-                                            <p class="text-textbody-light dark:text-textbody-dark mt-1"><?= nl2br(esc($content)) ?></p>
+                                            <h4 class="font-bold text-lg text-heading-light"><?= esc($title) ?></h4>
+                                            <p class="text-textbody-light mt-1"><?= nl2br(esc($content)) ?></p>
                                         </div>
                                     </div>
                                 <?php endfor; ?>
@@ -251,7 +252,7 @@
                 <div class="text-center mb-12">
                     <h2 class="text-4xl font-bold mb-4 text-primary"><?= esc($section->heading) ?></h2>
                     <div class="section-divider w-24 mx-auto mb-6"></div>
-                    <p class="text-xl text-textbody-light dark:text-textbody-dark max-w-3xl mx-auto">
+                    <p class="text-xl text-textbody-light max-w-3xl mx-auto">
                         <?= esc($section->short_desc) ?>
                     </p>
                 </div>
@@ -260,8 +261,8 @@
                     <?php for ($i = 0; $i < $cardCount; $i++):
                         // Alternate card colors: first = primary, second = secondary
                         $bgClass = $i % 2 === 0
-                            ? 'bg-background-light dark:bg-primary-dark border border-primary/20 dark:border-primary/30'
-                            : 'bg-background-light dark:bg-primary-dark border border-secondary/20 dark:border-secondary/30';
+                            ? 'bg-background-light border border-primary/20'
+                            : 'bg-background-light border border-secondary/20';
 
                         $iconBgClass = $i % 2 === 0
                             ? 'bg-primary/20 text-primary'
@@ -271,8 +272,8 @@
                             <div class="w-20 h-20 rounded-2xl <?= $iconBgClass ?> flex items-center justify-center mx-auto mb-4">
                                 <i class="<?= esc($cardIcons[$i]) ?> text-2xl"></i>
                             </div>
-                            <h3 class="text-xl font-bold mb-3 text-heading-light dark:text-heading-dark"><?= esc($cardTitles[$i]) ?></h3>
-                            <p class="text-textbody-light dark:text-textbody-dark"><?= esc($cardContents[$i]) ?></p>
+                            <h3 class="text-xl font-bold mb-3 text-heading-light"><?= esc($cardTitles[$i]) ?></h3>
+                            <p class="text-textbody-light"><?= esc($cardContents[$i]) ?></p>
                         </div>
                     <?php endfor; ?>
                 </div>
@@ -306,7 +307,7 @@
                 <div class="text-center mb-12">
                     <h2 class="text-4xl font-bold mb-4 text-primary"><?= esc($section->heading) ?></h2>
                     <div class="section-divider w-24 mx-auto mb-6"></div>
-                    <p class="text-xl text-textbody-light dark:text-textbody-dark max-w-3xl mx-auto">
+                    <p class="text-xl text-textbody-light max-w-3xl mx-auto">
                         <?= esc($section->short_desc) ?>
                     </p>
                 </div>
@@ -315,8 +316,8 @@
                     <?php for ($i = 0; $i < $cardCount; $i++):
                         // Alternate card colors: first = primary, second = secondary
                         $bgClass = $i % 2 === 0
-                            ? 'bg-background-light dark:bg-primary-dark border border-primary/20 dark:border-primary/30'
-                            : 'bg-background-light dark:bg-primary-dark border border-secondary/20 dark:border-secondary/30';
+                            ? 'bg-background-light border border-primary/20'
+                            : 'bg-background-light border border-secondary/20';
 
                         $iconBgClass = $i % 2 === 0
                             ? 'bg-primary/10 text-primary'
@@ -333,9 +334,9 @@
                 </div>
 
                 <?php if (!empty($section->additional_info)): ?>
-                    <div class="mt-12 bg-secondary/10 dark:bg-secondary/20 rounded-2xl p-8 border border-secondary/20 text-center">
-                        <h3 class="text-2xl font-bold mb-4 text-heading-light dark:text-heading-dark"><?= esc($section->additional_heading) ?></h3>
-                        <p class="text-textbody-light dark:text-textbody-dark mb-6 max-w-2xl mx-auto">
+                    <div class="mt-12 bg-secondary/10 rounded-2xl p-8 border border-secondary/20 text-center">
+                        <h3 class="text-2xl font-bold mb-4 text-heading-light"><?= esc($section->additional_heading) ?></h3>
+                        <p class="text-textbody-light mb-6 max-w-2xl mx-auto">
                             <?= esc($section->additional_info) ?>
                         </p>
                         <?php if (!empty($section->contact_email) || !empty($section->contact_link)): ?>

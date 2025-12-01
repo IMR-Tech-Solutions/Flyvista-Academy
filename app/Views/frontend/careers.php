@@ -65,7 +65,7 @@
 
                 </div>
             </h2>
-            <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
                 <?= esc($careerFeatures[0]->short_desc ?? 'We offer opportunities for growth, development, and making a real impact in aviation education.') ?>
             </p>
         </div>
@@ -74,16 +74,16 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 
             <?php foreach ($careerFeatures as $feature): ?>
-                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 text-center shadow-sm hover:shadow-md transition-shadow">
+                <div class="bg-white rounded-xl p-6 text-center shadow-sm hover:shadow-md transition-shadow">
                     <div class="w-16 h-16 rounded-full bg-primary-light/10 flex items-center justify-center mx-auto mb-4">
                         <i class="<?= esc($feature->icon) ?> text-primary-light text-2xl"></i>
                     </div>
 
-                    <h3 class="text-xl font-bold text-heading-light dark:text-heading-dark mb-2">
+                    <h3 class="text-xl font-bold text-heading-light mb-2">
                         <?= esc($feature->title) ?>
                     </h3>
 
-                    <p class="text-gray-600 dark:text-gray-400">
+                    <p class="text-gray-600">
                         <?= strip_tags($feature->description) ?>
                     </p>
                 </div>
@@ -115,7 +115,7 @@
                 </div>
             </h2>
 
-            <p class="text-base md:text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            <p class="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
                 Explore our available roles and find the perfect fit for your skills and career aspirations.
             </p>
         </div>
@@ -149,24 +149,24 @@
             <?php foreach ($jobs as $job): ?>
                 <?php $tags = array_map('trim', explode(',', $job->tags)); ?>
 
-                <div class="bg-white dark:bg-gray-800 rounded-xl p-5 md:p-6 shadow-sm 
-                    job-card border border-gray-200 dark:border-gray-700 job-item 
+                <div class="bg-white rounded-xl p-5 md:p-6 shadow-sm 
+                    job-card border border-gray-200 job-item 
                     <?= strtolower(esc($job->category)) ?>"
                     data-category="<?= strtolower(esc($job->category)) ?>">
 
                     <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-4 gap-4 sm:gap-0">
                         <div>
-                            <h3 class="text-lg md:text-xl font-bold text-heading-light dark:text-heading-dark">
+                            <h3 class="text-lg md:text-xl font-bold text-heading-light">
                                 <?= esc($job->title) ?>
                             </h3>
 
                             <div class="flex flex-wrap items-center mt-2 gap-3 text-sm">
-                                <span class="flex items-center text-gray-500 dark:text-gray-400">
+                                <span class="flex items-center text-gray-500">
                                     <i class="fas fa-map-marker-alt mr-1"></i>
                                     <?= esc($job->location) ?>
                                 </span>
 
-                                <span class="flex items-center text-gray-500 dark:text-gray-400">
+                                <span class="flex items-center text-gray-500">
                                     <i class="fas fa-clock mr-1"></i>
                                     <?= esc($job->job_type) ?>
                                 </span>
@@ -178,21 +178,21 @@
                         </span>
                     </div>
 
-                    <p class="text-gray-600 dark:text-gray-400 text-sm md:text-base mb-4">
+                    <p class="text-gray-600 text-sm md:text-base mb-4">
                         <?= esc($job->short_description) ?>
                     </p>
 
                     <div class="flex flex-wrap gap-2 mb-6">
                         <?php foreach ($tags as $tag): ?>
-                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 
-                                text-gray-700 dark:text-gray-300 text-xs rounded">
+                            <span class="px-2 py-1 bg-gray-100  
+                                text-gray-700 text-xs rounded">
                                 <?= esc($tag) ?>
                             </span>
                         <?php endforeach; ?>
                     </div>
 
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-0">
-                        <span class="text-sm text-gray-500 dark:text-gray-400">
+                        <span class="text-sm text-gray-500">
                             Posted <?= time_elapsed_string($job->posted_at) ?>
                         </span>
 
@@ -211,10 +211,10 @@
         <!-- No Jobs Message -->
         <div id="no-jobs-message" class="text-center py-12 hidden">
             <i class="fas fa-search text-4xl text-gray-400 mb-4"></i>
-            <h3 class="text-xl font-bold text-heading-light dark:text-heading-dark mb-2">
+            <h3 class="text-xl font-bold text-heading-light mb-2">
                 No positions match your filters
             </h3>
-            <p class="text-gray-600 dark:text-gray-400">
+            <p class="text-gray-600">
                 Try adjusting your filters or check back later for new opportunities.
             </p>
         </div>
@@ -265,23 +265,23 @@
 
 <!-- Job Details Modal -->
 <div id="job-modal" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 hidden">
-    <div class="bg-white dark:bg-gray-800 rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-        <div class="p-6 border-b border-gray-200 dark:border-gray-700">
+    <div class="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        <div class="p-6 border-b border-gray-200">
             <div class="flex justify-between items-start">
                 <div>
-                    <h3 id="modal-job-title" class="text-2xl font-bold text-heading-light dark:text-heading-dark">Certified Flight Instructor</h3>
+                    <h3 id="modal-job-title" class="text-2xl font-bold text-heading-light">Certified Flight Instructor</h3>
                     <div class="flex items-center mt-2 space-x-4">
-                        <span class="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                        <span class="flex items-center text-sm text-gray-500">
                             <i class="fas fa-map-marker-alt mr-1"></i>
                             <span id="modal-job-location">Flight City, FC</span>
                         </span>
-                        <span class="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                        <span class="flex items-center text-sm text-gray-500">
                             <i class="fas fa-clock mr-1"></i>
                             <span id="modal-job-type">Full-time</span>
                         </span>
                     </div>
                 </div>
-                <button id="close-modal" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
+                <button id="close-modal" class="p-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 transition-colors">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
@@ -292,9 +292,9 @@
                 <!-- Job details will be loaded here dynamically -->
             </div>
 
-            <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
-                <h4 class="text-lg font-bold text-heading-light dark:text-heading-dark mb-4">Ready to Apply?</h4>
-                <p class="text-gray-600 dark:text-gray-400 mb-4">Submit your application for this position using the form below.</p>
+            <div class="mt-8 pt-6 border-t border-gray-200">
+                <h4 class="text-lg font-bold text-heading-light mb-4">Ready to Apply?</h4>
+                <p class="text-gray-600 mb-4">Submit your application for this position using the form below.</p>
 
                 <form id="job-application-form"
                     class="space-y-4"
@@ -403,15 +403,15 @@
                 modalContent.innerHTML = `
                 <div class="mb-6">
                     <h4 class="text-lg font-bold mb-2">Job Description</h4>
-                    <p class="text-gray-600 dark:text-gray-400 mb-4">${desc}</p>
+                    <p class="text-gray-600 mb-4">${desc}</p>
 
                     <h4 class="text-lg font-bold mb-2">Responsibilities</h4>
-                    <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 mb-4">
+                    <ul class="list-disc list-inside text-gray-600 mb-4">
                         ${resList || "<li>No responsibilities listed.</li>"}
                     </ul>
 
                     <h4 class="text-lg font-bold mb-2">Requirements</h4>
-                    <ul class="list-disc list-inside text-gray-600 dark:text-gray-400">
+                    <ul class="list-disc list-inside text-gray-600">
                         ${reqList || "<li>No requirements listed.</li>"}
                     </ul>
                 </div>

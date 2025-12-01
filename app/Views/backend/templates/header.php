@@ -41,15 +41,15 @@
                     },
           colors: {
             primary: {
-              DEFAULT: '#20406C',
-              light: '#335B95',
-              dark: '#142947',
-            },
+                            DEFAULT: '#0F3D5F',
+                            light: '#155A85',
+                            dark: '#0A2A44'
+                        },
             secondary: {
-              DEFAULT: '#D4A85D',
-              light: '#E2BE80',
-              dark: '#B38B45',
-            },
+                            DEFAULT: '#D83030',
+                            light: '#E62834',
+                            dark: '#B32222'
+                        },
             graylight: '#F4F5FA',
             textbody: {
               light: '#333F4D',

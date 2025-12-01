@@ -22,20 +22,21 @@
         <nav class="text-white flex items-center space-x-2 animate-slide-in-right">
             <a href="<?= base_url('/') ?>" class="hover:text-secondary transition-colors">Home</a>
             <span class="text-white">➤</span>
-            <span class="text-secondary font-semibold">
+            <span class="text-white font-bold relative pb-1">
                 <?= isset($breadcrumb->heading) ? esc($breadcrumb->heading) : 'Terms & Conditions' ?>
+                <span class="absolute left-0 bottom-0 w-full border-b-2 border border-secondary-light opacity-70"></span>
             </span>
         </nav>
     </div>
 </section>
 
 <!-- Quick Navigation -->
-<section class="py-8 bg-gradient-to-r from-primary/5 to-secondary/5 dark:from-primary/10 dark:to-secondary/10">
+<section class="py-8 bg-gradient-to-r from-primary/5 to-secondary/5">
     <div class="container mx-auto px-4">
         <div class="flex flex-wrap justify-center gap-4">
             <?php foreach ($sections as $section): ?>
                 <a href="#<?= strtolower(str_replace(' ', '-', $section)) ?>"
-                    class="nav-btn group px-6 py-3 bg-white dark:bg-background-dark rounded-xl font-medium hover:bg-primary hover:text-white transition-all duration-300 flex items-center">
+                    class="nav-btn group px-6 py-3 bg-white rounded-xl font-medium hover:bg-primary hover:text-white transition-all duration-300 flex items-center">
                     <i class="fas fa-circle mr-2"></i>
                     <?= esc($section) ?>
                 </a>
@@ -77,14 +78,14 @@
                 <div class="text-center mb-12">
                     <h2 class="text-4xl font-bold mb-4 text-primary"><?= esc($section->heading) ?></h2>
                     <div class="section-divider w-24 mx-auto mb-6"></div>
-                    <p class="text-xl text-textbody-light dark:text-textbody-dark max-w-3xl mx-auto">
+                    <p class="text-xl text-textbody-light max-w-3xl mx-auto">
                         <?= esc($section->short_desc) ?>
                     </p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 stagger-animation">
                     <?php for ($i = 0; $i < $cardCount; $i++): ?>
-                        <div class="policy-card bg-background-light dark:bg-background-dark rounded-2xl p-8 text-center border border-primary/20">
+                        <div class="policy-card bg-background-light rounded-2xl p-8 text-center border border-primary/20">
 
                             <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
                                 <i class="<?= esc($icons[$i]) ?> text-2xl text-primary"></i>
@@ -108,7 +109,7 @@
             <div class="text-center mb-12">
                 <h2 class="text-4xl font-bold mb-4 text-primary">User Responsibilities</h2>
                 <div class="section-divider w-24 mx-auto mb-6"></div>
-                <p class="text-xl text-textbody-light dark:text-textbody-dark max-w-3xl mx-auto">
+                <p class="text-xl text-textbody-light max-w-3xl mx-auto">
                     As a FlyVista student or website user, you are expected to follow ethical, lawful, and respectful behavior at all times.
                 </p>
             </div>
@@ -256,7 +257,7 @@
                 <div class="text-center mb-12">
                     <h2 class="text-4xl font-bold mb-4 text-primary"><?= esc($section->heading) ?></h2>
                     <div class="section-divider w-24 mx-auto mb-6"></div>
-                    <p class="text-xl text-textbody-light dark:text-textbody-dark max-w-3xl mx-auto">
+                    <p class="text-xl text-textbody-light max-w-3xl mx-auto">
                         <?= esc($section->short_desc) ?>
                     </p>
                 </div>
@@ -264,7 +265,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 stagger-animation">
 
                     <?php for ($i = 0; $i < $cardCount; $i++): ?>
-                        <div class="policy-card bg-background-light dark:bg-background-dark 
+                        <div class="policy-card bg-background-light 
                         rounded-2xl p-8 border border-primary/20 
                         hover:shadow-lg transition-all duration-300">
 
@@ -275,12 +276,12 @@
                             </div>
 
                             <!-- Title -->
-                            <h3 class="text-xl font-bold text-heading-light dark:text-heading-dark text-center">
+                            <h3 class="text-xl font-bold text-heading-light text-center">
                                 <?= esc($titles[$i]) ?>
                             </h3>
 
                             <!-- Description -->
-                            <p class="text-textbody-light dark:text-textbody-dark text-center mt-3">
+                            <p class="text-textbody-light text-center mt-3">
                                 <?= nl2br(esc($contents[$i])) ?>
                             </p>
                         </div>
@@ -297,14 +298,14 @@
             <div class="text-center mb-12">
                 <h2 class="text-4xl font-bold mb-4 text-primary">Contact & Support</h2>
                 <div class="section-divider w-24 mx-auto mb-6"></div>
-                <p class="text-xl text-textbody-light dark:text-textbody-dark max-w-3xl mx-auto">
+                <p class="text-xl text-textbody-light max-w-3xl mx-auto">
                     If you have questions regarding these Terms & Conditions, feel free to reach out to our support team.
                 </p>
             </div>
 
-            <div class="mt-12 bg-secondary/10 dark:bg-secondary/20 rounded-2xl p-8 border border-secondary/20 text-center">
-                <h3 class="text-2xl font-bold mb-4 text-heading-light dark:text-heading-dark">We’re Here to Help</h3>
-                <p class="text-textbody-light dark:text-textbody-dark mb-6 max-w-2xl mx-auto">
+            <div class="mt-12 bg-secondary/10 rounded-2xl p-8 border border-secondary/20 text-center">
+                <h3 class="text-2xl font-bold mb-4 text-heading-light">We’re Here to Help</h3>
+                <p class="text-textbody-light mb-6 max-w-2xl mx-auto">
                     For any queries, clarifications, or concerns, contact FlyVista using the information below.
                 </p>
 
@@ -314,7 +315,7 @@
                         Email Support
                     </a>
 
-                    <a href="contact.html" class="px-6 py-3 bg-secondary hover:bg-secondary-dark text-white rounded-lg font-medium transition-colors flex items-center justify-center">
+                    <a href="<?= base_url('contact') ?>" class="px-6 py-3 bg-secondary hover:bg-secondary-dark text-white rounded-lg font-medium transition-colors flex items-center justify-center">
                         <i class="fas fa-headset mr-2"></i>
                         Contact Form
                     </a>

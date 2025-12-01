@@ -80,11 +80,11 @@
 <!-- Contact Section -->
 <?php $c = isset($contact) ? $contact : null; ?>
 
-<section class="py-10 bg-gradient-to-br from-graylight to-gray-100 dark:from-background-dark dark:to-primary-dark">
+<section class="py-10 bg-gradient-to-br from-graylight to-gray-100">
     <div class="container mx-auto px-4">
         <!-- Section Header -->
         <div class="text-center mb-16">
-            <h1 class="text-3xl md:text-4xl font-bold mb-4 text-primary dark:text-heading-dark animate-fade-in-down">Get In Touch
+            <h1 class="text-3xl md:text-4xl font-bold mb-4 text-primary animate-fade-in-down">Get In Touch
                 <div class="w-full flex items-center justify-center mt-2 gap-3">
 
                     <!-- Left Gradient Line -->
@@ -106,7 +106,7 @@
 
                 </div>
             </h1>
-            <p class="text-xl max-w-2xl mx-auto text-textbody-light dark:text-textbody-dark">
+            <p class="text-xl max-w-2xl mx-auto text-textbody-light">
                 Have questions about our aviation programs? Reach out to us and we'll help you take flight in your career.
             </p>
         </div>
@@ -116,7 +116,7 @@
             <div class="lg:col-span-1 space-y-8">
                 <div class="gradient-border contact-card">
                     <div class="p-8">
-                        <h2 class="text-2xl font-bold mb-6 text-primary dark:text-heading-dark flex items-center">
+                        <h2 class="text-2xl font-bold mb-6 text-primary flex items-center">
                             <i class="fas fa-headset text-secondary mr-3"></i>
                             Contact Information
                         </h2>
@@ -130,7 +130,7 @@
                                     </div>
                                     <div>
                                         <h3 class="font-bold text-lg">Our Location</h3>
-                                        <p class="text-textbody-light dark:text-textbody-dark"><?= esc($c->location) ?></p>
+                                        <p class="text-textbody-light"><?= esc($c->location) ?></p>
                                     </div>
                                 </div>
                             <?php endif; ?>
@@ -143,7 +143,7 @@
                                     </div>
                                     <div>
                                         <h3 class="font-bold text-lg">Phone Number</h3>
-                                        <p class="text-textbody-light dark:text-textbody-dark"><?= esc($c->phone) ?></p>
+                                        <p class="text-textbody-light"><?= esc($c->phone) ?></p>
                                     </div>
                                 </div>
                             <?php endif; ?>
@@ -156,33 +156,33 @@
                                     </div>
                                     <div>
                                         <h3 class="font-bold text-lg">Email Address</h3>
-                                        <p class="text-textbody-light dark:text-textbody-dark"><?= esc($c->email) ?></p>
+                                        <p class="text-textbody-light"><?= esc($c->email) ?></p>
                                     </div>
                                 </div>
                             <?php endif; ?>
                         </div>
 
                         <!-- Social Links -->
-                        <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+                        <div class="mt-8 pt-6 border-t border-gray-200">
                             <h3 class="font-bold text-lg mb-4">Follow Us</h3>
                             <div class="flex space-x-4">
                                 <?php if (!empty($c->facebook)): ?>
-                                    <a href="<?= esc($c->facebook) ?>" class="w-10 h-10 rounded-lg bg-graylight dark:bg-primary flex items-center justify-center text-primary dark:text-white hover:bg-primary-light hover:text-white transition-colors duration-300">
+                                    <a href="<?= esc($c->facebook) ?>" class="w-10 h-10 rounded-lg bg-graylight flex items-center justify-center text-primary hover:bg-primary-light hover:text-white transition-colors duration-300">
                                         <i class="fab fa-facebook-f"></i>
                                     </a>
                                 <?php endif; ?>
                                 <?php if (!empty($c->twitter)): ?>
-                                    <a href="<?= esc($c->twitter) ?>" class="w-10 h-10 rounded-lg bg-graylight dark:bg-primary flex items-center justify-center text-primary dark:text-white hover:bg-primary-light hover:text-white transition-colors duration-300">
+                                    <a href="<?= esc($c->twitter) ?>" class="w-10 h-10 rounded-lg bg-graylight flex items-center justify-center text-primary hover:bg-primary-light hover:text-white transition-colors duration-300">
                                         <i class="fab fa-twitter"></i>
                                     </a>
                                 <?php endif; ?>
                                 <?php if (!empty($c->instagram)): ?>
-                                    <a href="<?= esc($c->instagram) ?>" class="w-10 h-10 rounded-lg bg-graylight dark:bg-primary flex items-center justify-center text-primary dark:text-white hover:bg-primary-light hover:text-white transition-colors duration-300">
+                                    <a href="<?= esc($c->instagram) ?>" class="w-10 h-10 rounded-lg bg-graylight flex items-center justify-center text-primary hover:bg-primary-light hover:text-white transition-colors duration-300">
                                         <i class="fab fa-instagram"></i>
                                     </a>
                                 <?php endif; ?>
                                 <?php if (!empty($c->linkedin)): ?>
-                                    <a href="<?= esc($c->linkedin) ?>" class="w-10 h-10 rounded-lg bg-graylight dark:bg-primary flex items-center justify-center text-primary dark:text-white hover:bg-primary-light hover:text-white transition-colors duration-300">
+                                    <a href="<?= esc($c->linkedin) ?>" class="w-10 h-10 rounded-lg bg-graylight  flex items-center justify-center text-primary hover:bg-primary-light hover:text-white transition-colors duration-300">
                                         <i class="fab fa-linkedin-in"></i>
                                     </a>
                                 <?php endif; ?>
@@ -197,11 +197,11 @@
                 <!-- Contact Form -->
                 <div class="gradient-border contact-card mb-12">
                     <div class="p-8">
-                        <h2 class="text-2xl font-bold mb-2 text-primary dark:text-heading-dark flex items-center">
+                        <h2 class="text-2xl font-bold mb-2 text-primary flex items-center">
                             <i class="fas fa-paper-plane text-secondary mr-3"></i>
                             Send Us a Message
                         </h2>
-                        <p class="mb-6 text-textbody-light dark:text-textbody-dark">Fill out the form below and we'll get back to you as soon as possible.</p>
+                        <p class="mb-6 text-textbody-light">Fill out the form below and we'll get back to you as soon as possible.</p>
 
                         <?php if (session()->getFlashdata('success')): ?>
                             <p class="bg-green-200 p-3 mb-4 rounded text-sm text-green-800">
@@ -290,10 +290,10 @@
 
 <!-- Map Section -->
 <section class="container mx-auto px-4 py-10">
-    <div class="bg-white rounded-3xl overflow-hidden border border-gray-100 dark:border-gray-800">
+    <div class="bg-white rounded-3xl overflow-hidden border border-gray-100">
         <div class="grid grid-cols-1 lg:grid-cols-3">
             <!-- Info Panel -->
-            <div class="lg:col-span-1 p-8 lg:p-10 bg-white dark:from-primary-dark dark:to-gray-900">
+            <div class="lg:col-span-1 p-8 lg:p-10 bg-white">
                 <div class="flex items-center mb-6">
                     <div class="w-12 h-12 rounded-xl bg-primary flex items-center justify-center text-white mr-4">
                         <i class="fas fa-map-marked-alt text-lg"></i>
@@ -309,15 +309,15 @@
                 <div class="space-y-6 mb-8">
                     <!-- Opening Hours -->
                     <?php if (!empty($opening_hours)): ?>
-                        <div class="flex items-start space-x-4 p-4 rounded-xl hover:bg-white dark:hover:bg-gray-800 transition-all duration-300 group">
+                        <div class="flex items-start space-x-4 p-4 rounded-xl hover:bg-white transition-all duration-300 group">
                             <div class="w-10 h-10 rounded-lg bg-secondary/20 flex items-center justify-center text-secondary group-hover:scale-110 transition-transform">
                                 <i class="fas fa-clock"></i>
                             </div>
                             <div>
-                                <h3 class="font-semibold text-heading-light dark:text-heading-dark group-hover:text-primary transition-colors">Opening Hours</h3>
+                                <h3 class="font-semibold text-heading-light group-hover:text-primary transition-colors">Opening Hours</h3>
                                 <div class="mt-1 space-y-1">
                                     <?php foreach ($opening_hours as $oh): ?>
-                                        <p class="text-sm text-textbody-light dark:text-textbody-dark flex justify-between">
+                                        <p class="text-sm text-textbody-light flex justify-between">
                                             <span><?= esc($oh['day']) ?></span>
                                             <span class="font-medium <?= strtolower($oh['time']) === 'closed' ? 'text-red-500' : '' ?>"><?= esc($oh['time']) ?></span>
                                         </p>
@@ -329,13 +329,13 @@
 
                     <!-- Location -->
                     <?php if (!empty($c->location)): ?>
-                        <div class="flex items-start space-x-4 p-4 rounded-xl hover:bg-white dark:hover:bg-gray-800 transition-all duration-300 group">
+                        <div class="flex items-start space-x-4 p-4 rounded-xl hover:bg-white transition-all duration-300 group">
                             <div class="w-10 h-10 rounded-lg bg-secondary/20 flex items-center justify-center text-secondary group-hover:scale-110 transition-transform">
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
                             <div>
-                                <h3 class="font-semibold text-heading-light dark:text-heading-dark group-hover:text-primary transition-colors">Location</h3>
-                                <p class="text-sm text-textbody-light dark:text-textbody-dark mt-1"><?= esc($c->location) ?></p>
+                                <h3 class="font-semibold text-heading-light group-hover:text-primary transition-colors">Location</h3>
+                                <p class="text-sm text-textbody-light mt-1"><?= esc($c->location) ?></p>
                             </div>
                         </div>
                     <?php endif; ?>
@@ -359,29 +359,29 @@
                 </div>
 
                 <!-- Map Overlay Info -->
-                <div class="absolute top-4 right-4 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm rounded-xl p-4 shadow-lg max-w-xs">
+                <div class="absolute top-4 right-4 bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg max-w-xs">
                     <div class="flex items-start space-x-3">
                         <div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white flex-shrink-0">
                             <i class="fas fa-plane text-xs"></i>
                         </div>
                         <div>
-                            <h4 class="font-semibold text-sm text-heading-light dark:text-heading-dark">FlyVista Campus</h4>
-                            <p class="text-xs text-textbody-light dark:text-textbody-dark mt-1">Located in the heart of Mumbai's aviation district</p>
+                            <h4 class="font-semibold text-sm text-heading-light">FlyVista Campus</h4>
+                            <p class="text-xs text-textbody-light mt-1">Located in the heart of Mumbai's aviation district</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Quick Actions -->
                 <div class="absolute bottom-4 left-4 flex flex-wrap gap-2">
-                    <button class="bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm px-3 py-2 rounded-lg text-xs font-medium text-heading-light dark:text-heading-dark hover:bg-white hover:shadow-md transition-all flex items-center gap-2">
+                    <button class="bg-white/95 backdrop-blur-sm px-3 py-2 rounded-lg text-xs font-medium text-heading-light hover:bg-white hover:shadow-md transition-all flex items-center gap-2">
                         <i class="fas fa-car text-primary"></i>
                         Drive
                     </button>
-                    <button class="bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm px-3 py-2 rounded-lg text-xs font-medium text-heading-light dark:text-heading-dark hover:bg-white hover:shadow-md transition-all flex items-center gap-2">
+                    <button class="bg-white/95 backdrop-blur-sm px-3 py-2 rounded-lg text-xs font-medium text-heading-light hover:bg-white hover:shadow-md transition-all flex items-center gap-2">
                         <i class="fas fa-subway text-primary"></i>
                         Transit
                     </button>
-                    <button class="bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm px-3 py-2 rounded-lg text-xs font-medium text-heading-light dark:text-heading-dark hover:bg-white hover:shadow-md transition-all flex items-center gap-2">
+                    <button class="bg-white/95 backdrop-blur-sm px-3 py-2 rounded-lg text-xs font-medium text-heading-light hover:bg-white hover:shadow-md transition-all flex items-center gap-2">
                         <i class="fas fa-walking text-primary"></i>
                         Walk
                     </button>

@@ -2,12 +2,12 @@
 <main class="p-6">
     <div class="flex justify-between items-center mb-6">
         <div>
-            <h2 class="text-2xl font-bold text-dark">Edit Hero Section</h2>
+            <h2 class="text-2xl font-bold text-primary">Edit Hero Section</h2>
             <p class="text-gray-500">Update the Hero Section details</p>
         </div>
 
         <a href="<?= base_url('admin/hero') ?>"
-            class="text-secoundry hover:text-gray-700 flex items-center bg-primary/10 border border-primary rounded-full px-4 py-2">
+            class="text-primary hover:text-secondary flex items-center bg-primary/10 border border-primary rounded-full px-4 py-2">
             <i class="fas fa-arrow-left mr-2"></i> Back to Hero Section
         </a>
     </div>
@@ -19,7 +19,7 @@
                 <?= csrf_field() ?>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <h5 class="text-lg font-semibold text-secoundry md:col-span-2">Hero Section Details</h5>
+                    <h5 class="text-lg font-semibold text-secondary md:col-span-2">Hero Section Details</h5>
 
                     <!-- Tagline -->
                     <div>

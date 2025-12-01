@@ -107,7 +107,7 @@
                 </span>
 
                 <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary leading-snug">
-                    <?= esc($about->heading) ?>
+                    <?= ($about->heading) ?>
                     <div class="w-full flex items-center mt-2 gap-3">
 
                         <!-- Left Gradient Line -->
@@ -140,18 +140,14 @@
                     <?php if (!empty($about->feature1_icon)): ?>
                         <?php for ($i = 0; $i < count($about->feature1_icon); $i++): ?>
                             <div class="flex items-start gap-3 sm:gap-4">
-                                <div class="bg-[#E8EEF7] p-2 sm:p-3 rounded-lg">
-                                    <i class="<?= esc($about->feature1_icon[$i]) ?> text-primary text-xl sm:text-2xl"></i>
+                                <div class="bg-[#E8EEF7] p-1.5 sm:p-1.5 rounded-lg">
+                                    <i class="<?= esc($about->feature1_icon[$i]) ?> text-primary text-lg sm:text-lg"></i>
                                 </div>
 
                                 <div>
                                     <h5 class="font-semibold text-gray-900 text-sm sm:text-lg">
                                         <?= esc($about->feature1_title[$i]) ?>
                                     </h5>
-
-                                    <p class="text-gray-600 text-xs sm:text-sm leading-relaxed">
-                                        <?= esc($about->feature1_description[$i]) ?>
-                                    </p>
                                 </div>
                             </div>
                         <?php endfor; ?>
@@ -250,7 +246,7 @@
             </p>
 
             <!-- Main Heading -->
-            <h2 class="text-4xl md:text-5xl font-bold text-primary leading-tight relative">
+            <h2 class="text-3xl md:text-4xl font-bold text-primary leading-tight relative">
                 <?= esc($missionVision->heading ?? "Our Mission & Vision") ?>
                 <div class="w-full flex items-center gap-3 mt-3">
 
@@ -282,8 +278,8 @@
 
                 <div>
                     <h3 class="text-xl font-semibold text-heading-light">Our Mission</h3>
-                    <p class="text-textbody-light mt-1">
-                        <?= esc($missionVision->mission_description ?? "") ?>
+                    <p class="text-textbody-light mt-1 text-justify">
+                        <?= ($missionVision->mission_description ?? "") ?>
                     </p>
                 </div>
             </div>
@@ -296,8 +292,8 @@
 
                 <div>
                     <h3 class="text-xl font-semibold text-heading-light">Our Vision</h3>
-                    <p class="text-textbody-light mt-1">
-                        <?= esc($missionVision->vision_description ?? "") ?>
+                    <p class="text-textbody-light mt-1 text-justify">
+                        <?= ($missionVision->vision_description ?? "") ?>
                     </p>
                 </div>
             </div>
@@ -312,8 +308,8 @@
                     <h3 class="text-xl font-semibold text-heading-light">
                         <?= esc($missionVision->core_values_title ?? "Core Values") ?>
                     </h3>
-                    <p class="text-textbody-light mt-1">
-                        <?= esc($missionVision->core_values_description ?? "") ?>
+                    <p class="text-textbody-light mt-1 text-justify">
+                        <?= ($missionVision->core_values_description ?? "") ?>
                     </p>
                 </div>
             </div>
@@ -377,58 +373,60 @@
     }
 </style>
 
-<section class="relative py-12 bg-white dark:bg-background-dark rounded-xl shadow-lg overflow-hidden fade-in-section">
-    <div class="absolute inset-0"></div>
-    <div class="relative max-w-7xl mx-auto px-6">
+<section class="py-16 bg-white fade-in-section">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
-        <!-- Heading Section -->
+        <!-- LEFT: STATIC AVIATION IMAGE -->
+        <div class="relative">
+            <img 
+                src="https://images.unsplash.com/photo-1529074963764-98f45c47344b?auto=format&fit=crop&w=900&q=80" 
+                alt="Aviation Training" 
+                class="rounded-2xl shadow-xl object-cover w-full h-[420px]"
+            >
+
+            <div class="absolute inset-0 bg-primary/20 rounded-2xl mix-blend-multiply"></div>
+        </div>
+
+        <!-- RIGHT: DYNAMIC CONTENT -->
         <?php if (!empty($whyChoose)): ?>
-            <div class="text-center mb-16 animate-fade-in-down">
-                <p class="uppercase inline-block px-6 py-2 bg-secondary/10 text-secondary rounded-full font-semibold text-sm tracking-wider border border-secondary/20 mb-4 shadow-sm">
-                    Why Choose Flyvista
+            <div class="space-y-6">
+
+                <!-- Heading -->
+                <p class="uppercase inline-block px-6 py-2 bg-secondary/10 text-secondary rounded-full 
+                           font-semibold text-sm tracking-wider border border-secondary/20 shadow-sm">
+                    Why Choose Us
                 </p>
-                <h2 class="text-4xl md:text-5xl font-bold text-primary dark:text-heading-dark leading-tight">
-                    <?= esc($whyChoose[0]->heading) ?>
-                    <div class="w-full flex items-center justify-center mt-2 gap-3">
 
-                        <!-- Left Gradient Line -->
-                        <div class="w-20 h-[2px] bg-gradient-to-r from-transparent to-primary"></div>
+                <!-- Title -->
+                <h2 class="text-3xl md:text-4xl font-bold text-primary leading-tight">
+                    <?= esc($whyChoose[0]->title) ?>
+                    <div class="w-full flex items-center gap-3 mt-3">
 
-                        <!-- Left Dot -->
+                    <!-- Left Gradient Line -->
+                    <div class="w-16 h-[2px] bg-gradient-to-r from-transparent to-primary"></div>
+
+                    <!-- Left Dot -->
+                    <span class="h-1 w-1 bg-primary rounded-full"></span>
+
+                    <!-- Center Circle -->
+                    <span class="h-3 w-3 border-2 border-primary rounded-full flex items-center justify-center">
                         <span class="h-1 w-1 bg-primary rounded-full"></span>
+                    </span>
 
-                        <!-- Center Circle -->
-                        <span class="h-3 w-3 border-2 border-primary rounded-full flex items-center justify-center">
-                            <span class="h-1 w-1 bg-primary rounded-full"></span>
-                        </span>
+                    <!-- Right Dot -->
+                    <span class="h-1 w-1 bg-primary rounded-full"></span>
 
-                        <!-- Right Dot -->
-                        <span class="h-1 w-1 bg-primary rounded-full"></span>
+                    <!-- Right Gradient Line -->
+                    <div class="w-16 h-[2px] bg-gradient-to-l from-transparent to-primary"></div>
 
-                        <!-- Right Gradient Line -->
-                        <div class="w-20 h-[2px] bg-gradient-to-l from-transparent to-primary"></div>
-
-                    </div>
+                </div>
                 </h2>
-            </div>
 
-            <!-- Grid Features -->
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <?php foreach ($whyChoose as $card): ?>
-                    <div class="group bg-white/90 dark:bg-background-dark/60 backdrop-blur-xl p-8 rounded-2xl shadow-lg 
-                        border border-gray-200 dark:border-gray-700 hover:shadow-2xl hover:-translate-y-2 
-                        transition-all duration-500">
-                        <div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center text-primary text-2xl mb-5">
-                            <i class="<?= esc($card->icon) ?>"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold text-heading-light dark:text-heading-dark mb-2">
-                            <?= esc($card->title) ?>
-                        </h3>
-                        <p class="text-textbody-light dark:text-textbody-dark">
-                            <?= esc($card->short_desc) ?>
-                        </p>
-                    </div>
-                <?php endforeach; ?>
+                <!-- Description -->
+                <p class="text-textbody-light leading-relaxed text-justify text-lg">
+                    <?= nl2br(esc($whyChoose[0]->short_desc)) ?>
+                </p>
+
             </div>
         <?php endif; ?>
 
@@ -441,6 +439,7 @@
             opacity: 0;
             transform: translateY(-20px);
         }
+
         to {
             opacity: 1;
             transform: translateY(0);
@@ -452,7 +451,7 @@
     }
 </style>
 
-<section class="py-20 bg-graylight dark:bg-background-dark relative overflow-hidden fade-in-section">
+<section class="py-20 bg-graylight relative overflow-hidden fade-in-section">
 
     <!-- Background Pattern -->
     <div class="absolute inset-0 opacity-5 pointer-events-none">
@@ -468,7 +467,7 @@
                 <div class="flex items-center space-x-5 p-5 bg-white/5 backdrop-blur-md rounded-xl 
                             transform transition-all duration-500 hover:scale-105 fade-slide-up <?= $index > 0 ? 'delay-' . ($index * 100) : '' ?>">
 
-                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
+                    <div class="w-28 h-16 bg-primary/10 rounded-full flex items-center justify-center">
                         <i class="<?= esc($counter->icon) ?> text-3xl text-primary"></i>
                     </div>
 
@@ -538,24 +537,24 @@
                 Hardworking Members
                 <div class="w-full flex items-center justify-center mt-2 gap-3">
 
-                <!-- Left Gradient Line -->
-                <div class="w-16 h-[2px] bg-gradient-to-r from-transparent to-white"></div>
+                    <!-- Left Gradient Line -->
+                    <div class="w-16 h-[2px] bg-gradient-to-r from-transparent to-white"></div>
 
-                <!-- Left Dot -->
-                <span class="h-1 w-1 bg-white rounded-full"></span>
-
-                <!-- Center Circle -->
-                <span class="h-3 w-3 border-2 border-white rounded-full flex items-center justify-center">
+                    <!-- Left Dot -->
                     <span class="h-1 w-1 bg-white rounded-full"></span>
-                </span>
 
-                <!-- Right Dot -->
-                <span class="h-1 w-1 bg-white rounded-full"></span>
+                    <!-- Center Circle -->
+                    <span class="h-3 w-3 border-2 border-white rounded-full flex items-center justify-center">
+                        <span class="h-1 w-1 bg-white rounded-full"></span>
+                    </span>
 
-                <!-- Right Gradient Line -->
-                <div class="w-16 h-[2px] bg-gradient-to-l from-transparent to-white"></div>
+                    <!-- Right Dot -->
+                    <span class="h-1 w-1 bg-white rounded-full"></span>
 
-            </div>
+                    <!-- Right Gradient Line -->
+                    <div class="w-16 h-[2px] bg-gradient-to-l from-transparent to-white"></div>
+
+                </div>
             </h2>
         </div>
         <div class="min-h-[30vh]"></div>
@@ -565,36 +564,52 @@
     <!--   BOTTOM FLOATING CARDS   -->
     <!-- ========================= -->
     <div class="absolute -bottom-20 left-1/2 -translate-x-1/2 w-full px-6 z-20">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-10">
-            <?php foreach ($otherMembers as $member): ?>
-                <div class="group relative bg-white/20 backdrop-blur-xl rounded-3xl overflow-hidden shadow-2xl border border-white/20">
-                    <div class="absolute top-0 right-0 w-12 h-12 bg-primary-light clip-triangle"></div>
 
-                    <img src="<?= base_url('assets/img/team/' . $member->image) ?>" class="w-full h-72 object-cover rounded-t-3xl">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent rounded-3xl"></div>
+        <div class="max-w-7xl mx-auto">
 
-                    <!-- Social Icons -->
-                    <div class="absolute top-36 left-1/2 -translate-x-1/2 flex gap-3 opacity-0 
-                        group-hover:opacity-100 transition-all duration-500 transform group-hover:-translate-y-2">
-                        <?php if (!empty($member->facebook_url)): ?>
-                            <a href="<?= esc($member->facebook_url) ?>" target="_blank" class="bg-white w-9 h-9 rounded-md flex justify-center items-center text-primary hover:bg-secondary transition"><i class="fa-brands fa-facebook-f"></i></a>
-                        <?php endif; ?>
-                        <?php if (!empty($member->twitter_url)): ?>
-                            <a href="<?= esc($member->twitter_url) ?>" target="_blank" class="bg-white w-9 h-9 rounded-md flex justify-center items-center text-primary hover:bg-secondary transition"><i class="fa-brands fa-twitter"></i></a>
-                        <?php endif; ?>
-                        <?php if (!empty($member->instagram_url)): ?>
-                            <a href="<?= esc($member->instagram_url) ?>" target="_blank" class="bg-white w-9 h-9 rounded-md flex justify-center items-center text-primary hover:bg-secondary transition"><i class="fa-brands fa-instagram"></i></a>
-                        <?php endif; ?>
-                    </div>
+            <!-- Swiper Container -->
+            <div class="swiper myTeamSwiper pb-10">
+                <div class="swiper-wrapper">
 
-                    <!-- Details -->
-                    <div class="absolute bottom-5 text-center w-full text-white">
-                        <h3 class="text-lg font-semibold"><?= esc($member->name) ?></h3>
-                        <p class="text-xs opacity-75"><?= esc($member->role) ?></p>
-                    </div>
+                    <?php foreach ($otherMembers as $member): ?>
+                        <div class="swiper-slide">
+                            <div class="group relative bg-white/20 backdrop-blur-xl rounded-xl overflow-hidden shadow-2xl">
+                                <div class="absolute top-0 right-0 w-12 h-12 bg-primary-light clip-triangle"></div>
+
+                                <img src="<?= base_url('assets/img/team/' . $member->image) ?>" class="w-full h-72 object-cover rounded-t-xl">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent rounded-xl"></div>
+
+                                <!-- Social Icons -->
+                                <div class="absolute top-36 left-1/2 -translate-x-1/2 flex gap-3 opacity-0 
+                                group-hover:opacity-100 transition-all duration-500 transform group-hover:-translate-y-2">
+                                    <?php if (!empty($member->facebook_url)): ?>
+                                        <a href="<?= esc($member->facebook_url) ?>" target="_blank" class="bg-white w-9 h-9 rounded-md flex justify-center items-center text-primary hover:bg-secondary transition"><i class="fa-brands fa-facebook-f"></i></a>
+                                    <?php endif; ?>
+                                    <?php if (!empty($member->twitter_url)): ?>
+                                        <a href="<?= esc($member->twitter_url) ?>" target="_blank" class="bg-white w-9 h-9 rounded-md flex justify-center items-center text-primary hover:bg-secondary transition"><i class="fa-brands fa-twitter"></i></a>
+                                    <?php endif; ?>
+                                    <?php if (!empty($member->instagram_url)): ?>
+                                        <a href="<?= esc($member->instagram_url) ?>" target="_blank" class="bg-white w-9 h-9 rounded-md flex justify-center items-center text-primary hover:bg-secondary transition"><i class="fa-brands fa-instagram"></i></a>
+                                    <?php endif; ?>
+                                </div>
+
+                                <!-- Details -->
+                                <div class="absolute bottom-5 text-center w-full text-white">
+                                    <h3 class="text-lg font-semibold"><?= esc($member->name) ?></h3>
+                                    <p class="text-xs opacity-75"><?= esc($member->role) ?></p>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+
                 </div>
-            <?php endforeach; ?>
+            </div>
+
+            <!-- Pagination BELOW the slider -->
+            <div class="swiper-pagination mt-4"></div>
+
         </div>
+
     </div>
 </section>
 
@@ -603,6 +618,50 @@
         clip-path: polygon(100% 0, 0 0, 100% 100%);
     }
 </style>
+<style>
+    /* Smaller, clean white dots */
+    .swiper-pagination-bullet {
+        background: #F4F5FA;
+        opacity: 1;
+        width: 10px;
+        height: 10px;
+    }
+
+    /* Active Dot → Tailwind secondary color */
+    .swiper-pagination-bullet-active {
+        background: #D83030 !important;
+    }
+</style>
+
+<script>
+    var swiper = new Swiper(".myTeamSwiper", {
+        slidesPerView: 3,
+        spaceBetween: 30,
+        loop: true,
+        centeredSlides: false,
+        autoplay: {
+            delay: 2500,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+
+        // Responsive Breakpoints
+        breakpoints: {
+            0: {
+                slidesPerView: 1
+            }, // Mobile
+            640: {
+                slidesPerView: 2
+            }, // Tablet
+            1024: {
+                slidesPerView: 3
+            } // Desktop
+        }
+    });
+</script>
 
 <script>
     const video = document.getElementById('promoVideo');

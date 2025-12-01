@@ -30,7 +30,7 @@
 </section>
 
 <!-- Admission Steps -->
-<section class="py-10 bg-background-light dark:bg-background-dark">
+<section class="py-10 bg-background-light">
     <div class="container mx-auto px-6">
 
         <!-- Section Header -->
@@ -39,7 +39,7 @@
                 <?= esc($admission_heading->subheading ?? 'Admission Simplified') ?>
             </p>
 
-            <h2 class="text-3xl md:text-4xl font-bold text-primary dark:text-heading-dark">
+            <h2 class="text-3xl md:text-4xl font-bold text-primary">
                 <?= esc($admission_heading->heading ?? 'Simple Admission Process') ?>
                 <div class="w-full flex items-center justify-center mt-2 gap-3">
 
@@ -68,28 +68,28 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mt-5">
 
             <?php foreach ($admission_steps as $step): ?>
-                <div class="relative bg-graylight dark:bg-primary-dark rounded-2xl p-6 pt-16
-                            border border-primary-light/20 dark:border-primary-light/30 overflow-visible">
+                <div class="relative bg-graylight rounded-2xl p-6 pt-16
+                            border border-primary-light/20 overflow-visible">
 
                     <!-- Floating Icon -->
                     <div class="absolute -top-8 left-6 w-16 h-16 rounded-xl border-2 border-primary/50 bg-primary-light/10 
-                                dark:bg-primary-light/20 flex items-center justify-center shadow-lg">
+                                flex items-center justify-center shadow-lg">
                         <i class="<?= esc($step->icon) ?> text-primary text-2xl"></i>
                     </div>
 
                     <!-- Watermark Number -->
-                    <div class="absolute top-2 right-4 text-primary-light/25 dark:text-primary-light/15 
+                    <div class="absolute top-2 right-4 text-primary-light/25 
                                 text-8xl font-extrabold select-none leading-none">
                         <?= esc($step->step_number) ?>
                     </div>
 
                     <!-- Title -->
-                    <h3 class="text-xl font-bold text-heading-light dark:text-heading-dark mb-2">
+                    <h3 class="text-xl font-bold text-heading-light mb-2">
                         <?= esc($step->title) ?>
                     </h3>
 
                     <!-- Description -->
-                    <p class="text-textbody-light dark:text-textbody-dark mb-4">
+                    <p class="text-textbody-light mb-4 text-justify">
                         <?= esc($step->description) ?>
                     </p>
 
@@ -118,7 +118,7 @@
 </script>
 
 <!-- Documents Required -->
-<section class="py-10 bg-graylight dark:bg-primary-dark fade-in-section">
+<section class="py-10 bg-graylight fade-in-section">
     <div class="container mx-auto px-6">
 
         <div class="text-center max-w-3xl mx-auto mb-16">
@@ -126,7 +126,7 @@
                 Required Documents
             </p>
 
-            <h2 class="text-3xl md:text-4xl font-bold text-primary dark:text-heading-dark">
+            <h2 class="text-3xl md:text-4xl font-bold text-primary">
                 Documents Checklist
                 <div class="w-full flex items-center justify-center mt-2 gap-3">
 
@@ -154,15 +154,15 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
 
             <!-- Mandatory Documents -->
-            <div class="bg-background-light dark:bg-background-dark rounded-2xl p-6 shadow-lg 
-                border border-primary-light/20 dark:border-primary-light/30">
+            <div class="bg-background-light rounded-2xl p-6 shadow-lg 
+                border border-primary-light/20">
 
                 <div class="flex items-center mb-6">
-                    <div class="w-12 h-12 bg-primary-light/10 dark:bg-primary-light/20 rounded-lg 
+                    <div class="w-12 h-12 bg-primary-light/10 rounded-lg 
                         flex items-center justify-center mr-4">
                         <i class="fas fa-file-alt text-primary text-xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-heading-light dark:text-heading-dark">
+                    <h3 class="text-xl font-bold text-heading-light">
                         Mandatory Documents
                     </h3>
                 </div>
@@ -171,8 +171,8 @@
                     <?php if (!empty($mandatory_docs)): ?>
                         <?php foreach ($mandatory_docs as $doc): ?>
                             <li class="flex items-start">
-                                <span class="flex-shrink-0 w-2.5 h-2.5 bg-primary-light dark:bg-primary-light/80 rounded-full mt-2 mr-3"></span>
-                                <span class="text-textbody-light dark:text-textbody-dark">
+                                <span class="flex-shrink-0 w-2.5 h-2.5 bg-primary-light rounded-full mt-2 mr-3"></span>
+                                <span class="text-textbody-light">
                                     <?= esc($doc->document_name) ?>
                                 </span>
                             </li>
@@ -184,15 +184,15 @@
             </div>
 
             <!-- Additional Optional Documents -->
-            <div class="bg-background-light dark:bg-background-dark rounded-2xl p-6 shadow-lg 
-                border border-primary-light/20 dark:border-primary-light/30">
+            <div class="bg-background-light rounded-2xl p-6 shadow-lg 
+                border border-primary-light/20">
 
                 <div class="flex items-center mb-6">
                     <div class="w-12 h-12 bg-secondary-light/20 rounded-lg flex items-center 
                         justify-center mr-4">
                         <i class="fas fa-folder-open text-secondary text-xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-heading-light dark:text-heading-dark">
+                    <h3 class="text-xl font-bold text-heading-light">
                         Additional Documents (Optional)
                     </h3>
                 </div>
@@ -201,8 +201,8 @@
                     <?php if (!empty($optional_docs)): ?>
                         <?php foreach ($optional_docs as $doc): ?>
                             <li class="flex items-start">
-                                <i class="fas fa-star text-secondary mt-1 mr-3"></i>
-                                <span class="text-textbody-light dark:text-textbody-dark">
+                                <i class="fas fa-star text-sm text-secondary mt-1 mr-3"></i>
+                                <span class="text-textbody-light">
                                     <?= esc($doc->document_name) ?>
                                 </span>
                             </li>
@@ -277,7 +277,7 @@
 <div id="admissionModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden z-50 p-4">
 
     <!-- Modal Box -->
-    <div class="bg-white dark:bg-background-dark rounded-2xl p-6 w-full max-w-lg shadow-xl relative
+    <div class="bg-white rounded-2xl p-6 w-full max-w-lg shadow-xl relative
                 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
 
         <!-- Close Button -->
@@ -286,7 +286,7 @@
             &times;
         </button>
 
-        <h2 class="text-2xl font-bold mb-4 text-heading-light dark:text-heading-dark">
+        <h2 class="text-2xl font-bold mb-4 text-heading-light">
             Admission Application Form
         </h2>
 
@@ -332,7 +332,7 @@
 <div id="visitModal"
     class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden flex items-center justify-center z-50 p-4 fade-in-section">
 
-    <div class="bg-white dark:bg-background-dark rounded-2xl p-6 w-full max-w-md shadow-xl relative">
+    <div class="bg-white rounded-2xl p-6 w-full max-w-md shadow-xl relative">
 
         <!-- Close Button -->
         <button onclick="closeCampusVisit()"
@@ -340,11 +340,11 @@
             &times;
         </button>
 
-        <h2 class="text-2xl font-bold mb-4 text-heading-light dark:text-heading-dark">
+        <h2 class="text-2xl font-bold mb-4 text-heading-light">
             Schedule a Campus Visit
         </h2>
 
-        <p class="text-textbody-light dark:text-textbody-dark mb-4">
+        <p class="text-textbody-light mb-4">
             Contact our admission team to book your personalized campus tour.
         </p>
 
@@ -391,7 +391,7 @@
 </script>
 
 <!-- FAQ Section -->
-<section class="py-10 bg-background-light dark:bg-background-dark fade-in-section">
+<section class="py-10 bg-background-light fade-in-section">
     <div class="container mx-auto px-6">
 
         <!-- Heading -->
@@ -399,7 +399,7 @@
             <p class="uppercase inline-block px-6 py-2 bg-secondary/10 text-secondary rounded-full font-semibold text-sm tracking-wider border border-secondary/20 mb-4">
                 Need Help?
             </p>
-            <h2 class="text-3xl md:text-4xl font-bold text-primary dark:text-heading-dark">
+            <h2 class="text-3xl md:text-4xl font-bold text-primary">
                 Frequently Asked Questions
                 <div class="w-full flex items-center justify-center mt-2 gap-3">
 
@@ -427,15 +427,15 @@
         <div class="max-w-4xl mx-auto">
             <?php if (!empty($faqs)): ?>
                 <?php foreach ($faqs as $faq): ?>
-                    <div class="faq-item bg-graylight dark:bg-primary-dark rounded-xl p-6 mb-4 border border-primary-light/20 dark:border-primary-light/30">
+                    <div class="faq-item bg-graylight rounded-xl p-3 mb-4 border border-primary-light/20">
                         <div class="faq-header flex justify-between items-center cursor-pointer">
-                            <h3 class="text-lg font-semibold text-heading-light dark:text-heading-dark">
+                            <h3 class="text-lg font-semibold text-heading-light">
                                 <?= esc($faq->question) ?>
                             </h3>
                             <i class="fas fa-chevron-down text-primary transition-transform duration-300"></i>
                         </div>
                         <div class="faq-answer mt-4 hidden">
-                            <p class="text-textbody-light dark:text-textbody-dark">
+                            <p class="text-textbody-light">
                                 <?= esc($faq->answer) ?>
                             </p>
                         </div>
@@ -444,27 +444,6 @@
             <?php else: ?>
                 <p class="text-gray-500 text-center">No FAQs available at the moment.</p>
             <?php endif; ?>
-        </div>
-
-        <!-- Still Have Questions Box -->
-        <div class="mt-12 bg-gradient-primary rounded-2xl p-8 text-white text-center max-w-4xl mx-auto">
-            <h3 class="text-2xl md:text-3xl font-bold mb-4">Still Have Questions?</h3>
-            <p class="mb-6 max-w-2xl mx-auto">
-                Our admission counselors are available to assist you anytime.
-            </p>
-
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="tel:+15551234567"
-                    class="bg-secondary-light text-white hover:bg-secondary font-semibold py-3 px-6 rounded-lg 
-                          transition-all duration-300 transform hover:scale-105 flex items-center justify-center">
-                    <i class="fas fa-phone mr-2"></i> Call Us: +1 (555) 123-4567
-                </a>
-                <a href="mailto:admissions@flyvistaacademy.com"
-                    class="bg-transparent border-2 border-white text-white hover:bg-white/10 font-semibold py-3 px-6 rounded-lg 
-                          transition-all duration-300 transform hover:scale-105 flex items-center justify-center">
-                    <i class="fas fa-envelope mr-2"></i> Email Us
-                </a>
-            </div>
         </div>
     </div>
 </section>

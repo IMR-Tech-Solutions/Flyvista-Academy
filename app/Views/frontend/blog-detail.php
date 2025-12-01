@@ -41,7 +41,7 @@
             <header class="mb-8">
                 <div class="flex items-center space-x-2 mb-4">
                     <span class="px-3 py-1 bg-primary-light text-white text-xs font-medium rounded-full"><?= esc($post->category) ?></span>
-                    <span class="text-sm text-gray-500 dark:text-gray-400"><?= esc($post->reading_time) ?> min read</span>
+                    <span class="text-sm text-gray-500"><?= esc($post->reading_time) ?> min read</span>
                 </div>
 
                 <h1 class="text-3xl md:text-4xl font-bold text-primary mb-4 text-shadow"><?= esc($post->title) ?></h1>
@@ -49,19 +49,19 @@
                 <div class="flex items-center justify-between mb-6">
                     <div class="flex items-center space-x-4">
                         <div>
-                            <p class="font-medium text-heading-light dark:text-heading-dark">Published</p>
-                            <p class="text-sm text-gray-500 dark:text-gray-400"><?= date("F d, Y", strtotime($post->post_date)) ?> • <?= esc($post->reading_time) ?> min read</p>
+                            <p class="font-medium text-heading-light">Published</p>
+                            <p class="text-sm text-gray-500"><?= date("F d, Y", strtotime($post->post_date)) ?> • <?= esc($post->reading_time) ?> min read</p>
                         </div>
                     </div>
 
                     <div class="flex space-x-2">
-                        <button class="p-2 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors">
+                        <button class="p-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 transition-colors">
                             <i class="fab fa-twitter"></i>
                         </button>
-                        <button class="p-2 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors">
+                        <button class="p-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 transition-colors">
                             <i class="fab fa-linkedin-in"></i>
                         </button>
-                        <button class="p-2 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors">
+                        <button class="p-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 transition-colors">
                             <i class="fas fa-link"></i>
                         </button>
                     </div>
@@ -79,10 +79,10 @@
             </header>
 
             <!-- Article Content -->
-            <div class="prose dark:prose-invert max-w-none mb-12">
-                <p class="text-xl mb-6 text-gray-600 dark:text-gray-300"><?= $post->content ?></p>
+            <div class="prose max-w-none mb-12">
+                <p class="text-xl mb-6 text-gray-600"><?= $post->content ?></p>
 
-                <div class="prose dark:prose-invert max-w-none mb-12">
+                <div class="prose max-w-none mb-12">
                     <?= $description ?>
                 </div>
         </article>
@@ -91,7 +91,7 @@
         <aside class="lg:col-span-1 space-y-8">
 
             <!-- Blog Info (Aviation Fact) -->
-            <div class="bg-gray-100 dark:bg-gray-800 rounded-xl p-6 mb-8 text-center">
+            <div class="bg-gray-100 rounded-xl p-6 mb-8 text-center">
 
                 <?php if (!empty($aviation)): ?>
                     <div class="w-12 h-12 mx-auto mb-3 flex items-center justify-center rounded-full bg-primary-light text-white">
@@ -100,7 +100,7 @@
 
                     <h3 class="text-xl font-bold mb-2"><?= esc($aviation[0]['title']) ?></h3>
 
-                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                    <p class="text-sm text-gray-500">
                         <?= esc($aviation[0]['description']) ?>
                     </p>
                 <?php endif; ?>
@@ -108,7 +108,7 @@
             </div>
 
             <!-- ⭐ NEW: Related Blogs Card -->
-            <div class="bg-gray-100 dark:bg-gray-800 rounded-xl p-6 mb-8">
+            <div class="bg-gray-100 rounded-xl p-6 mb-8">
                 <h3 class="text-xl font-bold mb-4">Related Blogs</h3>
 
                 <div class="space-y-4">
@@ -122,7 +122,7 @@
                                     <h4 class="font-medium group-hover:text-primary-light transition-colors">
                                         <?= esc($rp->title) ?>
                                     </h4>
-                                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                                    <p class="text-xs text-gray-500 mt-1">
                                         <?= date("M d, Y", strtotime($rp->post_date)) ?>
                                     </p>
                                 </div>
@@ -133,13 +133,13 @@
             </div>
 
             <!-- Table of Contents -->
-            <div class="bg-gray-100 dark:bg-gray-800 rounded-xl p-6 mb-8">
+            <div class="bg-gray-100 rounded-xl p-6 mb-8">
                 <h3 class="text-xl font-bold mb-4">In This Article</h3>
 
                 <ul class="space-y-2">
                     <?php foreach ($toc as $t): ?>
                         <li>
-                            <span class="flex items-start text-gray-600 dark:text-gray-400">
+                            <span class="flex items-start text-gray-600">
                                 <span class="text-secondary-light mr-2">•</span>
                                 <?= esc($t) ?>
                             </span>
@@ -149,7 +149,7 @@
             </div>
 
             <!-- Upcoming Courses -->
-            <div class="bg-gray-100 dark:bg-gray-800 rounded-xl p-6 mb-8">
+            <div class="bg-gray-100 rounded-xl p-6 mb-8">
                 <h3 class="text-xl font-bold mb-4">Upcoming Courses</h3>
 
                 <div class="space-y-4">
@@ -160,7 +160,7 @@
                             </div>
                             <div>
                                 <h4 class="font-medium"><?= esc($u['title']) ?></h4>
-                                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Starts: <?= esc($u['date']) ?></p>
+                                <p class="text-xs text-gray-500 mt-1">Starts: <?= esc($u['date']) ?></p>
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -168,7 +168,7 @@
             </div>
 
             <!-- Simulator Specs -->
-            <div class="bg-gray-100 dark:bg-gray-800 rounded-xl p-6">
+            <div class="bg-gray-100 rounded-xl p-6">
                 <h3 class="text-xl font-bold mb-4">Our Simulator Fleet</h3>
 
                 <div class="space-y-3">
@@ -177,7 +177,7 @@
                         $name = trim($parts[0]);
                         $type = trim($parts[1] ?? '');
                     ?>
-                        <div class="flex justify-between items-center pb-2 border-b border-gray-200 dark:border-gray-700">
+                        <div class="flex justify-between items-center pb-2 border-b border-gray-200">
                             <span class="text-sm"><?= esc($name) ?></span>
                             <span class="text-xs bg-primary-light text-white px-2 py-1 rounded"><?= esc($type) ?></span>
                         </div>
@@ -192,7 +192,7 @@
                     <p class="text-sm mb-4 opacity-90">
                         Join our industry-leading aviation training programs and take the first step toward becoming a professional pilot.
                     </p>
-                    <a href="courses.html" class="block w-full text-center bg-white text-primary-light font-semibold py-2 rounded-lg transition-all duration-300 hover:bg-gray-100">
+                    <a href="<?= base_url('courses') ?>" class="block w-full text-center bg-white text-primary-light font-semibold py-2 rounded-lg transition-all duration-300 hover:bg-gray-100">
                         Explore Courses
                     </a>
                 </div>

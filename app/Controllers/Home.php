@@ -315,7 +315,7 @@ class Home extends BaseController
             // Decode JSON fields
             $detail->skills            = json_decode($detail->skills, true);
             $detail->training_methods  = json_decode($detail->training_methods, true);
-            $detail->program_details   = $detail->program_details; // TEXT
+            $detail->program_details = json_decode($detail->program_details, true);
             $detail->eligibility       = json_decode($detail->eligibility, true);
         } else {
             $detail = null;
