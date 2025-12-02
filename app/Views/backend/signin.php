@@ -113,9 +113,10 @@
                 <!-- Right Side -->
                 <div class="bg-primary px-6 py-12 text-center flex flex-col justify-center items-center">
                     <div class="flex justify-center mb-4">
-                        <i class="fas fa-film text-white text-5xl"></i>
+                        <img src="<?= base_url('assets/img/Flyvista-Logo-White.png') ?>"
+                            alt="FlyVista Logo"
+                            class="w-24 h-24 object-contain">
                     </div>
-                    <h1 class="text-2xl font-bold text-white">FlyVista</h1>
                     <p class="text-white/90 mt-1">Admin Dashboard Login</p>
                 </div>
             </div>

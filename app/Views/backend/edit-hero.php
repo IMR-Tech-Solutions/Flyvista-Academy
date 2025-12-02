@@ -40,7 +40,7 @@
                     <!-- Description -->
                     <div class="md:col-span-2">
                         <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
-                        <textarea name="description" rows="4"
+                        <textarea name="desc" rows="4"
                             class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-primary focus:border-primary"
                             placeholder="Enter hero description..."><?= esc($hero['description']) ?></textarea>
                     </div>

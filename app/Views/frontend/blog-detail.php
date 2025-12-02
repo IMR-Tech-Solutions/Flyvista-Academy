@@ -4,7 +4,7 @@
 
 <!-- Breadcrumb Hero Section -->
 <section
-    class="relative w-full h-48 md:h-[22rem] bg-cover bg-center flex items-center fade-in-section"
+    class="relative w-full h-48 md:h-[18rem] bg-cover bg-center flex items-center fade-in-section"
     style="background-image: url('<?= isset($breadcrumb->bg_image) && !empty($breadcrumb->bg_image) ? base_url($breadcrumb->bg_image) : base_url('assets/img/default-bg.jpg') ?>');">
 
     <!-- Overlay -->

@@ -28,8 +28,7 @@
 
                     <div class="md:col-span-2">
                         <label class="block text-sm font-medium text-gray-700 mb-1">Course Name</label>
-                        <select name="course_id"
-                            class="w-full px-4 py-2 border rounded-lg" required>
+                        <select name="course_id" class="w-full px-4 py-2 border rounded-lg" required>
                             <option value="">-- Select Course --</option>
 
                             <?php foreach ($courses as $c): ?>
@@ -37,7 +36,7 @@
                                     <?= $c->id == $detail['course_id'] ? 'selected' : '' ?>>
                                     <?= esc($c->title) ?>
                                 </option>
-                            <?php endforeach; ?>
+                            <?php endforeach ?>
                         </select>
                     </div>
 
@@ -82,19 +81,18 @@
                         </button>
                     </div>
 
+                    <!-- PROGRAM DETAILS -->
                     <h5 class="text-lg font-semibold md:col-span-2 mt-4 text-secondary-dark">
                         Program Details
                     </h5>
 
                     <div class="md:col-span-2">
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Program Details</label>
-
-                        <textarea name="program_details" rows="4"
+                        <textarea name="program_details" rows="7"
                             class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-primary focus:border-primary"
-                            placeholder="Enter program details..."><?= esc($detail['program_details']) ?></textarea>
+                            required><?= json_encode($detail['program_details'], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) ?></textarea>
                     </div>
 
-                    <!-- Eligibility -->
+                    <!-- ELIGIBILITY -->
                     <h5 class="text-lg font-semibold md:col-span-2 mt-4 text-secondary-dark">Eligibility</h5>
 
                     <div class="md:col-span-2">
@@ -123,27 +121,41 @@
 </main>
 
 <script>
-    let skills = <?= json_encode(is_string($detail['skills']) ? json_decode($detail['skills'], true) : $detail['skills']) ?>;
-    let training = <?= json_encode(is_string($detail['training_methods']) ? json_decode($detail['training_methods'], true) : $detail['training_methods']) ?>;
-    let eligibility = <?= json_encode(is_string($detail['eligibility']) ? json_decode($detail['eligibility'], true) : $detail['eligibility']) ?>;
-    let program = <?= json_encode(is_string($detail['program_details']) ? json_decode($detail['program_details'], true) : $detail['program_details']) ?>;
+    <?php
+    $skillsArr      = $detail['skills'] ?? [];
+    $trainingArr    = $detail['training_methods'] ?? [];
+    $eligibilityArr = $detail['eligibility'] ?? [];
+    ?>
 
+    let skills = <?= json_encode($skillsArr, JSON_UNESCAPED_UNICODE) ?>;
+    let training = <?= json_encode($trainingArr, JSON_UNESCAPED_UNICODE) ?>;
+    let eligibility = <?= json_encode($eligibilityArr, JSON_UNESCAPED_UNICODE) ?>;
+
+
+    /* ===============================
+       RENDER SKILLS (icon, title, items[])
+       =============================== */
     function renderSkills() {
         const wrap = document.getElementById("skillsWrapper");
         wrap.innerHTML = "";
+
         skills.forEach((s, i) => {
             wrap.insertAdjacentHTML("beforeend", `
-                <div class="flex space-x-3 p-4 border rounded-lg bg-gray-50 relative">
-                    <input type="text" name="skills[${i}][icon]" placeholder="Icon" value="${s.icon}"
-                           class="w-1/4 px-2 py-2 border rounded">
-                    <input type="text" name="skills[${i}][title]" placeholder="Title" value="${s.title}"
-                           class="w-1/4 px-2 py-2 border rounded">
-                    <input type="text" name="skills[${i}][description]" placeholder="Description" value="${s.description}"
-                           class="w-1/2 px-2 py-2 border rounded">
-                    <button type="button" onclick="skills.splice(${i},1);renderSkills()" 
-                            class="text-red-600 text-xl">&times;</button>
-                </div>
-            `);
+        <div class="p-4 border rounded-lg bg-gray-50 space-y-3">
+            <input type="text" name="skills[${i}][icon]" value="${s.icon ?? ''}"
+                   placeholder="Icon" class="w-full border px-2 py-2 rounded">
+
+            <input type="text" name="skills[${i}][title]" value="${s.title ?? ''}"
+                   placeholder="Title" class="w-full border px-2 py-2 rounded">
+
+            <label class="block text-sm">Items (one per line)</label>
+            <textarea name="skills[${i}][items][]" rows="4"
+                class="w-full border px-2 py-2 rounded">${(s.items ?? []).join("\n")}</textarea>
+
+            <button type="button" onclick="skills.splice(${i},1);renderSkills()"
+                    class="text-red-600 text-xl">&times;</button>
+        </div>
+        `);
         });
     }
 
@@ -151,27 +163,35 @@
         skills.push({
             icon: "",
             title: "",
-            description: ""
+            items: []
         });
         renderSkills();
     }
 
-    // TRAINING JSON
+
+    /* ===============================
+       RENDER TRAINING METHODS
+       =============================== */
     function renderTraining() {
         const wrap = document.getElementById("trainingWrapper");
         wrap.innerHTML = "";
-        training.forEach((s, i) => {
+
+        training.forEach((t, i) => {
             wrap.insertAdjacentHTML("beforeend", `
-            <div class="flex space-x-3 p-4 border rounded-lg bg-gray-50 relative">
-                <input type="text" name="training_methods[${i}][icon]" placeholder="Icon" value="${s.icon}"
-                        class="w-1/4 px-2 py-2 border rounded">
-                <input type="text" name="training_methods[${i}][title]" placeholder="Title" value="${s.title}"
-                        class="w-1/4 px-2 py-2 border rounded">
-                <input type="text" name="training_methods[${i}][description]" placeholder="Description" value="${s.description}"
-                        class="w-1/2 px-2 py-2 border rounded">
-                <button type="button" onclick="training.splice(${i},1);renderTraining()" 
-                        class="text-red-600 text-xl">&times;</button>
-            </div>
+        <div class="p-4 border rounded-lg bg-gray-50 space-y-3">
+            <input type="text" name="training_methods[${i}][icon]" value="${t.icon ?? ''}"
+                   placeholder="Icon" class="w-full border px-2 py-2 rounded">
+
+            <input type="text" name="training_methods[${i}][title]" value="${t.title ?? ''}"
+                   placeholder="Title" class="w-full border px-2 py-2 rounded">
+
+            <label class="block text-sm">Items (one per line)</label>
+            <textarea name="training_methods[${i}][items][]" rows="4"
+                class="w-full border px-2 py-2 rounded">${(t.items ?? []).join("\n")}</textarea>
+
+            <button type="button" onclick="training.splice(${i},1);renderTraining()"
+                    class="text-red-600 text-xl">&times;</button>
+        </div>
         `);
         });
     }
@@ -180,24 +200,29 @@
         training.push({
             icon: "",
             title: "",
-            description: ""
+            items: []
         });
         renderTraining();
     }
 
-    // ELIGIBILITY JSON
+
+    /* ===============================
+       RENDER ELIGIBILITY
+       =============================== */
     function renderEligibility() {
         const wrap = document.getElementById("eligibilityWrapper");
         wrap.innerHTML = "";
+
         eligibility.forEach((e, i) => {
             wrap.insertAdjacentHTML("beforeend", `
-                <div class="flex space-x-3">
-                    <input type="text" name="eligibility[${i}]" value="${e}" 
-                           class="w-full px-2 py-2 border rounded">
-                    <button type="button" onclick="eligibility.splice(${i},1);renderEligibility()"
-                            class="text-red-600 text-xl">&times;</button>
-                </div>
-            `);
+        <div class="flex space-x-3">
+            <input type="text" name="eligibility[${i}]"
+                   value="${e ?? ''}" class="w-full px-2 py-2 border rounded">
+
+            <button type="button" onclick="eligibility.splice(${i},1);renderEligibility()"
+                    class="text-red-600 text-xl">&times;</button>
+        </div>
+        `);
         });
     }
 
@@ -206,34 +231,10 @@
         renderEligibility();
     }
 
-    function renderProgram() {
-        const wrap = document.getElementById("programWrapper");
-        wrap.innerHTML = "";
-        program.forEach((p, i) => {
-            wrap.insertAdjacentHTML("beforeend", `
-            <div class="flex space-x-3 p-4 border rounded-lg bg-gray-50 relative">
-                <input type="text" name="program_details[${i}][title]" placeholder="Title" value="${p.title}"
-                       class="w-1/4 px-2 py-2 border rounded">
-                <input type="text" name="program_details[${i}][description]" placeholder="Description" value="${p.description}"
-                       class="w-3/4 px-2 py-2 border rounded">
-                <button type="button" onclick="program.splice(${i},1);renderProgram()" 
-                        class="text-red-600 text-xl">&times;</button>
-            </div>
-        `);
-        });
-    }
 
-    function addProgram() {
-        program.push({
-            title: "",
-            description: ""
-        });
-        renderProgram();
-    }
-
-    renderProgram();
-
-    // Load existing data
+    /* ===============================
+       INITIAL LOAD
+       =============================== */
     renderSkills();
     renderTraining();
     renderEligibility();

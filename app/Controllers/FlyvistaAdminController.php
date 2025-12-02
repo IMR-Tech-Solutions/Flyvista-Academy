@@ -323,7 +323,7 @@ class FlyvistaAdminController extends BaseController
         $data = [
             'tagline'          => $this->request->getPost('tagline'),
             'title'            => $this->request->getPost('title'),
-            'description'      => $this->request->getPost('description'),
+            'description'      => $this->request->getPost('desc'),
             'button_link'      => $this->request->getPost('button_link'),
             'contact_number'   => $this->request->getPost('contact_number'),
             'experience_years' => $this->request->getPost('experience_years'),
@@ -391,7 +391,7 @@ class FlyvistaAdminController extends BaseController
         $data = [
             'tagline'          => $this->request->getPost('tagline'),
             'title'            => $this->request->getPost('title'),
-            'description'      => $this->request->getPost('description'),
+            'description'      => $this->request->getPost('desc'),
             'button_link'      => $this->request->getPost('button_link'),
             'contact_number'   => $this->request->getPost('contact_number'),
             'experience_years' => $this->request->getPost('experience_years'),
@@ -1916,76 +1916,143 @@ class FlyvistaAdminController extends BaseController
 
     // Save Course Detail
     public function saveCourseDetail()
-    {
-        $model = new FlyvistaModel();
+{
+    $model = new FlyvistaModel();
 
-        $data = [
-            'course_id'          => $this->request->getPost('course_id'),
-            'about_title'        => $this->request->getPost('about_title'),
-            'about_description'  => $this->request->getPost('description'),
-
-            // Encode arrays into JSON
-            'skills'             => json_encode($this->request->getPost('skills')),
-            'training_methods'   => json_encode($this->request->getPost('training_methods')),
-            'program_details'    => json_encode($this->request->getPost('program_details')),
-            'eligibility'        => json_encode($this->request->getPost('eligibility')),
-        ];
-
-        $model->insertData($this->courseDetailsTable, $data);
-
-        return redirect()->to(base_url('admin/course-details'))->with('success', 'Course Details Added Successfully.');
-    }
-
-    // Edit Course Detail Page
-    public function editCourseDetail($id)
-    {
-        $model = new FlyvistaModel();
-
-        $data['detail'] = $model->getRowById($this->courseDetailsTable, $id);
-        $data['courses'] = $model->getTableData('courses'); // dropdown
-
-        if (!$data['detail']) {
-            return redirect()->to(base_url('admin/course-details'))->with('error', 'Record not found.');
+    /* ==========================================
+       PROCESS SKILLS (Convert textarea → array)
+    ========================================== */
+    $skillsPost = $this->request->getPost('skills');
+    if ($skillsPost) {
+        foreach ($skillsPost as $k => $s) {
+            if (isset($s['items'][0])) {
+                $skillsPost[$k]['items'] = preg_split("/\r\n|\n|\r/", trim($s['items'][0]));
+            } else {
+                $skillsPost[$k]['items'] = [];
+            }
         }
-
-        // Decode JSON fields
-        $data['detail']['skills']            = json_decode($data['detail']['skills'], true);
-        $data['detail']['training_methods']  = json_decode($data['detail']['training_methods'], true);
-        $data['detail']['program_details']   = json_decode($data['detail']['program_details'], true);
-        $data['detail']['eligibility']       = json_decode($data['detail']['eligibility'], true);
-
-        return
-            view('backend/templates/header') .
-            view('backend/edit-course-detail', $data) .
-            view('backend/templates/footer');
     }
 
-    // Update Course Detail
-    public function updateCourseDetail($id)
-    {
-        $model = new FlyvistaModel();
-        $oldData = $model->getRowById($this->courseDetailsTable, $id);
-
-        if (!$oldData) {
-            return redirect()->to(base_url('admin/course-details'))->with('error', 'Record not found.');
+    /* ===============================================
+       PROCESS TRAINING METHODS (textarea → array)
+    =============================================== */
+    $trainingPost = $this->request->getPost('training_methods');
+    if ($trainingPost) {
+        foreach ($trainingPost as $k => $t) {
+            if (isset($t['items'][0])) {
+                $trainingPost[$k]['items'] = preg_split("/\r\n|\n|\r/", trim($t['items'][0]));
+            } else {
+                $trainingPost[$k]['items'] = [];
+            }
         }
-
-        $data = [
-            'course_id'          => $this->request->getPost('course_id'),
-            'about_title'        => $this->request->getPost('about_title'),
-            'about_description'  => $this->request->getPost('description'),
-
-            // Encode as JSON
-            'skills'             => json_encode($this->request->getPost('skills')),
-            'training_methods'   => json_encode($this->request->getPost('training_methods')),
-            'program_details'    => json_encode($this->request->getPost('program_details')),
-            'eligibility'        => json_encode($this->request->getPost('eligibility')),
-        ];
-
-        $model->updateRowById($this->courseDetailsTable, $id, $data);
-
-        return redirect()->to(base_url('admin/course-details'))->with('success', 'Course Details Updated Successfully.');
     }
+
+    $data = [
+        'course_id'          => $this->request->getPost('course_id'),
+        'about_title'        => $this->request->getPost('about_title'),
+        'about_description'  => $this->request->getPost('description'),
+
+        // Save JSON
+        'skills'             => json_encode($skillsPost),
+        'training_methods'   => json_encode($trainingPost),
+        'program_details'    => json_encode($this->request->getPost('program_details')),
+        'eligibility'        => json_encode($this->request->getPost('eligibility')),
+    ];
+
+    $model->insertData($this->courseDetailsTable, $data);
+
+    return redirect()->to(base_url('admin/course-details'))
+                     ->with('success', 'Course Details Added Successfully.');
+}
+
+
+
+/* =====================================
+   EDIT — Load JSON & Decode Safely
+===================================== */
+public function editCourseDetail($id)
+{
+    $model = new FlyvistaModel();
+
+    $data['detail'] = $model->getRowById($this->courseDetailsTable, $id);
+    $data['courses'] = $model->getTableData('courses');
+
+    if (!$data['detail']) {
+        return redirect()->to(base_url('admin/course-details'))
+                         ->with('error', 'Record not found.');
+    }
+
+    // Decode JSON safely
+    $data['detail']['skills']           = json_decode($data['detail']['skills'], true) ?? [];
+    $data['detail']['training_methods'] = json_decode($data['detail']['training_methods'], true) ?? [];
+    $data['detail']['program_details']  = json_decode($data['detail']['program_details'], true) ?? [];
+    $data['detail']['eligibility']      = json_decode($data['detail']['eligibility'], true) ?? [];
+
+    return view('backend/templates/header')
+         . view('backend/edit-course-detail', $data)
+         . view('backend/templates/footer');
+}
+
+
+
+/* =====================================
+   UPDATE COURSE DETAIL
+===================================== */
+public function updateCourseDetail($id)
+{
+    $model = new FlyvistaModel();
+    $oldData = $model->getRowById($this->courseDetailsTable, $id);
+
+    if (!$oldData) {
+        return redirect()->to(base_url('admin/course-details'))
+                         ->with('error', 'Record not found.');
+    }
+
+    /* ==========================================
+       PROCESS SKILLS (textarea → array)
+    ========================================== */
+    $skillsPost = $this->request->getPost('skills');
+    if ($skillsPost) {
+        foreach ($skillsPost as $k => $s) {
+            if (isset($s['items'][0])) {
+                $skillsPost[$k]['items'] = preg_split("/\r\n|\n|\r/", trim($s['items'][0]));
+            } else {
+                $skillsPost[$k]['items'] = [];
+            }
+        }
+    }
+
+    /* ===============================================
+       PROCESS TRAINING METHODS (textarea → array)
+    =============================================== */
+    $trainingPost = $this->request->getPost('training_methods');
+    if ($trainingPost) {
+        foreach ($trainingPost as $k => $t) {
+            if (isset($t['items'][0])) {
+                $trainingPost[$k]['items'] = preg_split("/\r\n|\n|\r/", trim($t['items'][0]));
+            } else {
+                $trainingPost[$k]['items'] = [];
+            }
+        }
+    }
+
+    $data = [
+        'course_id'          => $this->request->getPost('course_id'),
+        'about_title'        => $this->request->getPost('about_title'),
+        'about_description'  => $this->request->getPost('description'),
+
+        // JSON Encode
+        'skills'             => json_encode($skillsPost),
+        'training_methods'   => json_encode($trainingPost),
+        'program_details'    => json_encode($this->request->getPost('program_details')),
+        'eligibility'        => json_encode($this->request->getPost('eligibility')),
+    ];
+
+    $model->updateRowById($this->courseDetailsTable, $id, $data);
+
+    return redirect()->to(base_url('admin/course-details'))
+                     ->with('success', 'Course Details Updated Successfully.');
+}
 
     // Delete Course Detail
     public function deleteCourseDetail($id)

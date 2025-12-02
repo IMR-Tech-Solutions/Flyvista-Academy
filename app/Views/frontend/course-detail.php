@@ -34,7 +34,7 @@
 </style>
 
 <!-- Breadcrumb -->
-<section class="relative w-full h-48 md:h-[22rem] bg-cover bg-center flex items-center fade-in-section"
+<section class="relative w-full h-48 md:h-[18rem] bg-cover bg-center flex items-center fade-in-section"
     style="background-image: url('<?= isset($breadcrumb->bg_image) && file_exists(FCPATH . $breadcrumb->bg_image) ? base_url($breadcrumb->bg_image) : base_url('assets/img/default-bg.jpg') ?>');">
 
     <!-- Overlay -->
@@ -90,7 +90,7 @@
                     </div>
 
                     <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition floating-card">
-                        <p class="text-lg leading-relaxed text-textbody-light">
+                        <p class="text-lg leading-relaxed text-textbody-light text-justify">
                             <?= nl2br($detail->about_description) ?>
                         </p>
                     </div>

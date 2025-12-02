@@ -17,7 +17,7 @@
 </style>
 
 <!-- Breadcrumb Hero Section -->
-<section class="relative w-full h-48 md:h-[22rem] bg-cover bg-center flex items-center fade-in-section"
+<section class="relative w-full h-48 md:h-[18rem] bg-cover bg-center flex items-center fade-in-section"
     style="background-image: url('<?= isset($breadcrumb->bg_image) && file_exists(FCPATH . $breadcrumb->bg_image) ? base_url($breadcrumb->bg_image) : base_url('assets/img/default-bg.jpg') ?>');">
 
     <!-- Overlay -->
@@ -100,7 +100,7 @@
                                 <?= esc($course->title) ?>
                             </h3>
 
-                            <p class="text-gray-600 text-sm mt-2 group-hover:text-white transition-all duration-500">
+                            <p class="text-gray-600 text-sm mt-2 group-hover:text-white transition-all duration-500 text-justify">
                                 <?= esc($course->short_description) ?>
                             </p>
 

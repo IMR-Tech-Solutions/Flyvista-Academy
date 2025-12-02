@@ -24,255 +24,164 @@
   }
 </style>
 
-<!-- Slider Section -->
-<section class="relative w-full bg-transparent overflow-hidden fade-in-section">
+<!-- Full-Background Slider Section -->
+<section class="relative w-full min-h-screen overflow-hidden">
 
-  <div class="swiper mySlider w-full h-[550px] relative z-10">
+  <!-- Animated Background Shapes -->
+  <div class="absolute inset-0 -z-10">
+    <div class="absolute w-96 h-96 bg-gradient-primary rounded-full opacity-30 animate-spin-slow top-10 left-10"></div>
+    <div class="absolute w-72 h-72 bg-secondary/20 rounded-full animate-pulse-slow bottom-20 right-16"></div>
+  </div>
+
+  <div class="swiper professionalSlider w-full h-full relative z-10">
     <div class="swiper-wrapper">
 
       <?php foreach ($hero_slides as $slide): ?>
-        <div class="swiper-slide relative">
+      <div class="swiper-slide relative w-full h-full pt-16 pb-24">
 
-          <!-- Background Image from DB (SLIDES) -->
-          <div class="absolute inset-0 bg-cover bg-center"
-            style="background-image:url('<?= base_url("assets/img/home/" . $slide->bg_shape_image) ?>')">
-          </div>
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image:url('<?= base_url("assets/img/home/" . $slide->bg_shape_image) ?>');"></div>
+        <div class="absolute inset-0 bg-black/40"></div> <!-- Dark overlay for readability -->
 
-          <!-- Gradient Overlay -->
-          <div class="absolute inset-0 bg-gradient-to-r from-background-light/80 to-transparent"></div>
-
-          <!-- CONTENT -->
-          <div class="relative z-10 h-full flex items-center">
-            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 px-4 sm:px-6 gap-6 sm:gap-10">
-
-              <div class="text-heading-light space-y-6">
-
-                <!-- Tagline -->
-                <div class="inline-flex items-center bg-primary/10 px-4 py-2 rounded-full" data-animate="slide-up">
-                  <div class="w-2 h-2 mr-2 rounded-full bg-secondary"></div>
-                  <span class="text-secondary font-semibold text-sm tracking-wider">
-                    <?= $slide->tagline ?>
-                  </span>
-                </div>
-
-                <!-- Title -->
-                <h1 class="text-4xl md:text-5xl font-bold" data-animate="slide-up" data-delay="100">
-                  <span class="text-primary"><?= $slide->title ?></span>
-                </h1>
-
-                <!-- Description -->
-                <p class="text-xl text-textbody-light max-w-xl" data-animate="slide-up" data-delay="200">
-                  <?= $slide->description ?>
-                </p>
-
-                <!-- Buttons -->
-                <div class="flex flex-col sm:flex-row gap-4" data-animate="slide-up" data-delay="300">
-                  <a href="<?= $slide->btn1 ?>"
-                    class="inline-block px-8 py-4 rounded-lg font-semibold text-white bg-gradient-to-r from-secondary to-secondary-dark shadow-lg transition">
-                    <?= $slide->btn_text_1 ?>
-                  </a>
-
-                  <a href="<?= $slide->btn2 ?>"
-                    class="inline-block px-8 py-4 rounded-lg font-semibold text-white bg-gradient-to-r from-primary to-primary-dark shadow-lg transition">
-                    <?= $slide->btn_text_2 ?>
-                  </a>
-                </div>
-
-              </div>
-
+        <div class="h-full flex flex-col justify-center items-start px-6 sm:px-12 lg:px-24 relative z-10">
+          <!-- Number Badge -->
+          <div class="flex items-center gap-4 mb-6">
+            <div class="text-5xl font-light text-white/50 tracking-tight">01</div>
+            <div class="w-16 h-px bg-white/40"></div>
+            <div class="text-sm font-medium text-white/70 tracking-wider uppercase">
+              <?= $slide->tagline ?>
             </div>
           </div>
 
-        </div>
-      <?php endforeach; ?>
+          <!-- Main Title -->
+          <h1 class="text-4xl md:text-5xl lg:text-6xl max-w-4xl font-serif font-bold text-white mb-3 leading-tight animate-fade-in-up drop-shadow-lg">
+            <?= $slide->title ?>
+          </h1>
 
+          <!-- Elegant Divider -->
+          <div class="w-32 h-1 bg-secondary mb-6 animate-fade-in-up"></div>
+
+          <!-- Description -->
+          <p class="text-lg md:text-xl text-white mb-6 max-w-3xl text-justify animate-fade-in-up leading-relaxed">
+            <?= $slide->description ?>
+          </p>
+
+          <!-- Stats Boxes -->
+          <div class="grid grid-cols-3 gap-4 mb-8 animate-fade-in-up">
+            <div class="border-l-2 border-white/50 pl-4 py-2">
+              <div class="text-2xl font-bold text-white">95%</div>
+              <div class="text-xs text-white/70 uppercase tracking-wider">Success Rate</div>
+            </div>
+            <div class="border-l-2 border-white/50 pl-4 py-2">
+              <div class="text-2xl font-bold text-white">2500+</div>
+              <div class="text-xs text-white/70 uppercase tracking-wider">Students</div>
+            </div>
+            <div class="border-l-2 border-white/50 pl-4 py-2">
+              <div class="text-2xl font-bold text-white">15+</div>
+              <div class="text-xs text-white/70 uppercase tracking-wider">Programs</div>
+            </div>
+          </div>
+
+          <!-- Buttons -->
+          <div class="flex flex-col sm:flex-row gap-4 animate-fade-in-up">
+            <a href="<?= $slide->btn1 ?>" class="group relative px-8 py-4 bg-gradient-to-r from-primary to-secondary text-white font-medium rounded-lg shadow-lg hover:scale-105 transition-all duration-300 overflow-hidden">
+              <span class="relative z-10 flex items-center gap-2">
+                <?= $slide->btn_text_1 ?>
+                <i class="fas fa-arrow-right text-sm group-hover:translate-x-1 transition-transform"></i>
+              </span>
+            </a>
+            <a href="<?= $slide->btn2 ?>" class="px-8 py-4 border-2 border-white text-white font-medium rounded-lg hover:border-transparent hover:bg-primary hover:text-white transition-all duration-300 flex items-center gap-2">
+              <?= $slide->btn_text_2 ?>
+              <i class="fas fa-external-link-alt text-xs"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <?php endforeach; ?>
     </div>
 
-    <!-- Pagination -->
-    <div class="swiper-pagination absolute bottom-6 left-1/2 -translate-x-1/2 z-30"></div>
+    <!-- Navigation Dots -->
+    <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-6 z-30">
+      <?php foreach ($hero_slides as $index => $slide): ?>
+      <button class="professional-dot w-8 h-0.5 bg-white/50 hover:bg-white transition-all duration-300" data-slide="<?= $index ?>"></button>
+      <?php endforeach; ?>
+    </div>
 
-    <!-- Navigation Buttons -->
-    <button class="swiper-button-prev-custom absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white shadow-xl flex items-center justify-center z-30">
-      <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-      </svg>
-    </button>
-
-    <button class="swiper-button-next-custom absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white shadow-xl flex items-center justify-center z-30">
-      <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-      </svg>
-    </button>
+    <!-- Navigation Arrows -->
+    <div class="absolute top-1/2 left-0 right-0 flex justify-between px-6 z-30">
+      <button class="professional-prev w-10 h-10 border border-white bg-white rounded-full flex items-center justify-center hover:bg-secondary hover:text-white transition-all duration-300">
+        <i class="fas fa-chevron-left text-sm"></i>
+      </button>
+      <button class="professional-next w-10 h-10 border border-white bg-white rounded-full flex items-center justify-center hover:bg-secondary hover:text-white transition-all duration-300">
+        <i class="fas fa-chevron-right text-sm"></i>
+      </button>
+    </div>
 
   </div>
 </section>
 
-<!-- Animation & Pagination styles -->
 <style>
-  /* Base animations */
-  @keyframes slideUpFade {
-    0% {
-      opacity: 0;
-      transform: translateY(30px);
-    }
+  /* Typography */
+  .font-serif { font-family: 'Playfair Display', serif; }
 
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+  /* Animations */
+  @keyframes fadeInUpElegant { from { opacity:0; transform:translateY(40px);} to {opacity:1; transform:translateY(0);} }
+  .animate-fade-in-up { animation: fadeInUpElegant 0.8s cubic-bezier(0.19,1,0.22,1) forwards; }
 
-  .animate-slide-up {
-    opacity: 0;
-    animation: slideUpFade 0.8s cubic-bezier(.19, 1, .22, 1) forwards;
-  }
+  @keyframes spin-slow { 100% { transform: rotate(360deg); } }
+  @keyframes pulse-slow { 0%,100% { opacity:0.6;} 50%{opacity:1;} }
+  @keyframes float { 0%,100% { transform:translateY(0);} 50%{transform:translateY(-10px);} }
+  @keyframes float-slow { 0%,100% { transform:translateY(0);} 50%{transform:translateY(-5px);} }
 
-  /* Background image full responsiveness */
-  .swiper-slide>div[style*="background-image"] {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
+  .animate-spin-slow { animation: spin-slow 80s linear infinite; }
+  .animate-pulse-slow { animation: pulse-slow 6s ease-in-out infinite; }
+  .animate-float { animation: float 6s ease-in-out infinite; }
+  .animate-float-slow { animation: float-slow 8s ease-in-out infinite; }
 
-  /* ===================== */
-  /*     RESPONSIVE FIXES   */
-  /* ===================== */
+  /* Image Aspect Ratio */
+  .aspect-\[4\/5\] { position:relative; padding-bottom:125%; }
+  .aspect-\[4\/5\] > * { position:absolute; top:0; left:0; width:100%; height:100%; }
 
-  @media (max-width: 1024px) {
-    .mySlider {
-      height: 480px !important;
-    }
-
-    h1 {
-      font-size: 2.3rem !important;
-      line-height: 1.2;
-    }
-
-    p {
-      font-size: 1rem !important;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .mySlider {
-      height: 420px !important;
-    }
-
-    h1 {
-      font-size: 1.9rem !important;
-    }
-
-    .swiper-button-prev-custom,
-    .swiper-button-next-custom {
-      display: none !important;
-      /* hide arrows on small devices */
-    }
-
-    .swiper-pagination {
-      bottom: 14px !important;
-    }
-  }
-
-  @media (max-width: 640px) {
-    .mySlider {
-      height: 470px !important;
-    }
-
-    h1 {
-      font-size: 1.7rem !important;
-      font-weight: 700;
-    }
-
-    p {
-      font-size: 0.9rem !important;
-      line-height: 1.4;
-    }
-
-    .max-w-6xl {
-      max-width: 95% !important;
-    }
-
-    .animate-slide-up {
-      animation-duration: 0.6s !important;
-    }
-
-    /* Buttons stack nicely */
-    .flex.sm\:flex-row {
-      flex-direction: column !important;
-    }
-  }
-
-  /* Swiper pagination bullets */
-  .swiper-pagination-bullet {
-    width: 10px;
-    height: 10px;
-    background-color: rgba(255, 255, 255, 0.55);
-    transition: all .25s ease;
-  }
-
-  .swiper-pagination-bullet-active {
-    background: #E94D65;
-    transform: scale(1.2);
-  }
+  /* Dot active state */
+  .professional-dot.active { width:24px; background:linear-gradient(to right, #1a1a1a, #4a4a4a); }
 </style>
 
-<!-- Swiper init script (selectors must match the buttons & pagination above) -->
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    const swiper = new Swiper('.mySlider', {
-      effect: 'fade',
-      fadeEffect: {
-        crossFade: true
-      },
-      autoplay: {
-        delay: 4500,
-        disableOnInteraction: false
-      },
-      speed: 1000,
-      loop: true,
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true
-      },
-      navigation: {
-        nextEl: '.swiper-button-next-custom',
-        prevEl: '.swiper-button-prev-custom'
-      },
-      on: {
-        init: function() {
-          // play entry animations for active slide
-          const active = this.slides[this.activeIndex];
-          const els = active.querySelectorAll('.animate-slide-up');
-          els.forEach((el, i) => {
-            el.style.animation = `slideUpFade 0.8s cubic-bezier(.19,1,.22,1) forwards ${i*0.15}s`;
-          });
-        },
-        slideChangeTransitionStart: function() {
-          // remove animations from all
-          this.slides.forEach(s => {
-            s.querySelectorAll('.animate-slide-up').forEach(el => {
-              el.style.animation = 'none';
-              el.style.opacity = '0';
-            });
-          });
-        },
-        slideChangeTransitionEnd: function() {
-          const active = this.slides[this.activeIndex];
-          const els = active.querySelectorAll('.animate-slide-up');
-          els.forEach((el, i) => {
-            // slight timeout so animation restarts cleanly
-            setTimeout(() => {
-              el.style.animation = `slideUpFade 0.8s cubic-bezier(.19,1,.22,1) forwards ${i*0.15}s`;
-            }, 50);
-          });
-        }
+    const swiper = new Swiper('.professionalSlider', {
+      effect: 'fade', fadeEffect: { crossFade:true }, speed:1000, loop:true,
+      autoplay: { delay:7000, disableOnInteraction:false },
+      navigation: { nextEl:'.professional-next', prevEl:'.professional-prev' },
+      on:{
+        init: function(){ updateNavigation(this); animateSlide(this.slides[this.activeIndex]); },
+        slideChange: function(){ updateNavigation(this); },
+        slideChangeTransitionStart: function(){ resetAnimations(this); },
+        slideChangeTransitionEnd: function(){ animateSlide(this.slides[this.activeIndex]); }
       }
     });
 
-    // ensure buttons are visible/focusable (just in case)
-    document.querySelectorAll('.swiper-button-prev-custom, .swiper-button-next-custom, .swiper-pagination').forEach(el => {
-      el.setAttribute('tabindex', '0');
-    });
+    function updateNavigation(swiperInstance){
+      document.querySelectorAll('.professional-dot').forEach((dot,index)=>{
+        dot.classList.toggle('active', index===swiperInstance.realIndex);
+        dot.onclick=()=>swiper.slideToLoop(index);
+      });
+    }
+
+    function animateSlide(slide){
+      const elements = slide.querySelectorAll('h1,p,.grid,.flex');
+      elements.forEach((el,index)=>{
+        setTimeout(()=>{ el.classList.add('animate-fade-in-up'); el.style.animationDelay = `${index*0.1}s`; },50);
+      });
+    }
+
+    function resetAnimations(swiperInstance){
+      swiperInstance.slides.forEach(slide=>{
+        slide.querySelectorAll('.animate-fade-in-up').forEach(el=>{
+          el.style.animation='none';
+          el.style.opacity='0';
+        });
+      });
+    }
   });
 </script>
 
@@ -801,7 +710,7 @@
 
                 <h3 class="text-primary text-xl font-bold mb-3"><?= esc($step->title) ?></h3>
 
-                <p class="text-textbody-light text-sm leading-relaxed flex-grow text-justify">
+                <p class="text-textbody-light text-sm leading-relaxed flex-grow text-justify line-clamp-5">
                   <?= esc($step->description) ?>
                 </p>
               </div>
@@ -1448,7 +1357,7 @@
             </a>
 
             <!-- Short excerpt -->
-            <p class="text-textbody-light mt-3">
+            <p class="text-textbody-light mt-3 text-justify">
               <?= esc($item->content) ?>
             </p>
 

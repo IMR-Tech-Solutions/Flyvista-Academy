@@ -17,7 +17,7 @@
 </style>
 
 <!-- Breadcrumb Hero Section -->
-<section class="relative w-full h-48 md:h-[22rem] bg-cover bg-center flex items-center fade-in-section"
+<section class="relative w-full h-48 md:h-[18rem] bg-cover bg-center flex items-center fade-in-section"
     style="background-image: url('<?= isset($breadcrumb->bg_image) ? base_url($breadcrumb->bg_image) : base_url('assets/img/default-bg.jpg') ?>');">
 
     <!-- Overlay -->
@@ -379,7 +379,7 @@
         <!-- LEFT: STATIC AVIATION IMAGE -->
         <div class="relative">
             <img 
-                src="https://images.unsplash.com/photo-1529074963764-98f45c47344b?auto=format&fit=crop&w=900&q=80" 
+                src="<?= base_url('assets/img/why-choose.png') ?>" 
                 alt="Aviation Training" 
                 class="rounded-2xl shadow-xl object-cover w-full h-[420px]"
             >
@@ -460,7 +460,7 @@
         <div class="absolute bottom-0 left-1/4 w-20 h-20 bg-primary rounded-full -translate-y-1/2"></div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
         <?php if (!empty($counters)): ?>
             <?php foreach ($counters as $index => $counter): ?>

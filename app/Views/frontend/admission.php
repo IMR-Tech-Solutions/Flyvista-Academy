@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
 
 <!-- Breadcrumb Hero Section -->
-<section class="relative w-full h-48 md:h-[22rem] bg-cover bg-center flex items-center fade-in-section"
+<section class="relative w-full h-48 md:h-[18rem] bg-cover bg-center flex items-center fade-in-section"
     style="background-image: url('<?= isset($breadcrumb->bg_image) && file_exists(FCPATH . $breadcrumb->bg_image) ? base_url($breadcrumb->bg_image) : base_url('assets/img/default-bg.jpg') ?>');">
 
     <!-- Overlay -->
@@ -30,6 +30,7 @@
 </section>
 
 <!-- Admission Steps -->
+<!-- Admission Steps with Button Between Columns -->
 <section class="py-10 bg-background-light">
     <div class="container mx-auto px-6">
 
@@ -64,43 +65,100 @@
             </h2>
         </div>
 
-        <!-- GRID -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mt-5">
+        <!-- GRID Layout with 2-2 cards and center button -->
+        <div class="flex flex-col lg:flex-row items-center justify-between mt-5">
 
-            <?php foreach ($admission_steps as $step): ?>
-                <div class="relative bg-graylight rounded-2xl p-6 pt-16
-                            border border-primary-light/20 overflow-visible">
-
-                    <!-- Floating Icon -->
-                    <div class="absolute -top-8 left-6 w-16 h-16 rounded-xl border-2 border-primary/50 bg-primary-light/10 
-                                flex items-center justify-center shadow-lg">
-                        <i class="<?= esc($step->icon) ?> text-primary text-2xl"></i>
-                    </div>
-
-                    <!-- Watermark Number -->
-                    <div class="absolute top-2 right-4 text-primary-light/25 
-                                text-8xl font-extrabold select-none leading-none">
-                        <?= esc($step->step_number) ?>
-                    </div>
-
-                    <!-- Title -->
-                    <h3 class="text-xl font-bold text-heading-light mb-2">
-                        <?= esc($step->title) ?>
-                    </h3>
-
-                    <!-- Description -->
-                    <p class="text-textbody-light mb-4 text-justify">
-                        <?= esc($step->description) ?>
-                    </p>
-
-                    <!-- Action (optional) -->
-                    <?php if ($step->step_number == 1): ?>
-                        <div onclick="openAdmissionModal()" class="text-primary font-medium flex items-center cursor-pointer hover:opacity-80">
-                            Apply Now <i class="fas fa-arrow-right ml-2 text-sm"></i>
+            <!-- Left Column - Cards 1 & 2 -->
+            <div class="lg:w-5/12 space-y-12">
+                <?php foreach (array_slice($admission_steps, 0, 2) as $step): ?>
+                    <div class="relative bg-graylight rounded-2xl min-h-[350px] p-6 pt-16
+                                border border-primary-light/20 overflow-visible">
+                        <!-- Floating Icon -->
+                        <div class="absolute -top-8 left-6 w-16 h-16 rounded-xl border-2 border-primary/50 bg-primary-light/10 
+                                    flex items-center justify-center shadow-lg">
+                            <i class="<?= esc($step->icon) ?> text-primary text-2xl"></i>
                         </div>
-                    <?php endif; ?>
-                </div>
-            <?php endforeach; ?>
+
+                        <!-- Watermark Number -->
+                        <div class="absolute top-2 right-4 text-primary-light/25 
+                                    text-8xl font-extrabold select-none leading-none">
+                            <?= esc($step->step_number) ?>
+                        </div>
+
+                        <!-- Title -->
+                        <h3 class="text-xl font-bold text-heading-light mb-2">
+                            <?= esc($step->title) ?>
+                        </h3>
+
+                        <!-- Description -->
+                        <p class="text-textbody-light mb-4 text-justify">
+                            <?= esc($step->description) ?>
+                        </p>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+
+            <!-- Center Circular Button (visible on large screens) -->
+            <div class="hidden lg:flex items-center justify-center w-2/12">
+                <button onclick="openAdmissionModal()" 
+                        class="w-32 h-32 rounded-full bg-gradient-to-br from-primary via-primary to-primary-dark text-white 
+                               flex flex-col items-center justify-center
+                               shadow-2xl hover:shadow-4xl hover:scale-110 
+                               active:scale-95 transition-all duration-300
+                               border-8 border-white/50 cursor-pointer
+                               focus:outline-none focus:ring-8 focus:ring-primary/50
+                               hover:rotate-12 transition-transform duration-500">
+                    <span class="text-2xl font-bold leading-tight">Apply</span>
+                    <span class="text-2xl font-bold leading-tight">Now</span>
+                    <i class="fas fa-arrow-right mt-2 text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Right Column - Cards 3 & 4 -->
+            <div class="lg:w-5/12 space-y-12">
+                <?php foreach (array_slice($admission_steps, 2, 2) as $step): ?>
+                    <div class="relative bg-graylight rounded-2xl min-h-[350px] p-6 pt-16
+                                border border-primary-light/20 overflow-visible">
+                        <!-- Floating Icon -->
+                        <div class="absolute -top-8 left-6 w-16 h-16 rounded-xl border-2 border-primary/50 bg-primary-light/10 
+                                    flex items-center justify-center shadow-lg">
+                            <i class="<?= esc($step->icon) ?> text-primary text-2xl"></i>
+                        </div>
+
+                        <!-- Watermark Number -->
+                        <div class="absolute top-2 right-4 text-primary-light/25 
+                                    text-8xl font-extrabold select-none leading-none">
+                            <?= esc($step->step_number) ?>
+                        </div>
+
+                        <!-- Title -->
+                        <h3 class="text-xl font-bold text-heading-light mb-2">
+                            <?= esc($step->title) ?>
+                        </h3>
+
+                        <!-- Description -->
+                        <p class="text-textbody-light mb-4 text-justify">
+                            <?= esc($step->description) ?>
+                        </p>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+
+            <!-- Mobile Circular Button (visible on small screens) -->
+            <div class="lg:hidden mt-12">
+                <button onclick="openAdmissionModal()" 
+                        class="w-28 h-28 rounded-full bg-gradient-to-br from-primary to-primary-dark text-white 
+                               flex flex-col items-center justify-center
+                               shadow-2xl hover:shadow-3xl hover:scale-110 
+                               active:scale-95 transition-all duration-300
+                               border-8 border-white/40 cursor-pointer
+                               focus:outline-none focus:ring-8 focus:ring-primary/40
+                               mx-auto">
+                    <span class="text-xl font-bold leading-tight">Apply</span>
+                    <span class="text-xl font-bold leading-tight">Now</span>
+                    <i class="fas fa-arrow-right mt-2 text-base"></i>
+                </button>
+            </div>
 
         </div>
     </div>

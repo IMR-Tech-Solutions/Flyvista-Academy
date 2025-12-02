@@ -20,7 +20,7 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-                    <h5 class="text-lg font-semibold text-secoundry md:col-span-2">Mission Section</h5>
+                    <h5 class="text-lg font-semibold text-secondary md:col-span-2">Mission Section</h5>
 
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Heading</label>
@@ -45,26 +45,26 @@
                             placeholder="Enter mission description..." required><?= esc($mv['mission_description']) ?></textarea>
                     </div>
 
-                    <!-- Mission Image -->
+                    <!-- Top Image -->
                     <div class="md:col-span-2">
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Mission Image</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Top Image</label>
 
-                        <?php if (!empty($mv['mission_image'])): ?>
+                        <?php if (!empty($mv['top_image'])): ?>
                             <div class="mb-2">
-                                <img src="<?= base_url('assets/img/mission-vision/' . $mv['mission_image']) ?>"
-                                    width="150" class="rounded shadow" id="mission-current-img">
+                                <img src="<?= base_url('assets/img/mission-vision/' . $mv['top_image']) ?>"
+                                    width="150" class="rounded shadow" id="top-current-img">
                             </div>
                         <?php endif; ?>
 
-                        <label class="block mb-2 text-sm font-medium text-gray-700">Upload New Mission Image</label>
+                        <label class="block mb-2 text-sm font-medium text-gray-700">Upload New Top Image</label>
                         <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg">
                             <div class="space-y-1 text-center">
                                 <div class="flex text-sm text-gray-600">
-                                    <label for="mission_image"
+                                    <label for="top_image"
                                         class="relative cursor-pointer bg-white rounded-md font-medium text-primary hover:text-primary/80">
                                         <span>Upload a file</span>
-                                        <input id="mission_image" name="mission_image" type="file" class="sr-only" accept="image/*"
-                                            onchange="previewImage(event, 'mission-new-preview', 'mission-preview-box')">
+                                        <input id="top_image" name="top_image" type="file" class="sr-only" accept="image/*"
+                                            onchange="previewImage(event, 'top-new-preview', 'top-preview-box')">
                                     </label>
                                     <p class="pl-1">or drag and drop</p>
                                 </div>
@@ -72,14 +72,14 @@
                             </div>
                         </div>
 
-                        <div id="mission-preview-box" class="hidden mt-4">
+                        <div id="top-preview-box" class="hidden mt-4">
                             <p class="text-sm text-gray-600 mb-2">New Image Preview:</p>
-                            <img id="mission-new-preview" src="#" width="150" class="rounded shadow">
+                            <img id="top-new-preview" src="#" width="150" class="rounded shadow">
                         </div>
                     </div>
 
                     <!-- Vision Section -->
-                    <h5 class="text-lg font-semibold text-secoundry md:col-span-2 mt-6">Vision Section</h5>
+                    <h5 class="text-lg font-semibold text-secondary md:col-span-2 mt-6">Vision Section</h5>
 
                     <!-- Vision Title -->
                     <div>
@@ -97,26 +97,26 @@
                             placeholder="Enter vision description..." required><?= esc($mv['vision_description']) ?></textarea>
                     </div>
 
-                    <!-- Vision Image -->
+                    <!-- Bottom Image -->
                     <div class="md:col-span-2">
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Vision Image</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Bottom Image</label>
 
-                        <?php if (!empty($mv['vision_image'])): ?>
+                        <?php if (!empty($mv['bottom_image'])): ?>
                             <div class="mb-2">
-                                <img src="<?= base_url('assets/img/mission-vision/' . $mv['vision_image']) ?>"
-                                    width="150" class="rounded shadow" id="vision-current-img">
+                                <img src="<?= base_url('assets/img/mission-vision/' . $mv['bottom_image']) ?>"
+                                    width="150" class="rounded shadow" id="bottom-current-img">
                             </div>
                         <?php endif; ?>
 
-                        <label class="block mb-2 text-sm font-medium text-gray-700">Upload New Vision Image</label>
+                        <label class="block mb-2 text-sm font-medium text-gray-700">Upload New Bottom Image</label>
                         <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg">
                             <div class="space-y-1 text-center">
                                 <div class="flex text-sm text-gray-600">
-                                    <label for="vision_image"
+                                    <label for="bottom_image"
                                         class="relative cursor-pointer bg-white rounded-md font-medium text-primary hover:text-primary/80">
                                         <span>Upload a file</span>
-                                        <input id="vision_image" name="vision_image" type="file" class="sr-only" accept="image/*"
-                                            onchange="previewImage(event, 'vision-new-preview', 'vision-preview-box')">
+                                        <input id="bottom_image" name="bottom_image" type="file" class="sr-only" accept="image/*"
+                                            onchange="previewImage(event, 'bottom-new-preview', 'bottom-preview-box')">
                                     </label>
                                     <p class="pl-1">or drag and drop</p>
                                 </div>
@@ -124,12 +124,49 @@
                             </div>
                         </div>
 
-                        <div id="vision-preview-box" class="hidden mt-4">
+                        <div id="bottom-preview-box" class="hidden mt-4">
                             <p class="text-sm text-gray-600 mb-2">New Image Preview:</p>
-                            <img id="vision-new-preview" src="#" width="150" class="rounded shadow">
+                            <img id="bottom-new-preview" src="#" width="150" class="rounded shadow">
                         </div>
                     </div>
 
+                    <!-- Core Values Section -->
+                    <h5 class="text-lg font-semibold text-secondary md:col-span-2 mt-6">Core Values Section</h5>
+
+                    <!-- Core Values Title -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Core Values Title</label>
+                        <input type="text" name="core_values_title" value="<?= esc($mv['core_values_title']) ?>"
+                            class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-primary focus:border-primary"
+                            placeholder="Enter core values title..." required>
+                    </div>
+
+                    <!-- Core Values Description -->
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Core Values Description</label>
+                        <textarea name="core_values_description" rows="4"
+                            class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-primary focus:border-primary"
+                            placeholder="Enter core values description..." required><?= esc($mv['core_values_description']) ?></textarea>
+                    </div>
+
+                    <!-- Badge Section -->
+                    <h5 class="text-lg font-semibold text-secondary md:col-span-2 mt-6">Badge Section</h5>
+
+                    <!-- Badge Title -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Badge Title</label>
+                        <input type="text" name="badge_title" value="<?= esc($mv['badge_title']) ?>"
+                            class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-primary focus:border-primary"
+                            placeholder="Enter badge title...">
+                    </div>
+
+                    <!-- Badge Count -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Badge Count</label>
+                        <input type="number" name="badge_count" value="<?= esc($mv['badge_count']) ?>"
+                            class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-primary focus:border-primary"
+                            placeholder="Enter badge count..." min="1">
+                    </div>
                 </div>
 
                 <div class="mt-8 flex justify-end space-x-3">

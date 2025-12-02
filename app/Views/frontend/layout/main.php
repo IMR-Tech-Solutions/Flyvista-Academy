@@ -190,188 +190,190 @@
 
 <body class="bg-white font-sans">
 
-    <!-- TOPBAR -->
-    <div class="bg-gradient-to-r from-primary-dark to-primary text-white text-sm relative overflow-hidden">
-        <!-- Background Pattern -->
-        <div class="absolute inset-0 opacity-10">
-            <div class="absolute top-0 left-0 w-20 h-20 bg-secondary rounded-full -translate-x-1/2 -translate-y-1/2"></div>
-            <div class="absolute bottom-0 right-0 w-16 h-16 bg-secondary rounded-full translate-x-1/2 translate-y-1/2"></div>
-        </div>
+    <div class="sticky top-0 z-50">
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center h-auto md:h-12 relative z-10 py-2 md:py-0 space-y-2 md:space-y-0">
-            <!-- Contact Info -->
-            <div class="flex flex-col md:flex-row items-center md:space-x-6 space-y-1 md:space-y-0">
-                <!-- Phone -->
-                <div class="flex items-center space-x-2 group cursor-pointer">
-                    <div class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center group-hover:bg-secondary transition-all duration-300">
-                        <i class="fa-solid fa-phone text-xs"></i>
+        <!-- TOPBAR -->
+        <div class="bg-gradient-to-r from-primary-dark to-primary text-white text-sm relative overflow-hidden">
+            <!-- Background Pattern -->
+            <div class="absolute inset-0 opacity-10">
+                <div class="absolute top-0 left-0 w-20 h-20 bg-secondary rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+                <div class="absolute bottom-0 right-0 w-16 h-16 bg-secondary rounded-full translate-x-1/2 translate-y-1/2"></div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center h-auto md:h-12 relative z-10 py-2 md:py-0 space-y-2 md:space-y-0">
+                <!-- Contact Info -->
+                <div class="flex flex-col md:flex-row items-center md:space-x-6 space-y-1 md:space-y-0">
+                    <!-- Phone -->
+                    <div class="flex items-center space-x-2 group cursor-pointer">
+                        <div class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center group-hover:bg-secondary transition-all duration-300">
+                            <i class="fa-solid fa-phone text-xs"></i>
+                        </div>
+                        <div class="text-center md:text-left">
+                            <span class="text-white/80 text-xs">Toll-Free</span>
+                            <a href="tel:+18001234567" class="font-semibold text-white hover:text-secondary transition-colors duration-200 block text-sm">
+                                +1 800 123 4567
+                            </a>
+                        </div>
                     </div>
-                    <div class="text-center md:text-left">
-                        <span class="text-white/80 text-xs">Toll-Free</span>
-                        <a href="tel:+18001234567" class="font-semibold text-white hover:text-secondary transition-colors duration-200 block text-sm">
-                            +1 800 123 4567
-                        </a>
+
+                    <!-- Email -->
+                    <div class="hidden sm:flex items-center space-x-2 group cursor-pointer">
+                        <div class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center group-hover:bg-secondary transition-all duration-300">
+                            <i class="fa-solid fa-envelope text-xs"></i>
+                        </div>
+                        <div>
+                            <span class="text-white/80 text-xs">Email Us</span>
+                            <a href="mailto:info@flyvista.com" class="font-semibold text-white hover:text-secondary transition-colors duration-200 block text-sm">
+                                info@flyvista.com
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Email -->
-                <div class="hidden sm:flex items-center space-x-2 group cursor-pointer">
-                    <div class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center group-hover:bg-secondary transition-all duration-300">
-                        <i class="fa-solid fa-envelope text-xs"></i>
-                    </div>
-                    <div>
-                        <span class="text-white/80 text-xs">Email Us</span>
-                        <a href="mailto:info@flyvista.com" class="font-semibold text-white hover:text-secondary transition-colors duration-200 block text-sm">
-                            info@flyvista.com
+                <!-- Social + WhatsApp -->
+                <div class="flex items-center space-x-3">
+                    <!-- Social Icons -->
+                    <div class="flex items-center space-x-2 border-r border-white/20 pr-3">
+                        <a href="https://www.facebook.com/flyvista" target="_blank"
+                            class="w-7 h-7 bg-white/10 rounded-full flex items-center justify-center hover:bg-blue-600 hover:scale-110 transition-all duration-300 group">
+                            <i class="fab fa-facebook-f text-xs group-hover:text-white"></i>
+                        </a>
+                        <a href="https://twitter.com/flyvista" target="_blank"
+                            class="w-7 h-7 bg-white/10 rounded-full flex items-center justify-center hover:bg-blue-400 hover:scale-110 transition-all duration-300 group">
+                            <i class="fab fa-twitter text-xs group-hover:text-white"></i>
+                        </a>
+                        <a href="https://www.instagram.com/flyvista" target="_blank"
+                            class="w-7 h-7 bg-white/10 rounded-full flex items-center justify-center hover:bg-pink-600 hover:scale-110 transition-all duration-300 group">
+                            <i class="fab fa-instagram text-xs group-hover:text-white"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/company/flyvista" target="_blank"
+                            class="w-7 h-7 bg-white/10 rounded-full flex items-center justify-center hover:bg-blue-800 hover:scale-110 transition-all duration-300 group">
+                            <i class="fab fa-linkedin-in text-xs group-hover:text-white"></i>
                         </a>
                     </div>
+
+                    <!-- WhatsApp -->
+                    <a href="https://wa.me/917019786263?text=Hello%20FlyVista!" target="_blank"
+                        class="flex items-center space-x-2 bg-green-500 hover:bg-green-600 text-white px-2 sm:px-3 py-1.5 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg group">
+                        <div class="w-5 h-5 bg-white/20 rounded-full flex items-center justify-center">
+                            <i class="fab fa-whatsapp text-xs"></i>
+                        </div>
+                        <span class="font-medium text-sm hidden sm:inline">Chat with Us</span>
+                        <i class="fa-solid fa-arrow-right text-xs transform group-hover:translate-x-0.5 transition-transform duration-300"></i>
+                    </a>
                 </div>
             </div>
 
-            <!-- Social + WhatsApp -->
-            <div class="flex items-center space-x-3">
-                <!-- Social Icons -->
-                <div class="flex items-center space-x-2 border-r border-white/20 pr-3">
-                    <a href="https://www.facebook.com/flyvista" target="_blank"
-                        class="w-7 h-7 bg-white/10 rounded-full flex items-center justify-center hover:bg-blue-600 hover:scale-110 transition-all duration-300 group">
-                        <i class="fab fa-facebook-f text-xs group-hover:text-white"></i>
-                    </a>
-                    <a href="https://twitter.com/flyvista" target="_blank"
-                        class="w-7 h-7 bg-white/10 rounded-full flex items-center justify-center hover:bg-blue-400 hover:scale-110 transition-all duration-300 group">
-                        <i class="fab fa-twitter text-xs group-hover:text-white"></i>
-                    </a>
-                    <a href="https://www.instagram.com/flyvista" target="_blank"
-                        class="w-7 h-7 bg-white/10 rounded-full flex items-center justify-center hover:bg-pink-600 hover:scale-110 transition-all duration-300 group">
-                        <i class="fab fa-instagram text-xs group-hover:text-white"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/company/flyvista" target="_blank"
-                        class="w-7 h-7 bg-white/10 rounded-full flex items-center justify-center hover:bg-blue-800 hover:scale-110 transition-all duration-300 group">
-                        <i class="fab fa-linkedin-in text-xs group-hover:text-white"></i>
-                    </a>
-                </div>
-
-                <!-- WhatsApp -->
-                <a href="https://wa.me/917019786263?text=Hello%20FlyVista!" target="_blank"
-                    class="flex items-center space-x-2 bg-green-500 hover:bg-green-600 text-white px-2 sm:px-3 py-1.5 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg group">
-                    <div class="w-5 h-5 bg-white/20 rounded-full flex items-center justify-center">
-                        <i class="fab fa-whatsapp text-xs"></i>
-                    </div>
-                    <span class="font-medium text-sm hidden sm:inline">Chat with Us</span>
-                    <i class="fa-solid fa-arrow-right text-xs transform group-hover:translate-x-0.5 transition-transform duration-300"></i>
-                </a>
-            </div>
+            <!-- Animated Border Bottom -->
+            <div class="h-0.5 bg-gradient-to-r from-transparent via-secondary to-transparent animate-pulse"></div>
         </div>
 
-        <!-- Animated Border Bottom -->
-        <div class="h-0.5 bg-gradient-to-r from-transparent via-secondary to-transparent animate-pulse"></div>
-    </div>
+        <!-- HEADER -->
+        <header id="header" class="bg-white shadow-sm transition-all duration-300">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between py-3 md:py-4">
 
-    <!-- HEADER -->
-    <header id="header" class="sticky top-0 z-50 bg-white shadow-sm transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between py-3 md:py-4">
+                    <!-- Logo -->
+                    <a href="<?= base_url('/') ?>" class="flex items-center">
+                        <img src="<?= base_url('assets/img/flyvista-logo.png') ?>" class="h-20 w-auto object-contain" alt="FlyVista Logo">
+                    </a>
 
-                <!-- Logo -->
-                <a href="<?= base_url('/') ?>" class="flex items-center">
-                    <img src="<?= base_url('assets/img/flyvista-logo.png') ?>" class="h-20 w-auto object-contain" alt="FlyVista Logo">
-                </a>
+                    <!-- Desktop Navigation -->
+                    <nav class="hidden lg:flex space-x-8 text-sm font-medium text-primary">
+                        <a href="<?= base_url('/') ?>" class="nav-link py-2">Home</a>
+                        <a href="<?= base_url('about') ?>" class="nav-link py-2">About</a>
 
-                <!-- Desktop Navigation -->
-                <nav class="hidden lg:flex space-x-8 text-sm font-medium text-primary">
-                    <a href="<?= base_url('/') ?>" class="nav-link py-2">Home</a>
-                    <a href="<?= base_url('about') ?>" class="nav-link py-2">About</a>
+                        <!-- Courses Dropdown -->
+                        <div class="relative dropdown">
+                            <button class="w-full flex justify-between items-center py-2 nav-link">
+                                Courses <i class="fa-solid fa-chevron-down text-xs"></i>
+                            </button>
 
-                    <!-- Courses Dropdown -->
-                    <div class="relative dropdown">
-                        <button class="w-full flex justify-between items-center py-2 nav-link">
-                            Courses <i class="fa-solid fa-chevron-down text-xs"></i>
-                        </button>
+                            <div class="dropdown-menu absolute left-0 mt-2 w-56 bg-white rounded-lg shadow-md border border-gray-100 z-50">
 
-                        <div class="dropdown-menu absolute left-0 mt-2 w-56 bg-white rounded-lg shadow-md border border-gray-100 z-50">
+                                <?php foreach ($courses_menu as $item): ?>
+                                    <a href="<?= base_url('courses/' . $item->slug) ?>"
+                                        class="dropdown-item flex items-start gap-2 py-2 px-4 text-primary hover:text-secondary">
+                                        <span class="dash mt-2"></span>
+                                        <span><?= esc($item->title) ?></span>
+                                    </a>
+                                <?php endforeach; ?>
 
-                            <?php foreach ($courses_menu as $item): ?>
-                                <a href="<?= base_url('courses/' . $item->slug) ?>"
-                                    class="dropdown-item flex items-start gap-2 py-2 px-4 text-primary hover:text-secondary">
-                                    <span class="dash mt-2"></span>
-                                    <span><?= esc($item->title) ?></span>
+                            </div>
+                        </div>
+
+                        <a href="<?= base_url('admission') ?>" class="nav-link py-2">Admission Process</a>
+                        <a href="<?= base_url('blog') ?>" class="nav-link py-2">Blog</a>
+                        <a href="<?= base_url('contact') ?>" class="nav-link py-2">Contact</a>
+                    </nav>
+
+                    <!-- Contact Info -->
+                    <div class="hidden lg:flex items-center gap-3">
+                        <div class="relative group">
+                            <div class="flex items-center justify-center bg-gradient-primary text-xl rounded-full w-12 h-12 text-white shadow-md transition-transform duration-300 group-hover:scale-110">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
+                        </div>
+                        <div class="animate-fade-in-down">
+                            <p class="text-md text-gray-500 leading-tight">Call Us Anytime</p>
+                            <a href="tel:+18001234567" class="text-secondary font-semibold hover:text-primary">+1 800 123 4567</a>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-toggle" class="lg:hidden p-2 text-primary">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+
+                </div>
+            </div>
+        </header>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu-overlay" class="mobile-menu-overlay fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"></div>
+
+        <!-- MOBILE MENU -->
+        <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 w-80 h-full bg-white shadow-xl z-50 lg:hidden overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-8">
+                    <img src="<?= base_url('assets/img/flyvista-logo.png') ?>" class="h-16 w-auto">
+                    <button id="mobile-menu-close" class="text-gray-500 hover:text-secondary">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+
+                <nav class="space-y-4">
+                    <a href="<?= base_url('/') ?>" class="mobile-link block py-3 px-4 rounded-lg">Home</a>
+                    <a href="<?= base_url('about') ?>" class="mobile-link block py-3 px-4 rounded-lg">About</a>
+
+                    <!-- Mobile Dropdown -->
+                    <button id="mobile-courses-toggle"
+                        class="w-full flex justify-between items-center py-3 px-4 mobile-link rounded-lg">
+                        Courses <i class="fa-solid fa-chevron-down text-xs"></i>
+                    </button>
+
+                    <div id="mobile-courses-menu" class="hidden ml-4">
+
+                        <?php if (!empty($courses_menu)) : ?>
+                            <?php foreach ($courses_menu as $course) : ?>
+                                <a href="<?= base_url('courses/' . $course->slug) ?>"
+                                    class="mobile-dropdown-item flex items-start gap-2 py-2 px-4 text-primary">
+                                    <span class="mobile-dash mt-2"></span>
+                                    <span><?= esc($course->title) ?></span>
                                 </a>
                             <?php endforeach; ?>
+                        <?php endif; ?>
 
-                        </div>
                     </div>
 
-                    <a href="<?= base_url('admission') ?>" class="nav-link py-2">Admission Process</a>
-                    <a href="<?= base_url('blog') ?>" class="nav-link py-2">Blog</a>
-                    <a href="<?= base_url('contact') ?>" class="nav-link py-2">Contact</a>
+                    <a href="<?= base_url('admission') ?>" class="mobile-link block py-3 px-4 rounded-lg">Admission Process</a>
+                    <a href="<?= base_url('blog') ?>" class="mobile-link block py-3 px-4 rounded-lg">Blog</a>
+                    <a href="<?= base_url('contact') ?>" class="mobile-link block py-3 px-4 rounded-lg">Contact</a>
                 </nav>
-
-                <!-- Contact Info -->
-                <div class="hidden lg:flex items-center gap-3">
-                    <div class="relative group">
-                        <div class="flex items-center justify-center bg-gradient-primary text-xl rounded-full w-12 h-12 text-white shadow-md transition-transform duration-300 group-hover:scale-110">
-                            <i class="fa-solid fa-phone"></i>
-                        </div>
-                        <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
-                    </div>
-                    <div class="animate-fade-in-down">
-                        <p class="text-md text-gray-500 leading-tight">Call Us Anytime</p>
-                        <a href="tel:+18001234567" class="text-secondary font-semibold hover:text-primary">+1 800 123 4567</a>
-                    </div>
-                </div>
-
-                <!-- Mobile Menu Button -->
-                <button id="mobile-menu-toggle" class="lg:hidden p-2 text-primary">
-                    <i class="fa-solid fa-bars text-xl"></i>
-                </button>
-
             </div>
-        </div>
-    </header>
-
-    <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu-overlay" class="mobile-menu-overlay fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"></div>
-
-    <!-- MOBILE MENU -->
-    <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 w-80 h-full bg-white shadow-xl z-50 lg:hidden overflow-y-auto">
-        <div class="p-6">
-            <div class="flex justify-between items-center mb-8">
-                <img src="<?= base_url('assets/img/flyvista-logo.png') ?>" class="h-16 w-auto">
-                <button id="mobile-menu-close" class="text-gray-500 hover:text-secondary">
-                    <i class="fa-solid fa-xmark text-lg"></i>
-                </button>
-            </div>
-
-            <nav class="space-y-4">
-                <a href="<?= base_url('/') ?>" class="mobile-link block py-3 px-4 rounded-lg">Home</a>
-                <a href="<?= base_url('about') ?>" class="mobile-link block py-3 px-4 rounded-lg">About</a>
-
-                <!-- Mobile Dropdown -->
-                <button id="mobile-courses-toggle"
-                    class="w-full flex justify-between items-center py-3 px-4 mobile-link rounded-lg">
-                    Courses <i class="fa-solid fa-chevron-down text-xs"></i>
-                </button>
-
-                <div id="mobile-courses-menu" class="hidden ml-4">
-
-                    <?php if (!empty($courses_menu)) : ?>
-                        <?php foreach ($courses_menu as $course) : ?>
-                            <a href="<?= base_url('courses/' . $course->slug) ?>"
-                                class="mobile-dropdown-item flex items-start gap-2 py-2 px-4 text-primary">
-                                <span class="mobile-dash mt-2"></span>
-                                <span><?= esc($course->title) ?></span>
-                            </a>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-
-                </div>
-
-                <a href="<?= base_url('admission') ?>" class="mobile-link block py-3 px-4 rounded-lg">Admission Process</a>
-                <a href="<?= base_url('blog') ?>" class="mobile-link block py-3 px-4 rounded-lg">Blog</a>
-                <a href="<?= base_url('contact') ?>" class="mobile-link block py-3 px-4 rounded-lg">Contact</a>
-            </nav>
         </div>
     </div>
-
     <!-- Active Menu Script -->
     <script>
         const currentURL = "<?= base_url(uri_string()) ?>";
@@ -410,7 +412,7 @@
             <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full border border-white/10"></div>
         </div>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-6 relative z-10">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
 
                 <!-- Logo & About -->
@@ -421,8 +423,8 @@
                         </div>
                     </div>
 
-                    <p class="text-gray-300 mb-6 leading-relaxed text-md">
-                        Premier aviation training institute providing world-class education and career opportunities in the aviation industry.
+                    <p class="text-gray-300 mb-6 leading-relaxed text-md text-justify">
+                        At Flyvista, we empower aspiring aviation professionals through practical training, personality development, and 100% placement assistance.
                     </p>
 
                     <div class="flex space-x-3">
@@ -449,7 +451,7 @@
                 </div>
 
                 <!-- Quick Links -->
-                <div class="transform transition-transform duration-500 hover:-translate-y-1">
+                <div class="transform transition-transform duration-500 hover:-translate-y-1 md:mx-5">
                     <h3 class="text-xl font-bold mb-6 text-white relative inline-block">
                         Quick Links
                         <span class="absolute -bottom-2 left-0 w-10 h-0.5 bg-[#E62834]"></span>
@@ -471,16 +473,16 @@
                         </li>
 
                         <li class="group">
-                            <a href="<?= base_url('careers') ?>" class="text-gray-300 hover:text-[#E62834] transition-all duration-300 flex items-center">
+                            <a href="<?= base_url('courses') ?>" class="text-gray-300 hover:text-[#E62834] transition-all duration-300 flex items-center">
                                 <span class="w-2 h-2 bg-[#E62834] rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:ml-3"></span>
-                                <span class="ml-0 group-hover:ml-3 transition-all duration-300">Career Opportunities</span>
+                                <span class="ml-0 group-hover:ml-3 transition-all duration-300">Courses</span>
                             </a>
                         </li>
 
                         <li class="group">
-                            <a href="<?= base_url('courses') ?>" class="text-gray-300 hover:text-[#E62834] transition-all duration-300 flex items-center">
+                            <a href="<?= base_url('careers') ?>" class="text-gray-300 hover:text-[#E62834] transition-all duration-300 flex items-center">
                                 <span class="w-2 h-2 bg-[#E62834] rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:ml-3"></span>
-                                <span class="ml-0 group-hover:ml-3 transition-all duration-300">Courses</span>
+                                <span class="ml-0 group-hover:ml-3 transition-all duration-300">Career Opportunities</span>
                             </a>
                         </li>
 
