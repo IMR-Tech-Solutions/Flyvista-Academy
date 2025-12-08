@@ -5,6 +5,8 @@ namespace App\Controllers;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\CLIRequest;
 use CodeIgniter\HTTP\IncomingRequest;
+use App\Models\FlyvistaModel;
+use Psr\Log\LoggerInterface;
 
 /**
  * BaseController for FlyVista
@@ -17,8 +19,7 @@ abstract class BaseController extends Controller
     protected $request;
 
     /**
-     * Global data accessible in all views
-     * (MUST be declared for PHP 8.2)
+     * Global data shared across all views
      *
      * @var array
      */
@@ -30,16 +31,25 @@ abstract class BaseController extends Controller
     protected $flyvistaModel;
 
 
-    public function initController(\CodeIgniter\HTTP\RequestInterface $request, 
-                                   \CodeIgniter\HTTP\ResponseInterface $response, 
-                                   \Psr\Log\LoggerInterface $logger)
-    {
+    public function initController(
+        \CodeIgniter\HTTP\RequestInterface $request,
+        \CodeIgniter\HTTP\ResponseInterface $response,
+        LoggerInterface $logger
+    ) {
         parent::initController($request, $response, $logger);
 
-        // Load model
-        $this->flyvistaModel = new \App\Models\FlyvistaModel();
+        /*
+        |--------------------------------------------------------------------------
+        | Load Main Model
+        |--------------------------------------------------------------------------
+        */
+        $this->flyvistaModel = new FlyvistaModel();
 
-        // Load dynamic courses for header dropdown (status = 1)
+        /*
+        |--------------------------------------------------------------------------
+        | Load Dynamic Courses for Header Dropdown
+        |--------------------------------------------------------------------------
+        */
         $courses = $this->flyvistaModel->getTableData(
             'courses',
             ['status' => 1],
@@ -47,7 +57,31 @@ abstract class BaseController extends Controller
             0
         );
 
-        // Save globally
         $this->data['courses_menu'] = $courses;
+
+        /*
+        |--------------------------------------------------------------------------
+        | Load Contact Info for Topbar
+        |--------------------------------------------------------------------------
+        | Table: contact_info
+        | Query runs from FlyvistaModel::getTableData()
+        */
+        $contact = $this->flyvistaModel->getTableData(
+            'contact_info',
+            [],      // no condition → fetch first() row
+            'id',
+            1        // return single row
+        );
+
+        $this->data['contact'] = $contact;
+
+        /*
+        |--------------------------------------------------------------------------
+        | Share Data Globally With All Views
+        |--------------------------------------------------------------------------
+        */
+        $renderer = \Config\Services::renderer();
+        $renderer->setVar('courses_menu', $courses);
+        $renderer->setVar('contact', $contact);
     }
 }

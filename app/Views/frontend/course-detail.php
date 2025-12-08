@@ -310,47 +310,53 @@
 
             <!-- Left Content -->
             <div class="space-y-8 animate-fade-in-down">
+
                 <!-- Badge -->
-                <span class="inline-block px-4 py-2 bg-secondary/10 text-secondary border border-secondary-light font-semibold rounded-full text-sm uppercase tracking-wider">
-                    Start Your Journey
+                <span class="inline-block px-4 py-2 bg-secondary/10 text-secondary border border-secondary-light/20 font-semibold rounded-full text-sm uppercase tracking-wider">
+                    Transforming Aspirants Into Aviation Achievers
                 </span>
 
                 <!-- Heading -->
                 <h2 class="text-3xl md:text-4xl font-bold text-primary">
-                    Ready to Take Flight with Your Career?
+                    Ready to Take Flight with Your Aviation Career?
                 </h2>
 
                 <!-- Description -->
-                <p class="text-lg text-gray-600 leading-relaxed">
-                    Join thousands of successful aviation professionals who started their journey at FlyVista.
-                    Our comprehensive training programs and industry connections will launch your career to new heights.
+                <p class="text-lg text-gray-600 leading-relaxed text-justify">
+                    Join FlyVista Academy and turn your passion for flying into a global opportunity.
+                    With world-class grooming, communication training, real-time airport exposure,
+                    and industry-aligned modules, we prepare you to meet international airline standards
+                    with confidence and professional excellence.
                 </p>
 
                 <!-- Features List -->
                 <div class="space-y-4">
                     <div class="flex items-center space-x-3">
-                        <div class="w-6 h-6 bg-secondary-light rounded-full flex items-center justify-center">
+                        <div class="w-5 h-5 bg-secondary-light rounded-full flex items-center justify-center">
                             <i class="fas fa-check text-white text-xs"></i>
                         </div>
-                        <span class="text-gray-700 font-medium">Placement Assistance</span>
+                        <span class="text-gray-700 font-medium">100% Placement Assistance</span>
                     </div>
+
                     <div class="flex items-center space-x-3">
-                        <div class="w-6 h-6 bg-secondary-light rounded-full flex items-center justify-center">
+                        <div class="w-5 h-5 bg-secondary-light rounded-full flex items-center justify-center">
                             <i class="fas fa-check text-white text-xs"></i>
                         </div>
-                        <span class="text-gray-700 font-medium">Industry Expert Trainers</span>
+                        <span class="text-gray-700 font-medium">Internationally Aligned Curriculum</span>
                     </div>
+
                     <div class="flex items-center space-x-3">
-                        <div class="w-6 h-6 bg-secondary-light rounded-full flex items-center justify-center">
+                        <div class="w-5 h-5 bg-secondary-light rounded-full flex items-center justify-center">
                             <i class="fas fa-check text-white text-xs"></i>
                         </div>
-                        <span class="text-gray-700 font-medium">Modern Training Blog</span>
+                        <span class="text-gray-700 font-medium">Simulation Labs & Real Airport Exposure</span>
                     </div>
+
                     <div class="flex items-center space-x-3">
-                        <div class="w-6 h-6 bg-secondary-light rounded-full flex items-center justify-center">
+                        <div class="w-5 h-5 bg-secondary-light rounded-full flex items-center justify-center">
                             <i class="fas fa-check text-white text-xs"></i>
                         </div>
-                        <span class="text-gray-700 font-medium">Global Certification</span>
+                        <span class="text-gray-700 font-medium">Soft Skills, Grooming & Personality Development</span>
                     </div>
                 </div>
             </div>

@@ -9,7 +9,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="robots" content="noindex, nofollow" />
 
-  <link rel="icon" href="<?= base_url('assets/img/favicon.png') ?>" type="image/png" />
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="34x34" href="<?= base_url('favicon.png') ?>">
 
   <title>FlyVista - Admin Dashboard</title>
   <script src="https://cdn.tailwindcss.com"></script>
@@ -20,7 +21,7 @@
   <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
 
   <!-- Place the first <script> tag in your HTML's <head> -->
-  <script src="https://cdn.tiny.cloud/1/knv9wlj76gscl0q2pdzffj0juxim7p5qx23oelqjh9i5q18a/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+  <script src="https://cdn.tiny.cloud/1/arndtw5mf8l47r92yv1iecndlmuo7kbnla0k7sk9rlhh3zpd/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 
   <style>
     /* Hide default DataTable elements */
@@ -193,11 +194,11 @@
 
                         <!-- Team Members -->
                         <li>
-                            <a href="<?= base_url('admin/team-members') ?>"
+                            <a href="<?= base_url('admin/leaders') ?>"
                             class="flex items-center space-x-3 p-2 rounded-lg
-                            <?= strpos($currentURL, 'admin/team-members') !== false ? 'bg-primary text-white' : 'hover:bg-gray-100' ?>">
+                            <?= strpos($currentURL, 'admin/leaders') !== false ? 'bg-primary text-white' : 'hover:bg-gray-100' ?>">
                                 <i class="fas fa-users"></i>
-                                <span>Team Members</span>
+                                <span>Team leaders</span>
                             </a>
                         </li>
 
@@ -208,6 +209,18 @@
                             <?= strpos($currentURL, 'admin/courses') !== false ? 'bg-primary text-white' : 'hover:bg-gray-100' ?>">
                                 <i class="fas fa-book-open"></i>
                                 <span>Our Courses</span>
+                            </a>
+                        </li>
+
+                        <!-- Flagship Program -->
+                        <li>
+                            <a href="<?= base_url('admin/flagship_program') ?>"
+                                class="flex items-center space-x-3 p-2 rounded-lg
+                                <?= strpos($currentURL, 'admin/flagship_program') !== false
+                                    ? 'bg-primary text-white'
+                                    : 'hover:bg-gray-100' ?>">
+                                    <i class="fas fa-rocket mr-3"></i>
+                                Flagship Program
                             </a>
                         </li>
 
@@ -288,6 +301,16 @@
                             <?= strpos($currentURL, 'admin/faqs') !== false ? 'bg-primary text-white' : 'hover:bg-gray-100' ?>">
                                 <i class="fas fa-question-circle"></i>
                                 <span>FAQ</span>
+                            </a>
+                        </li>
+
+                        <!-- Career Placement -->
+                        <li>
+                            <a href="<?= base_url('admin/placement-career') ?>"
+                            class="flex items-center space-x-3 p-2 rounded-lg
+                            <?= strpos($currentURL, 'admin/placement-career') !== false ? 'bg-primary text-white' : 'hover:bg-gray-100' ?>">
+                                <i class="fas fa-graduation-cap"></i>
+                                <span>Career Placement</span>
                             </a>
                         </li>
 

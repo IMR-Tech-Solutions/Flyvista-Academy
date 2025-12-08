@@ -303,7 +303,7 @@ class FlyvistaAdminController extends BaseController
         $model = new FlyvistaModel();
 
         // Upload Images
-        $fields = ['bg_shape_image', 'left_image', 'right_image'];
+        $fields = ['bg_shape_image'];
         $uploadPath = 'assets/img/home/';
 
         $uploadedImages = [];
@@ -329,8 +329,6 @@ class FlyvistaAdminController extends BaseController
             'experience_years' => $this->request->getPost('experience_years'),
             'experience_text'  => $this->request->getPost('experience_text'),
             'bg_shape_image'   => $uploadedImages['bg_shape_image'],
-            'left_image'       => $uploadedImages['left_image'],
-            'right_image'      => $uploadedImages['right_image'],
         ];
 
         $model->insertData($this->table, $data);
@@ -364,7 +362,7 @@ class FlyvistaAdminController extends BaseController
             return redirect()->to('admin/hero')->with('error', 'Record not found.');
         }
 
-        $fields = ['bg_shape_image', 'left_image', 'right_image'];
+        $fields = ['bg_shape_image'];
         $uploadPath = 'assets/img/home/';
 
         $uploadedImages = [];
@@ -397,8 +395,6 @@ class FlyvistaAdminController extends BaseController
             'experience_years' => $this->request->getPost('experience_years'),
             'experience_text'  => $this->request->getPost('experience_text'),
             'bg_shape_image'   => $uploadedImages['bg_shape_image'],
-            'left_image'       => $uploadedImages['left_image'],
-            'right_image'      => $uploadedImages['right_image'],
         ];
 
         $model->updateRowById($this->table, $id, $data);
@@ -733,6 +729,141 @@ class FlyvistaAdminController extends BaseController
         }
 
         return redirect()->to(base_url('admin/courses'))->with('error', 'Delete failed.');
+    }
+
+    // Table
+    protected $flagshipTable = 'flagship_program';
+
+    // Show Flagship Program List
+    public function flagshipIndex()
+    {
+        $model = new FlyvistaModel();
+        $data['programs'] = $model->getTableData($this->flagshipTable);
+
+        return
+            view('backend/templates/header') .
+            view('backend/flagship_program', $data) .
+            view('backend/templates/footer');
+    }
+
+    // Add Flagship Program Page
+    public function flagshipAdd()
+    {
+        return
+            view('backend/templates/header') .
+            view('backend/add-flagship-program') .
+            view('backend/templates/footer');
+    }
+
+    // Save Flagship Program
+    public function flagshipSave()
+    {
+        $model = new FlyvistaModel();
+        $uploadPath = 'assets/img/courses/';
+        $file = $this->request->getFile('image');
+
+        // Handle image upload
+        $imageName = '';
+        if ($file && $file->isValid() && !$file->hasMoved()) {
+            $imageName = $file->getRandomName();
+            $file->move($uploadPath, $imageName);
+        }
+
+        // Prepare insert data
+        $data = [
+            'title'                => $this->request->getPost('title'),
+            'subtitle'             => $this->request->getPost('subtitle'),
+            'overview'             => $this->request->getPost('overview'),
+            'training_highlights'  => $this->request->getPost('training_highlights'),
+            'distinctive_features' => $this->request->getPost('distinctive_features'),
+            'tagline'              => $this->request->getPost('tagline'),
+            'outcome_description'  => $this->request->getPost('outcome_description'),
+            'success_rate'         => $this->request->getPost('success_rate'),
+            'image'                => $imageName,
+        ];
+
+        $model->insertData($this->flagshipTable, $data);
+
+        return redirect()->to(base_url('admin/flagship_program'))
+            ->with('success', 'Flagship Program Added Successfully.');
+    }
+
+    // Edit Flagship Program Page
+    public function flagshipEdit($id)
+    {
+        $model = new FlyvistaModel();
+        $data['program'] = $model->getRowById($this->flagshipTable, $id);
+
+        if (!$data['program']) {
+            return redirect()->to(base_url('admin/flagship_program'))->with('error', 'Record not found.');
+        }
+
+        return
+            view('backend/templates/header') .
+            view('backend/edit-flagship-program', $data) .
+            view('backend/templates/footer');
+    }
+
+    // Update Flagship Program
+    public function flagshipUpdate($id)
+    {
+        $model = new FlyvistaModel();
+        $oldData = $model->getRowById($this->flagshipTable, $id);
+        $uploadPath = 'assets/img/courses/';
+        $file = $this->request->getFile('image');
+
+        if (!$oldData) {
+            return redirect()->to(base_url('admin/flagship_program'))->with('error', 'Record not found.');
+        }
+
+        // Handle image update
+        $imageName = $oldData['image'];
+        if ($file && $file->isValid() && !$file->hasMoved()) {
+            if (!empty($oldData['image']) && file_exists($uploadPath . $oldData['image'])) {
+                unlink($uploadPath . $oldData['image']);
+            }
+            $imageName = $file->getRandomName();
+            $file->move($uploadPath, $imageName);
+        }
+
+        // Prepare update data
+        $data = [
+            'title'                => $this->request->getPost('title'),
+            'subtitle'             => $this->request->getPost('subtitle'),
+            'overview'             => $this->request->getPost('overview'),
+            'training_highlights'  => $this->request->getPost('training_highlights'),
+            'distinctive_features' => $this->request->getPost('distinctive_features'),
+            'tagline'              => $this->request->getPost('tagline'),
+            'outcome_description'  => $this->request->getPost('outcome_description'),
+            'success_rate'         => $this->request->getPost('success_rate'),
+            'image'                => $imageName,
+        ];
+
+        $model->updateRowById($this->flagshipTable, $id, $data);
+
+        return redirect()->to(base_url('admin/flagship_program'))
+            ->with('success', 'Flagship Program Updated Successfully.');
+    }
+
+    // Delete Flagship Program
+    public function flagshipDelete($id)
+    {
+        $model = new FlyvistaModel();
+        $record = $model->getRowById($this->flagshipTable, $id);
+        $uploadPath = 'assets/img/courses/';
+
+        if ($record) {
+            if (!empty($record['image']) && file_exists($uploadPath . $record['image'])) {
+                unlink($uploadPath . $record['image']);
+            }
+
+            $model->deleteRowById($this->flagshipTable, $id);
+
+            return redirect()->to(base_url('admin/flagship_program'))
+                ->with('success', 'Flagship Program Deleted Successfully.');
+        }
+
+        return redirect()->to(base_url('admin/flagship_program'))->with('error', 'Delete failed.');
     }
 
     // ADMISSION PROCESS SECTION MANAGEMENT
@@ -1596,158 +1727,150 @@ class FlyvistaAdminController extends BaseController
         return redirect()->to(base_url('admin/counters'))->with('error', 'Delete failed.');
     }
 
-    protected $teammembertable = 'team_members';
+    protected $db;
 
-    // List all team members
+    public function __leaderconstruct()
+    {
+        $this->db = \Config\Database::connect();
+    }
+
+    protected $leaderstable = 'leaders';
+
+    // List all Leaders
     public function index()
     {
         $model = new FlyvistaModel();
-        $data['members'] = $model->getTableData($this->teammembertable);
+        $data['leaders'] = $model->getTableData($this->leaderstable);
 
         return
             view('backend/templates/header') .
-            view('backend/team-members', $data) .
+            view('backend/leaders', $data) .
             view('backend/templates/footer');
     }
 
-    // Add Team Member Page
+    // Add Leader Page
     public function add()
     {
         return
             view('backend/templates/header') .
-            view('backend/add-team-member') .
+            view('backend/add-leaders') .
             view('backend/templates/footer');
     }
 
-    // Save Team Member
+    // Save Leader
     public function save()
     {
         $model = new FlyvistaModel();
-        $uploadImagePath = 'assets/img/team/';
-        $uploadVideoPath = 'assets/videos/team/';
+        $uploadPath = 'assets/img/team/';
 
-        // Handle image upload
+        // Handle Image Upload
         $imageName = '';
-        $imageFile = $this->request->getFile('image');
+        $imageFile = $this->request->getFile('profile_image');
+
         if ($imageFile && $imageFile->isValid() && !$imageFile->hasMoved()) {
             $imageName = $imageFile->getRandomName();
-            $imageFile->move($uploadImagePath, $imageName);
-        }
-
-        // Handle video upload
-        $videoName = '';
-        $videoFile = $this->request->getFile('video');
-        if ($videoFile && $videoFile->getSize() > 50 * 1024 * 1024) { // 50MB
-            return redirect()->back()->with('error', 'Video size exceeds 50MB limit.');
+            $imageFile->move($uploadPath, $imageName);
         }
 
         $data = [
-            'name'          => $this->request->getPost('name'),
-            'role'          => $this->request->getPost('role'),
-            'image'         => $imageName,
-            'video'         => $videoName,
-            'facebook_url'  => $this->request->getPost('facebook_url'),
-            'twitter_url'   => $this->request->getPost('twitter_url'),
-            'instagram_url' => $this->request->getPost('instagram_url'),
+            'heading'           => $this->request->getPost('heading'),
+            'full_name'         => $this->request->getPost('full_name'),
+            'designation'       => $this->request->getPost('designation'),
+            'short_description' => $this->request->getPost('short_description'),
+            'long_description'  => $this->request->getPost('long_description'),
+            'quote'             => $this->request->getPost('quote'),
+            'profile_image'     => $imageName,
+            'responsibility'    => $this->request->getPost('responsibility'),
+            'display_order'     => $this->request->getPost('display_order'),
         ];
 
-        $model->insertData($this->teammembertable, $data);
+        $model->insertData($this->leaderstable, $data);
 
-        return redirect()->to(base_url('admin/team-members'))->with('success', 'Team Member Added Successfully.');
+        return redirect()->to(base_url('admin/leaders'))->with('success', 'Leader Added Successfully.');
     }
 
-    // Edit Team Member Page
+    // Edit Leader Page
+    // Edit Leader
     public function edit($id)
     {
         $model = new FlyvistaModel();
-        $data['member'] = $model->getRowById($this->teammembertable, $id);
+        $row = $model->getTableData($this->leaderstable, ['leader_id' => $id]);
+        $data['leader'] = $row ? $row[0] : null;
 
-        if (!$data['member']) {
-            return redirect()->to(base_url('admin/team-members'))->with('error', 'Record not found.');
+        if (!$data['leader']) {
+            return redirect()->to(base_url('admin/leaders'))->with('error', 'Record not found.');
         }
 
-        return
-            view('backend/templates/header') .
-            view('backend/edit-team-member', $data) .
+        return view('backend/templates/header') .
+            view('backend/edit-leaders', $data) .
             view('backend/templates/footer');
     }
 
-    // Update Team Member
+    // Update Leader
     public function update($id)
     {
         $model = new FlyvistaModel();
-        $oldData = $model->getRowById($this->teammembertable, $id);
+        $row = $model->getTableData($this->leaderstable, ['leader_id' => $id]);
+        $oldData = $row ? $row[0] : null;
 
         if (!$oldData) {
-            return redirect()->to(base_url('admin/team-members'))->with('error', 'Record not found.');
+            return redirect()->to(base_url('admin/leaders'))->with('error', 'Record not found.');
         }
 
-        $uploadImagePath = 'assets/img/team/';
-        $uploadVideoPath = 'assets/videos/team/';
+        $uploadPath = 'assets/img/team/';
+        $imageFile = $this->request->getFile('profile_image');
 
-        // Image
-        $imageFile = $this->request->getFile('image');
         if ($imageFile && $imageFile->isValid() && !$imageFile->hasMoved()) {
-            if (!empty($oldData['image']) && file_exists($uploadImagePath . $oldData['image'])) {
-                unlink($uploadImagePath . $oldData['image']);
+            if (!empty($oldData->profile_image) && file_exists($uploadPath . $oldData->profile_image)) {
+                unlink($uploadPath . $oldData->profile_image);
             }
             $imageName = $imageFile->getRandomName();
-            $imageFile->move($uploadImagePath, $imageName);
+            $imageFile->move($uploadPath, $imageName);
         } else {
-            $imageName = $oldData['image'];
-        }
-
-        // Video
-        $videoFile = $this->request->getFile('video');
-        if ($videoFile && $videoFile->isValid() && !$videoFile->hasMoved()) {
-            if (!empty($oldData['video']) && file_exists($uploadVideoPath . $oldData['video'])) {
-                unlink($uploadVideoPath . $oldData['video']);
-            }
-            $videoName = $videoFile->getRandomName();
-            $videoFile->move($uploadVideoPath, $videoName);
-        } else {
-            $videoName = $oldData['video'];
+            $imageName = $oldData->profile_image;
         }
 
         $data = [
-            'name'          => $this->request->getPost('name'),
-            'role'          => $this->request->getPost('role'),
-            'image'         => $imageName,
-            'video'         => $videoName,
-            'facebook_url'  => $this->request->getPost('facebook_url'),
-            'twitter_url'   => $this->request->getPost('twitter_url'),
-            'instagram_url' => $this->request->getPost('instagram_url'),
+            'full_name'      => $this->request->getPost('full_name'),
+            'designation'    => $this->request->getPost('designation'),
+            'profile_image'  => $imageName,
+            'responsibility' => $this->request->getPost('responsibility'),
+            'heading'        => $this->request->getPost('heading'),
+            'short_description' => $this->request->getPost('short_description'),
+            'long_description'  => $this->request->getPost('long_description'),
+            'quote'             => $this->request->getPost('quote'),
+            'display_order'     => $this->request->getPost('display_order'),
         ];
 
-        $model->updateRowById($this->teammembertable, $id, $data);
+        $builder = $model->db->table($this->leaderstable);
+        $builder->where('leader_id', $id);
+        $builder->update($data);
 
-        return redirect()->to(base_url('admin/team-members'))->with('success', 'Team Member Updated Successfully.');
+        return redirect()->to(base_url('admin/leaders'))->with('success', 'Leader Updated Successfully.');
     }
 
-    // Delete Team Member
+    // Delete Leader
     public function delete($id)
-    {
-        $model = new FlyvistaModel();
-        $record = $model->getRowById($this->teammembertable, $id);
+{
+    $model = new \App\Models\FlyvistaModel();
+    $uploadPath = 'assets/img/team/';
 
-        $uploadImagePath = 'assets/img/team/';
-        $uploadVideoPath = 'assets/videos/team/';
+    // Fetch the leader row
+    $record = $model->db->table('leaders')->where('leader_id', $id)->get()->getRowArray();
 
-        if ($record) {
-            if (!empty($record['image']) && file_exists($uploadImagePath . $record['image'])) {
-                unlink($uploadImagePath . $record['image']);
-            }
-            if (!empty($record['video']) && file_exists($uploadVideoPath . $record['video'])) {
-                unlink($uploadVideoPath . $record['video']);
-            }
-
-            $model->deleteRowById($this->teammembertable, $id);
-
-            return redirect()->to(base_url('admin/team-members'))->with('success', 'Team Member Deleted Successfully.');
+    if ($record) {
+        if (!empty($record['profile_image']) && file_exists($uploadPath . $record['profile_image'])) {
+            unlink($uploadPath . $record['profile_image']);
         }
 
-        return redirect()->to(base_url('admin/team-members'))->with('error', 'Delete failed.');
+        // Delete using correct PK column
+        $model->db->table('leaders')->where('leader_id', $id)->delete();
+
+        return redirect()->to(base_url('admin/leaders'))->with('success', 'Leader Deleted Successfully.');
     }
+
+    return redirect()->to(base_url('admin/leaders'))->with('error', 'Delete failed.');
+}
 
     protected $successStoriesTable = 'success_stories';
 
@@ -1916,143 +2039,143 @@ class FlyvistaAdminController extends BaseController
 
     // Save Course Detail
     public function saveCourseDetail()
-{
-    $model = new FlyvistaModel();
+    {
+        $model = new FlyvistaModel();
 
-    /* ==========================================
+        /* ==========================================
        PROCESS SKILLS (Convert textarea → array)
     ========================================== */
-    $skillsPost = $this->request->getPost('skills');
-    if ($skillsPost) {
-        foreach ($skillsPost as $k => $s) {
-            if (isset($s['items'][0])) {
-                $skillsPost[$k]['items'] = preg_split("/\r\n|\n|\r/", trim($s['items'][0]));
-            } else {
-                $skillsPost[$k]['items'] = [];
+        $skillsPost = $this->request->getPost('skills');
+        if ($skillsPost) {
+            foreach ($skillsPost as $k => $s) {
+                if (isset($s['items'][0])) {
+                    $skillsPost[$k]['items'] = preg_split("/\r\n|\n|\r/", trim($s['items'][0]));
+                } else {
+                    $skillsPost[$k]['items'] = [];
+                }
             }
         }
-    }
 
-    /* ===============================================
+        /* ===============================================
        PROCESS TRAINING METHODS (textarea → array)
     =============================================== */
-    $trainingPost = $this->request->getPost('training_methods');
-    if ($trainingPost) {
-        foreach ($trainingPost as $k => $t) {
-            if (isset($t['items'][0])) {
-                $trainingPost[$k]['items'] = preg_split("/\r\n|\n|\r/", trim($t['items'][0]));
-            } else {
-                $trainingPost[$k]['items'] = [];
+        $trainingPost = $this->request->getPost('training_methods');
+        if ($trainingPost) {
+            foreach ($trainingPost as $k => $t) {
+                if (isset($t['items'][0])) {
+                    $trainingPost[$k]['items'] = preg_split("/\r\n|\n|\r/", trim($t['items'][0]));
+                } else {
+                    $trainingPost[$k]['items'] = [];
+                }
             }
         }
+
+        $data = [
+            'course_id'          => $this->request->getPost('course_id'),
+            'about_title'        => $this->request->getPost('about_title'),
+            'about_description'  => $this->request->getPost('description'),
+
+            // Save JSON
+            'skills'             => json_encode($skillsPost),
+            'training_methods'   => json_encode($trainingPost),
+            'program_details'    => json_encode($this->request->getPost('program_details')),
+            'eligibility'        => json_encode($this->request->getPost('eligibility')),
+        ];
+
+        $model->insertData($this->courseDetailsTable, $data);
+
+        return redirect()->to(base_url('admin/course-details'))
+            ->with('success', 'Course Details Added Successfully.');
     }
 
-    $data = [
-        'course_id'          => $this->request->getPost('course_id'),
-        'about_title'        => $this->request->getPost('about_title'),
-        'about_description'  => $this->request->getPost('description'),
-
-        // Save JSON
-        'skills'             => json_encode($skillsPost),
-        'training_methods'   => json_encode($trainingPost),
-        'program_details'    => json_encode($this->request->getPost('program_details')),
-        'eligibility'        => json_encode($this->request->getPost('eligibility')),
-    ];
-
-    $model->insertData($this->courseDetailsTable, $data);
-
-    return redirect()->to(base_url('admin/course-details'))
-                     ->with('success', 'Course Details Added Successfully.');
-}
 
 
-
-/* =====================================
+    /* =====================================
    EDIT — Load JSON & Decode Safely
 ===================================== */
-public function editCourseDetail($id)
-{
-    $model = new FlyvistaModel();
+    public function editCourseDetail($id)
+    {
+        $model = new FlyvistaModel();
 
-    $data['detail'] = $model->getRowById($this->courseDetailsTable, $id);
-    $data['courses'] = $model->getTableData('courses');
+        $data['detail'] = $model->getRowById($this->courseDetailsTable, $id);
+        $data['courses'] = $model->getTableData('courses');
 
-    if (!$data['detail']) {
-        return redirect()->to(base_url('admin/course-details'))
-                         ->with('error', 'Record not found.');
+        if (!$data['detail']) {
+            return redirect()->to(base_url('admin/course-details'))
+                ->with('error', 'Record not found.');
+        }
+
+        // Decode JSON safely
+        $data['detail']['skills']           = json_decode($data['detail']['skills'], true) ?? [];
+        $data['detail']['training_methods'] = json_decode($data['detail']['training_methods'], true) ?? [];
+        $data['detail']['program_details']  = json_decode($data['detail']['program_details'], true) ?? [];
+        $data['detail']['eligibility']      = json_decode($data['detail']['eligibility'], true) ?? [];
+
+        return view('backend/templates/header')
+            . view('backend/edit-course-detail', $data)
+            . view('backend/templates/footer');
     }
 
-    // Decode JSON safely
-    $data['detail']['skills']           = json_decode($data['detail']['skills'], true) ?? [];
-    $data['detail']['training_methods'] = json_decode($data['detail']['training_methods'], true) ?? [];
-    $data['detail']['program_details']  = json_decode($data['detail']['program_details'], true) ?? [];
-    $data['detail']['eligibility']      = json_decode($data['detail']['eligibility'], true) ?? [];
-
-    return view('backend/templates/header')
-         . view('backend/edit-course-detail', $data)
-         . view('backend/templates/footer');
-}
 
 
-
-/* =====================================
+    /* =====================================
    UPDATE COURSE DETAIL
 ===================================== */
-public function updateCourseDetail($id)
-{
-    $model = new FlyvistaModel();
-    $oldData = $model->getRowById($this->courseDetailsTable, $id);
+    public function updateCourseDetail($id)
+    {
+        $model = new FlyvistaModel();
+        $oldData = $model->getRowById($this->courseDetailsTable, $id);
 
-    if (!$oldData) {
-        return redirect()->to(base_url('admin/course-details'))
-                         ->with('error', 'Record not found.');
-    }
+        if (!$oldData) {
+            return redirect()->to(base_url('admin/course-details'))
+                ->with('error', 'Record not found.');
+        }
 
-    /* ==========================================
+        /* ==========================================
        PROCESS SKILLS (textarea → array)
     ========================================== */
-    $skillsPost = $this->request->getPost('skills');
-    if ($skillsPost) {
-        foreach ($skillsPost as $k => $s) {
-            if (isset($s['items'][0])) {
-                $skillsPost[$k]['items'] = preg_split("/\r\n|\n|\r/", trim($s['items'][0]));
-            } else {
-                $skillsPost[$k]['items'] = [];
+        $skillsPost = $this->request->getPost('skills');
+        if ($skillsPost) {
+            foreach ($skillsPost as $k => $s) {
+                if (isset($s['items'][0])) {
+                    $skillsPost[$k]['items'] = preg_split("/\r\n|\n|\r/", trim($s['items'][0]));
+                } else {
+                    $skillsPost[$k]['items'] = [];
+                }
             }
         }
-    }
 
-    /* ===============================================
+        /* ===============================================
        PROCESS TRAINING METHODS (textarea → array)
     =============================================== */
-    $trainingPost = $this->request->getPost('training_methods');
-    if ($trainingPost) {
-        foreach ($trainingPost as $k => $t) {
-            if (isset($t['items'][0])) {
-                $trainingPost[$k]['items'] = preg_split("/\r\n|\n|\r/", trim($t['items'][0]));
-            } else {
-                $trainingPost[$k]['items'] = [];
+        $trainingPost = $this->request->getPost('training_methods');
+        if ($trainingPost) {
+            foreach ($trainingPost as $k => $t) {
+                if (isset($t['items'][0])) {
+                    $trainingPost[$k]['items'] = preg_split("/\r\n|\n|\r/", trim($t['items'][0]));
+                } else {
+                    $trainingPost[$k]['items'] = [];
+                }
             }
         }
+
+        $data = [
+            'course_id'          => $this->request->getPost('course_id'),
+            'about_title'        => $this->request->getPost('about_title'),
+            'about_description'  => $this->request->getPost('description'),
+
+            // JSON Encode
+            'skills'             => json_encode($skillsPost),
+            'training_methods'   => json_encode($trainingPost),
+            'program_details'    => json_encode($this->request->getPost('program_details')),
+            'eligibility'        => json_encode($this->request->getPost('eligibility')),
+        ];
+
+        $model->updateRowById($this->courseDetailsTable, $id, $data);
+
+        return redirect()->to(base_url('admin/course-details'))
+            ->with('success', 'Course Details Updated Successfully.');
     }
-
-    $data = [
-        'course_id'          => $this->request->getPost('course_id'),
-        'about_title'        => $this->request->getPost('about_title'),
-        'about_description'  => $this->request->getPost('description'),
-
-        // JSON Encode
-        'skills'             => json_encode($skillsPost),
-        'training_methods'   => json_encode($trainingPost),
-        'program_details'    => json_encode($this->request->getPost('program_details')),
-        'eligibility'        => json_encode($this->request->getPost('eligibility')),
-    ];
-
-    $model->updateRowById($this->courseDetailsTable, $id, $data);
-
-    return redirect()->to(base_url('admin/course-details'))
-                     ->with('success', 'Course Details Updated Successfully.');
-}
 
     // Delete Course Detail
     public function deleteCourseDetail($id)
@@ -2599,6 +2722,131 @@ public function updateCourseDetail($id)
         }
 
         return redirect()->to(base_url('admin/terms'))->with('error', 'Delete failed.');
+    }
+
+    // =============================
+    // PLACEMENT & CAREER SECTION
+    // =============================
+
+    protected $placementCareerTable = 'placement_career';
+
+    // List Records
+    public function placementCareer()
+    {
+        $model = new FlyvistaModel();
+        $data['placement'] = $model->getTableData($this->placementCareerTable);
+
+        return
+            view('backend/templates/header') .
+            view('backend/placement-career', $data) .
+            view('backend/templates/footer');
+    }
+
+    // Add Page
+    public function addPlacementCareer()
+    {
+        return
+            view('backend/templates/header') .
+            view('backend/add-placement-career') .
+            view('backend/templates/footer');
+    }
+
+    // Save Record
+    public function savePlacementCareer()
+    {
+        $model = new FlyvistaModel();
+
+        $data = [
+            'section_heading'        => $this->request->getPost('section_heading'),
+            'section_subheading'     => $this->request->getPost('section_subheading'),
+            'section_description'    => $this->request->getPost('section_description'),
+
+            'card1_title'            => $this->request->getPost('card1_title'),
+            'card1_items'            => json_encode($this->request->getPost('card1_items')),  // array → json
+
+            'card2_title'            => $this->request->getPost('card2_title'),
+            'card2_description'      => $this->request->getPost('card2_description'),
+            'card2_items'            => json_encode($this->request->getPost('card2_items')),
+
+            'card3_title'            => $this->request->getPost('card3_title'),
+            'card3_description'      => $this->request->getPost('card3_description'),
+            'card3_items'            => json_encode($this->request->getPost('card3_items')),
+
+            'status'                 => $this->request->getPost('status') ?? 1
+        ];
+
+        $model->insertData($this->placementCareerTable, $data);
+
+        return redirect()->to(base_url('admin/placement-career'))
+            ->with('success', 'Placement & Career Section Added Successfully.');
+    }
+
+    // Edit Page
+    public function editPlacementCareer($id)
+    {
+        $model = new FlyvistaModel();
+        $data['pc'] = $model->getRowById($this->placementCareerTable, $id);
+
+        if (!$data['pc']) {
+            return redirect()->to(base_url('admin/placement-career'))
+                ->with('error', 'Record not found.');
+        }
+
+        return
+            view('backend/templates/header') .
+            view('backend/edit-placement-career', $data) .
+            view('backend/templates/footer');
+    }
+
+    // Update Record
+    public function updatePlacementCareer($id)
+    {
+        $model = new FlyvistaModel();
+        $oldData = $model->getRowById($this->placementCareerTable, $id);
+
+        if (!$oldData) {
+            return redirect()->to(base_url('admin/placement-career'))->with('error', 'Record not found.');
+        }
+
+        $data = [
+            'section_heading'        => $this->request->getPost('section_heading'),
+            'section_subheading'     => $this->request->getPost('section_subheading'),
+            'section_description'    => $this->request->getPost('section_description'),
+
+            'card1_title'            => $this->request->getPost('card1_title'),
+            'card1_items'            => json_encode($this->request->getPost('card1_items')),
+
+            'card2_title'            => $this->request->getPost('card2_title'),
+            'card2_description'      => $this->request->getPost('card2_description'),
+            'card2_items'            => json_encode($this->request->getPost('card2_items')),
+
+            'card3_title'            => $this->request->getPost('card3_title'),
+            'card3_description'      => $this->request->getPost('card3_description'),
+            'card3_items'            => json_encode($this->request->getPost('card3_items')),
+
+            'status'                 => $this->request->getPost('status') ?? 1
+        ];
+
+        $model->updateRowById($this->placementCareerTable, $id, $data);
+
+        return redirect()->to(base_url('admin/placement-career'))
+            ->with('success', 'Placement & Career Section Updated Successfully.');
+    }
+
+    // Delete Record
+    public function deletePlacementCareer($id)
+    {
+        $model = new FlyvistaModel();
+        $record = $model->getRowById($this->placementCareerTable, $id);
+
+        if ($record) {
+            $model->deleteRowById($this->placementCareerTable, $id);
+            return redirect()->to(base_url('admin/placement-career'))
+                ->with('success', 'Record Deleted Successfully.');
+        }
+
+        return redirect()->to(base_url('admin/placement-career'))
+            ->with('error', 'Delete failed.');
     }
 
     // ==========================================

@@ -108,7 +108,7 @@
 
                 <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary leading-snug">
                     <?= ($about->heading) ?>
-                    <div class="w-full flex items-center mt-2 gap-3">
+                    <div class="w-full flex items-center mt-2 gap-3 justify-center sm:justify-start">
 
                         <!-- Left Gradient Line -->
                         <div class="w-16 h-[2px] bg-gradient-to-r from-transparent to-primary"></div>
@@ -126,7 +126,6 @@
 
                         <!-- Right Gradient Line -->
                         <div class="w-16 h-[2px] bg-gradient-to-l from-transparent to-primary"></div>
-
                     </div>
                 </h2>
 
@@ -278,7 +277,7 @@
 
                 <div>
                     <h3 class="text-xl font-semibold text-heading-light">Our Mission</h3>
-                    <p class="text-textbody-light mt-1 text-justify">
+                    <p class="text-textbody-light mt-1 text-justify pr-6">
                         <?= ($missionVision->mission_description ?? "") ?>
                     </p>
                 </div>
@@ -292,7 +291,7 @@
 
                 <div>
                     <h3 class="text-xl font-semibold text-heading-light">Our Vision</h3>
-                    <p class="text-textbody-light mt-1 text-justify">
+                    <p class="text-textbody-light mt-1 text-justify pr-6">
                         <?= ($missionVision->vision_description ?? "") ?>
                     </p>
                 </div>
@@ -308,7 +307,7 @@
                     <h3 class="text-xl font-semibold text-heading-light">
                         <?= esc($missionVision->core_values_title ?? "Core Values") ?>
                     </h3>
-                    <p class="text-textbody-light mt-1 text-justify">
+                    <p class="text-textbody-light mt-1 text-justify pr-6">
                         <?= ($missionVision->core_values_description ?? "") ?>
                     </p>
                 </div>
@@ -378,11 +377,10 @@
 
         <!-- LEFT: STATIC AVIATION IMAGE -->
         <div class="relative">
-            <img 
-                src="<?= base_url('assets/img/why-choose.png') ?>" 
-                alt="Aviation Training" 
-                class="rounded-2xl shadow-xl object-cover w-full h-[420px]"
-            >
+            <img
+                src="<?= base_url('assets/img/why-choose.png') ?>"
+                alt="Aviation Training"
+                class="rounded-2xl shadow-xl object-cover w-full h-[420px]">
 
             <div class="absolute inset-0 bg-primary/20 rounded-2xl mix-blend-multiply"></div>
         </div>
@@ -402,24 +400,24 @@
                     <?= esc($whyChoose[0]->title) ?>
                     <div class="w-full flex items-center gap-3 mt-3">
 
-                    <!-- Left Gradient Line -->
-                    <div class="w-16 h-[2px] bg-gradient-to-r from-transparent to-primary"></div>
+                        <!-- Left Gradient Line -->
+                        <div class="w-16 h-[2px] bg-gradient-to-r from-transparent to-primary"></div>
 
-                    <!-- Left Dot -->
-                    <span class="h-1 w-1 bg-primary rounded-full"></span>
-
-                    <!-- Center Circle -->
-                    <span class="h-3 w-3 border-2 border-primary rounded-full flex items-center justify-center">
+                        <!-- Left Dot -->
                         <span class="h-1 w-1 bg-primary rounded-full"></span>
-                    </span>
 
-                    <!-- Right Dot -->
-                    <span class="h-1 w-1 bg-primary rounded-full"></span>
+                        <!-- Center Circle -->
+                        <span class="h-3 w-3 border-2 border-primary rounded-full flex items-center justify-center">
+                            <span class="h-1 w-1 bg-primary rounded-full"></span>
+                        </span>
 
-                    <!-- Right Gradient Line -->
-                    <div class="w-16 h-[2px] bg-gradient-to-l from-transparent to-primary"></div>
+                        <!-- Right Dot -->
+                        <span class="h-1 w-1 bg-primary rounded-full"></span>
 
-                </div>
+                        <!-- Right Gradient Line -->
+                        <div class="w-16 h-[2px] bg-gradient-to-l from-transparent to-primary"></div>
+
+                    </div>
                 </h2>
 
                 <!-- Description -->
@@ -482,206 +480,115 @@
     </div>
 </section>
 
+<!-- LEADERSHIP TEAM - DYNAMIC -->
+<section class="relative py-10 overflow-hidden"> 
+    
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Section Header -->
+        <div class="text-center mb-20">
+            <div class="inline-flex items-center bg-secondary/10 border border-secondary/20 gap-2 px-5 py-2 backdrop-blur-sm rounded-full shadow-sm mb-6">
+                <span class="text-sm font-semibold text-secondary tracking-wide">MEET OUR LEADERS</span>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <h1 class="text-3xl md:text-4xl font-bold text-primary mb-6 leading-tight">
+                    Our Leadership Team
+                    <div class="w-full flex items-center justify-center gap-3 mt-3">
 
-<!-- TEAM MEMBERS SECTION -->
-<section class="relative pt-20 pb-20 mt-40 mb-40 fade-in-section">
+                        <!-- Left Gradient Line -->
+                        <div class="w-16 h-[2px] bg-gradient-to-r from-transparent to-primary"></div>
 
-    <!-- Background Image -->
-    <div class="absolute inset-0">
-        <img src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg"
-            class="w-full h-full object-cover">
-    </div>
+                        <!-- Left Dot -->
+                        <span class="h-1 w-1 bg-primary rounded-full"></span>
 
-    <!-- Dark Overlay -->
-    <div class="absolute inset-0 bg-primary-dark/70"></div>
+                        <!-- Center Circle -->
+                        <span class="h-3 w-3 border-2 border-primary rounded-full flex items-center justify-center">
+                            <span class="h-1 w-1 bg-primary rounded-full"></span>
+                        </span>
 
-    <!-- Highlight Overlay -->
-    <div class="absolute inset-0 bg-white/10 backdrop-blur-sm pointer-events-none"></div>
+                        <!-- Right Dot -->
+                        <span class="h-1 w-1 bg-primary rounded-full"></span>
 
-    <!-- ========================= -->
-    <!--     TOP FLOATING CARD     -->
-    <!-- ========================= -->
-    <?php if ($topTeamMember): ?>
-        <div class="absolute -top-44 left-1/2 mb-10 -translate-x-1/2 w-[90%] md:w-[70%] 
-            bg-white rounded-3xl shadow-2xl overflow-hidden z-20 relative border border-white/20">
+                        <!-- Right Gradient Line -->
+                        <div class="w-16 h-[2px] bg-gradient-to-l from-transparent to-primary"></div>
 
-            <!-- VIDEO -->
-            <?php if (!empty($topTeamMember->video) && file_exists(FCPATH . 'assets/videos/team/' . $topTeamMember->video)): ?>
-                <video id="promoVideo" class="w-full h-72 object-cover" muted autoplay loop controls>
-                    <source src="<?= base_url('assets/videos/team/' . $topTeamMember->video) ?>" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            <?php else: ?>
-                <p class="text-red-500 text-center">Video not found.</p>
-            <?php endif; ?>
-
-            <!-- PLAY / PAUSE BUTTON -->
-            <button id="videoToggleBtn" class="absolute inset-0 flex items-center justify-center z-30 opacity-100 transition duration-300">
-                <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-3xl shadow-lg">
-                    <i id="videoIcon" class="fa-solid fa-play"></i>
-                </div>
-            </button>
+                    </div>
+                </h1>
+            </div>
         </div>
-    <?php endif; ?>
 
-    <!-- ========================= -->
-    <!--         CONTENT           -->
-    <!-- ========================= -->
-    <div class="relative z-10 max-w-7xl mx-auto px-6">
-        <!-- Section Title -->
-        <div class="text-center mb-8">
-            <p class="inline-block px-6 py-2 bg-white/20 text-white rounded-full font-semibold text-sm tracking-wider border border-white/30 mb-4 shadow-sm">
-                Team Members
-            </p>
-            <h2 class="text-4xl font-bold text-white tracking-wide">
-                Hardworking Members
-                <div class="w-full flex items-center justify-center mt-2 gap-3">
+        <!-- Leadership Cards -->
+        <div class="space-y-10">
+            <?php if (!empty($leaders)): ?>
+                <?php foreach ($leaders as $index => $leader): ?>
+                    <div class="grid lg:grid-cols-3 gap-8 items-start <?= $index % 2 !== 0 ? 'lg:flex-row-reverse' : '' ?>">
+                        
+                        <!-- Profile Image -->
+                        <div class="relative group">
+                            <div class="relative rounded-2xl overflow-hidden shadow-xl">
+                                <img src="<?= base_url('assets/img/team/' . ($leader->profile_image ?? 'default.png')) ?>" 
+                                     alt="<?= esc($leader->full_name) ?>" 
+                                     class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-700">
+                                <div class="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent"></div>
+                            </div>
 
-                    <!-- Left Gradient Line -->
-                    <div class="w-16 h-[2px] bg-gradient-to-r from-transparent to-white"></div>
-
-                    <!-- Left Dot -->
-                    <span class="h-1 w-1 bg-white rounded-full"></span>
-
-                    <!-- Center Circle -->
-                    <span class="h-3 w-3 border-2 border-white rounded-full flex items-center justify-center">
-                        <span class="h-1 w-1 bg-white rounded-full"></span>
-                    </span>
-
-                    <!-- Right Dot -->
-                    <span class="h-1 w-1 bg-white rounded-full"></span>
-
-                    <!-- Right Gradient Line -->
-                    <div class="w-16 h-[2px] bg-gradient-to-l from-transparent to-white"></div>
-
-                </div>
-            </h2>
-        </div>
-        <div class="min-h-[30vh]"></div>
-    </div>
-
-    <!-- ========================= -->
-    <!--   BOTTOM FLOATING CARDS   -->
-    <!-- ========================= -->
-    <div class="absolute -bottom-20 left-1/2 -translate-x-1/2 w-full px-6 z-20">
-
-        <div class="max-w-7xl mx-auto">
-
-            <!-- Swiper Container -->
-            <div class="swiper myTeamSwiper pb-10">
-                <div class="swiper-wrapper">
-
-                    <?php foreach ($otherMembers as $member): ?>
-                        <div class="swiper-slide">
-                            <div class="group relative bg-white/20 backdrop-blur-xl rounded-xl overflow-hidden shadow-2xl">
-                                <div class="absolute top-0 right-0 w-12 h-12 bg-primary-light clip-triangle"></div>
-
-                                <img src="<?= base_url('assets/img/team/' . $member->image) ?>" class="w-full h-72 object-cover rounded-t-xl">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent rounded-xl"></div>
-
-                                <!-- Social Icons -->
-                                <div class="absolute top-36 left-1/2 -translate-x-1/2 flex gap-3 opacity-0 
-                                group-hover:opacity-100 transition-all duration-500 transform group-hover:-translate-y-2">
-                                    <?php if (!empty($member->facebook_url)): ?>
-                                        <a href="<?= esc($member->facebook_url) ?>" target="_blank" class="bg-white w-9 h-9 rounded-md flex justify-center items-center text-primary hover:bg-secondary transition"><i class="fa-brands fa-facebook-f"></i></a>
-                                    <?php endif; ?>
-                                    <?php if (!empty($member->twitter_url)): ?>
-                                        <a href="<?= esc($member->twitter_url) ?>" target="_blank" class="bg-white w-9 h-9 rounded-md flex justify-center items-center text-primary hover:bg-secondary transition"><i class="fa-brands fa-twitter"></i></a>
-                                    <?php endif; ?>
-                                    <?php if (!empty($member->instagram_url)): ?>
-                                        <a href="<?= esc($member->instagram_url) ?>" target="_blank" class="bg-white w-9 h-9 rounded-md flex justify-center items-center text-primary hover:bg-secondary transition"><i class="fa-brands fa-instagram"></i></a>
-                                    <?php endif; ?>
-                                </div>
-
-                                <!-- Details -->
-                                <div class="absolute bottom-5 text-center w-full text-white">
-                                    <h3 class="text-lg font-semibold"><?= esc($member->name) ?></h3>
-                                    <p class="text-xs opacity-75"><?= esc($member->role) ?></p>
-                                </div>
+                            <div class="absolute -top-4 -right-4 bg-gradient-to-r from-primary to-secondary text-white px-6 py-2 rounded-full shadow-lg">
+                                <?= esc($leader->designation) ?>
                             </div>
                         </div>
-                    <?php endforeach; ?>
 
-                </div>
-            </div>
+                        <!-- Content -->
+                        <div class="lg:col-span-2">
+                            <div class="mb-6">
+                                <h3 class="text-3xl font-bold text-gray-900 mb-2"><?= esc($leader->full_name) ?></h3>
+                                <p class="text-lg text-secondary font-medium mb-4"><?= esc($leader->heading) ?></p>
+                            </div>
 
-            <!-- Pagination BELOW the slider -->
-            <div class="swiper-pagination mt-4"></div>
+                            <p class="text-gray-600 text-justify"><?= nl2br(esc($leader->short_description)) ?></p>
 
+                            <?php if (!empty($leader->responsibility)): ?>
+                                <div class="bg-gray-50 rounded-xl p-6 mb-6 mt-2">
+                                    <h4 class="font-bold text-gray-900 mb-4 flex items-center gap-2">
+                                        <span class="w-6 h-6 bg-primary rounded-full flex items-center justify-center">
+                                            <span class="text-white text-xs">✓</span>
+                                        </span>
+                                        She leads:
+                                    </h4>
+                                    <div class="grid md:grid-cols-2 gap-3">
+                                        <?php
+                                        // If responsibility is JSON, decode; otherwise, split by newline
+                                        $responsibilities = json_decode($leader->responsibility, true);
+                                        if (!is_array($responsibilities)) {
+                                            $responsibilities = explode("\n", $leader->responsibility);
+                                        }
+                                        ?>
+                                        <?php foreach ($responsibilities as $resp): ?>
+                                            <?php if(trim($resp) !== ''): ?>
+                                                <div class="flex items-start gap-2">
+                                                    <span class="text-primary">▸</span>
+                                                    <span class="text-gray-700"><?= esc($resp) ?></span>
+                                                </div>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+
+                            <?php if (!empty($leader->quote)): ?>
+                                <blockquote class="border-l-4 border-secondary pl-6 py-2 my-6">
+                                    <p class="text-xl text-gray-700 italic">"<?= esc($leader->quote) ?>"</p>
+                                </blockquote>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p class="text-center text-gray-500">No leaders found.</p>
+            <?php endif; ?>
         </div>
-
     </div>
 </section>
-
-<style>
-    .clip-triangle {
-        clip-path: polygon(100% 0, 0 0, 100% 100%);
-    }
-</style>
-<style>
-    /* Smaller, clean white dots */
-    .swiper-pagination-bullet {
-        background: #F4F5FA;
-        opacity: 1;
-        width: 10px;
-        height: 10px;
-    }
-
-    /* Active Dot → Tailwind secondary color */
-    .swiper-pagination-bullet-active {
-        background: #D83030 !important;
-    }
-</style>
-
-<script>
-    var swiper = new Swiper(".myTeamSwiper", {
-        slidesPerView: 3,
-        spaceBetween: 30,
-        loop: true,
-        centeredSlides: false,
-        autoplay: {
-            delay: 2500,
-            disableOnInteraction: false,
-        },
-        pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
-        },
-
-        // Responsive Breakpoints
-        breakpoints: {
-            0: {
-                slidesPerView: 1
-            }, // Mobile
-            640: {
-                slidesPerView: 2
-            }, // Tablet
-            1024: {
-                slidesPerView: 3
-            } // Desktop
-        }
-    });
-</script>
-
-<script>
-    const video = document.getElementById('promoVideo');
-    const btn = document.getElementById('videoToggleBtn');
-    const icon = document.getElementById('videoIcon');
-    if (video) {
-        video.pause();
-        btn.addEventListener('click', () => {
-            if (video.paused) {
-                video.play();
-                icon.classList.remove('fa-play');
-                icon.classList.add('fa-pause');
-            } else {
-                video.pause();
-                icon.classList.remove('fa-pause');
-                icon.classList.add('fa-play');
-            }
-        });
-    }
-</script>
 
 <!-- ============================== -->
 <!--        CTA SECTION (LIGHT)     -->

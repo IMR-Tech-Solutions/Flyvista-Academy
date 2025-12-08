@@ -64,6 +64,14 @@ $routes->get('admin/courses/edit/(:num)', 'FlyvistaAdminController::editCourse/$
 $routes->post('admin/courses/update/(:num)', 'FlyvistaAdminController::updateCourse/$1');
 $routes->get('admin/courses/delete/(:num)', 'FlyvistaAdminController::deleteCourse/$1');
 
+// Flagship Program Management
+$routes->get('admin/flagship_program', 'FlyvistaAdminController::flagshipIndex');
+$routes->get('admin/flagship_program/add', 'FlyvistaAdminController::flagshipAdd');
+$routes->post('admin/flagship_program/save', 'FlyvistaAdminController::flagshipSave');
+$routes->get('admin/flagship_program/edit/(:num)', 'FlyvistaAdminController::flagshipEdit/$1');
+$routes->post('admin/flagship_program/update/(:num)', 'FlyvistaAdminController::flagshipUpdate/$1');
+$routes->get('admin/flagship_program/delete/(:num)', 'FlyvistaAdminController::flagshipDelete/$1');
+
 // ADMISSION PROCESS SECTION
 $routes->get('admin/admission', 'FlyvistaAdminController::admissionProcess');
 $routes->get('admin/admission/add', 'FlyvistaAdminController::addAdmissionStep');
@@ -123,13 +131,13 @@ $routes->get('admin/counters/edit/(:num)', 'FlyvistaAdminController::editCounter
 $routes->post('admin/counters/update/(:num)', 'FlyvistaAdminController::updateCounter/$1');
 $routes->get('admin/counters/delete/(:num)', 'FlyvistaAdminController::deleteCounter/$1');
 
-// Team Members
-$routes->get('admin/team-members', 'FlyvistaAdminController::index');
-$routes->get('admin/team-members/add', 'FlyvistaAdminController::add');
-$routes->post('admin/team-members/save', 'FlyvistaAdminController::save');
-$routes->get('admin/team-members/edit/(:num)', 'FlyvistaAdminController::edit/$1');
-$routes->post('admin/team-members/update/(:num)', 'FlyvistaAdminController::update/$1');
-$routes->get('admin/team-members/delete/(:num)', 'FlyvistaAdminController::delete/$1');
+// Leaders
+$routes->get('admin/leaders', 'FlyvistaAdminController::index');
+$routes->get('admin/leaders/add', 'FlyvistaAdminController::add');
+$routes->post('admin/leaders/save', 'FlyvistaAdminController::save');
+$routes->get('admin/leaders/edit/(:num)', 'FlyvistaAdminController::edit/$1');
+$routes->post('admin/leaders/update/(:num)', 'FlyvistaAdminController::update/$1');
+$routes->get('admin/leaders/delete/(:num)', 'FlyvistaAdminController::delete/$1');
 
 // SUCCESS STORIES SECTION
 $routes->get('admin/success-stories', 'FlyvistaAdminController::successStories');
@@ -166,6 +174,14 @@ $routes->get('admin/documents/delete/(:num)', 'FlyvistaAdminController::deleteDo
 // faq
 $routes->get('admin/faqs', 'FlyvistaAdminController::Faqs');
 $routes->post('admin/update-faqs', 'FlyvistaAdminController::updateFaqs');
+
+// PLACEMENT & CAREER SECTION
+$routes->get('admin/placement-career', 'FlyvistaAdminController::placementCareer');
+$routes->get('admin/placement-career/add', 'FlyvistaAdminController::addPlacementCareer');
+$routes->post('admin/placement-career/save', 'FlyvistaAdminController::savePlacementCareer');
+$routes->get('admin/placement-career/edit/(:num)', 'FlyvistaAdminController::editPlacementCareer/$1');
+$routes->post('admin/placement-career/update/(:num)', 'FlyvistaAdminController::updatePlacementCareer/$1');
+$routes->get('admin/placement-career/delete/(:num)', 'FlyvistaAdminController::deletePlacementCareer/$1');
 
 // Career Features
 $routes->get('admin/career-features', 'FlyvistaAdminController::careerFeatures');

@@ -4,16 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlyVista – Aviation Training Institute</title>
+    <title><?= esc($meta['title'] ?? 'Default Site Title') ?></title>
+    <meta name="description" content="<?= esc($meta['description'] ?? 'Default description') ?>">
+    <meta name="keywords" content="<?= esc($meta['keywords'] ?? 'aviation, courses, training') ?>">
+    <link rel="canonical" href="<?= esc($meta['canonical'] ?? current_url()) ?>">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;600;700&family=Kumbh+Sans:wght@400;500;600&family=Roboto+Serif:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Animate.css -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Animate.css (non-critical) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" media="print" onload="this.media='all'">
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Font Awesome (non-critical) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'">
 
     <!-- TailwindCSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -192,17 +195,18 @@
 
     <div class="sticky top-0 z-50">
 
-        <!-- TOPBAR -->
         <div class="bg-gradient-to-r from-primary-dark to-primary text-white text-sm relative overflow-hidden">
-            <!-- Background Pattern -->
+
             <div class="absolute inset-0 opacity-10">
                 <div class="absolute top-0 left-0 w-20 h-20 bg-secondary rounded-full -translate-x-1/2 -translate-y-1/2"></div>
                 <div class="absolute bottom-0 right-0 w-16 h-16 bg-secondary rounded-full translate-x-1/2 translate-y-1/2"></div>
             </div>
 
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center h-auto md:h-12 relative z-10 py-2 md:py-0 space-y-2 md:space-y-0">
+
                 <!-- Contact Info -->
                 <div class="flex flex-col md:flex-row items-center md:space-x-6 space-y-1 md:space-y-0">
+
                     <!-- Phone -->
                     <div class="flex items-center space-x-2 group cursor-pointer">
                         <div class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center group-hover:bg-secondary transition-all duration-300">
@@ -210,8 +214,8 @@
                         </div>
                         <div class="text-center md:text-left">
                             <span class="text-white/80 text-xs">Toll-Free</span>
-                            <a href="tel:+18001234567" class="font-semibold text-white hover:text-secondary transition-colors duration-200 block text-sm">
-                                +1 800 123 4567
+                            <a href="tel:<?= esc($contact->phone) ?>" class="font-semibold text-white hover:text-secondary transition-colors duration-200 block text-sm">
+                                <?= esc($contact->phone) ?>
                             </a>
                         </div>
                     </div>
@@ -223,48 +227,54 @@
                         </div>
                         <div>
                             <span class="text-white/80 text-xs">Email Us</span>
-                            <a href="mailto:info@flyvista.com" class="font-semibold text-white hover:text-secondary transition-colors duration-200 block text-sm">
-                                info@flyvista.com
+                            <a href="mailto:<?= esc($contact->email) ?>" class="font-semibold text-white hover:text-secondary transition-colors duration-200 block text-sm">
+                                <?= esc($contact->email) ?>
                             </a>
                         </div>
                     </div>
+
                 </div>
 
                 <!-- Social + WhatsApp -->
                 <div class="flex items-center space-x-3">
+
                     <!-- Social Icons -->
                     <div class="flex items-center space-x-2 border-r border-white/20 pr-3">
-                        <a href="https://www.facebook.com/flyvista" target="_blank"
+
+                        <a href="<?= esc($contact->facebook) ?>" target="_blank"
                             class="w-7 h-7 bg-white/10 rounded-full flex items-center justify-center hover:bg-blue-600 hover:scale-110 transition-all duration-300 group">
-                            <i class="fab fa-facebook-f text-xs group-hover:text-white"></i>
+                            <i class="fab fa-facebook-f text-xs"></i>
                         </a>
-                        <a href="https://twitter.com/flyvista" target="_blank"
+
+                        <a href="<?= esc($contact->twitter) ?>" target="_blank"
                             class="w-7 h-7 bg-white/10 rounded-full flex items-center justify-center hover:bg-blue-400 hover:scale-110 transition-all duration-300 group">
-                            <i class="fab fa-twitter text-xs group-hover:text-white"></i>
+                            <i class="fab fa-twitter text-xs"></i>
                         </a>
-                        <a href="https://www.instagram.com/flyvista" target="_blank"
+
+                        <a href="<?= esc($contact->instagram) ?>" target="_blank"
                             class="w-7 h-7 bg-white/10 rounded-full flex items-center justify-center hover:bg-pink-600 hover:scale-110 transition-all duration-300 group">
-                            <i class="fab fa-instagram text-xs group-hover:text-white"></i>
+                            <i class="fab fa-instagram text-xs"></i>
                         </a>
-                        <a href="https://www.linkedin.com/company/flyvista" target="_blank"
+
+                        <a href="<?= esc($contact->linkedin) ?>" target="_blank"
                             class="w-7 h-7 bg-white/10 rounded-full flex items-center justify-center hover:bg-blue-800 hover:scale-110 transition-all duration-300 group">
-                            <i class="fab fa-linkedin-in text-xs group-hover:text-white"></i>
+                            <i class="fab fa-linkedin-in text-xs"></i>
                         </a>
                     </div>
 
                     <!-- WhatsApp -->
-                    <a href="https://wa.me/917019786263?text=Hello%20FlyVista!" target="_blank"
+                    <a href="<?= esc($contact->whatsapp) ?>" target="_blank"
                         class="flex items-center space-x-2 bg-green-500 hover:bg-green-600 text-white px-2 sm:px-3 py-1.5 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg group">
+
                         <div class="w-5 h-5 bg-white/20 rounded-full flex items-center justify-center">
                             <i class="fab fa-whatsapp text-xs"></i>
                         </div>
+
                         <span class="font-medium text-sm hidden sm:inline">Chat with Us</span>
                         <i class="fa-solid fa-arrow-right text-xs transform group-hover:translate-x-0.5 transition-transform duration-300"></i>
                     </a>
                 </div>
             </div>
-
-            <!-- Animated Border Bottom -->
             <div class="h-0.5 bg-gradient-to-r from-transparent via-secondary to-transparent animate-pulse"></div>
         </div>
 
@@ -275,7 +285,10 @@
 
                     <!-- Logo -->
                     <a href="<?= base_url('/') ?>" class="flex items-center">
-                        <img src="<?= base_url('assets/img/flyvista-logo.png') ?>" class="h-20 w-auto object-contain" alt="FlyVista Logo">
+                        <img src="<?= base_url('assets/img/flyvista-logo.png') ?>"
+                            class="h-20 w-auto object-contain"
+                            width="160" height="80"
+                            alt="FlyVista Logo">
                     </a>
 
                     <!-- Desktop Navigation -->
@@ -317,12 +330,16 @@
                         </div>
                         <div class="animate-fade-in-down">
                             <p class="text-md text-gray-500 leading-tight">Call Us Anytime</p>
-                            <a href="tel:+18001234567" class="text-secondary font-semibold hover:text-primary">+1 800 123 4567</a>
+
+                            <a href="tel:<?= esc($contact->phone ?? '') ?>"
+                                class="text-secondary font-semibold hover:text-primary">
+                                <?= esc($contact->phone ?? 'N/A') ?>
+                            </a>
                         </div>
                     </div>
 
                     <!-- Mobile Menu Button -->
-                    <button id="mobile-menu-toggle" class="lg:hidden p-2 text-primary">
+                    <button id="mobile-menu-toggle" class="lg:hidden p-2 text-primary" aria-label="Open mobile menu">
                         <i class="fa-solid fa-bars text-xl"></i>
                     </button>
 
@@ -337,8 +354,11 @@
         <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 w-80 h-full bg-white shadow-xl z-50 lg:hidden overflow-y-auto">
             <div class="p-6">
                 <div class="flex justify-between items-center mb-8">
-                    <img src="<?= base_url('assets/img/flyvista-logo.png') ?>" class="h-16 w-auto">
-                    <button id="mobile-menu-close" class="text-gray-500 hover:text-secondary">
+                    <img src="<?= base_url('assets/img/flyvista-logo.png') ?>"
+                        class="h-16 w-auto"
+                        width="128" height="64"
+                        alt="FlyVista Logo">
+                    <button id="mobile-menu-close" class="text-gray-500 hover:text-secondary" aria-label="Close mobile menu">
                         <i class="fa-solid fa-xmark text-lg"></i>
                     </button>
                 </div>
@@ -418,35 +438,42 @@
                 <!-- Logo & About -->
                 <div class="transform transition-transform duration-500 hover:-translate-y-1">
                     <div class="flex items-center space-x-3 mb-6">
-                        <div class="relative">
-                            <img src="<?= base_url('assets/img/Flyvista-Logo-White.png') ?>" alt="FlyVista Logo" class="w-auto h-20">
-                        </div>
+                        <img src="<?= base_url('assets/img/Flyvista-Logo-White.png') ?>" alt="FlyVista Logo" class="w-auto h-20">
                     </div>
 
                     <p class="text-gray-300 mb-6 leading-relaxed text-md text-justify">
                         At Flyvista, we empower aspiring aviation professionals through practical training, personality development, and 100% placement assistance.
                     </p>
 
+                    <!-- Social Icons Dynamic -->
                     <div class="flex space-x-3">
-                        <a href="https://www.facebook.com/flyvista" target="_blank"
-                            class="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 text-gray-300 shadow-md hover:bg-white/20 hover:text-[#D83030] transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
+                        <?php if (!empty($contact->facebook)) : ?>
+                            <a href="<?= esc($contact->facebook) ?>" target="_blank"
+                                class="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 text-gray-300 shadow-md hover:bg-white/20 hover:text-[#D83030] transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                        <?php endif; ?>
 
-                        <a href="https://twitter.com/flyvista" target="_blank"
-                            class="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 text-gray-300 shadow-md hover:bg-white/20 hover:text-[#D83030] transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg">
-                            <i class="fab fa-twitter"></i>
-                        </a>
+                        <?php if (!empty($contact->twitter)) : ?>
+                            <a href="<?= esc($contact->twitter) ?>" target="_blank"
+                                class="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 text-gray-300 shadow-md hover:bg-white/20 hover:text-[#D83030] transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                        <?php endif; ?>
 
-                        <a href="https://www.instagram.com/flyvista" target="_blank"
-                            class="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 text-gray-300 shadow-md hover:bg-white/20 hover:text-[#D83030] transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg">
-                            <i class="fab fa-instagram"></i>
-                        </a>
+                        <?php if (!empty($contact->instagram)) : ?>
+                            <a href="<?= esc($contact->instagram) ?>" target="_blank"
+                                class="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 text-gray-300 shadow-md hover:bg-white/20 hover:text-[#D83030] transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        <?php endif; ?>
 
-                        <a href="https://www.linkedin.com/company/flyvista" target="_blank"
-                            class="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 text-gray-300 shadow-md hover:bg-white/20 hover:text-[#D83030] transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
+                        <?php if (!empty($contact->linkedin)) : ?>
+                            <a href="<?= esc($contact->linkedin) ?>" target="_blank"
+                                class="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 text-gray-300 shadow-md hover:bg-white/20 hover:text-[#D83030] transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        <?php endif; ?>
                     </div>
                 </div>
 
@@ -508,12 +535,8 @@
                                 <li class="group">
                                     <a href="<?= base_url('courses/' . $course->slug) ?>"
                                         class="text-gray-300 hover:text-[#E62834] transition-all duration-300 flex items-center">
-                                        <span class="w-2 h-2 bg-[#E62834] rounded-full opacity-0 
-                                              group-hover:opacity-100 transition-all duration-300 group-hover:ml-3"></span>
-
-                                        <span class="ml-0 group-hover:ml-3 transition-all duration-300">
-                                            <?= esc($course->title) ?>
-                                        </span>
+                                        <span class="w-2 h-2 bg-[#E62834] rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:ml-3"></span>
+                                        <span class="ml-0 group-hover:ml-3 transition-all duration-300"><?= esc($course->title) ?></span>
                                     </a>
                                 </li>
                             <?php endforeach; ?>
@@ -521,7 +544,7 @@
                     </ul>
                 </div>
 
-                <!-- Contact Info -->
+                <!-- Contact Info (Dynamic) -->
                 <div class="transform transition-transform duration-500 hover:-translate-y-1">
                     <h3 class="text-xl font-bold mb-6 text-white relative inline-block">
                         Contact Info
@@ -531,11 +554,11 @@
                     <ul class="space-y-5">
 
                         <li class="flex items-center group">
-                            <div class="w-10 md:w-16 h-10 rounded-full bg-white/10 flex items-center justify-center mr-4 group-hover:bg-[#E62834] transition-colors duration-300">
+                            <div class="w-10 md:w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mr-4 group-hover:bg-[#E62834] transition-colors duration-300">
                                 <i class="fa-solid fa-location-dot text-white group-hover:text-white text-base leading-none"></i>
                             </div>
                             <span class="text-gray-200 pt-2">
-                                123 Aviation Avenue, Airport City, AC 12345
+                                <?= esc($contact->location ?? 'N/A') ?>
                             </span>
                         </li>
 
@@ -543,8 +566,8 @@
                             <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mr-4 group-hover:bg-[#E62834] transition-colors duration-300">
                                 <i class="fa-solid fa-phone text-white group-hover:text-white transition-colors duration-300"></i>
                             </div>
-                            <a href="tel:+18001234567" class="text-gray-300 hover:text-[#E62834] transition-colors pt-2">
-                                +1 800 123 4567
+                            <a href="tel:<?= esc($contact->phone) ?>" class="text-gray-300 hover:text-[#E62834] transition-colors pt-2">
+                                <?= esc($contact->phone) ?>
                             </a>
                         </li>
 
@@ -552,8 +575,8 @@
                             <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mr-4 group-hover:bg-[#E62834] transition-colors duration-300">
                                 <i class="fa-solid fa-envelope text-white group-hover:text-white transition-colors duration-300"></i>
                             </div>
-                            <a href="mailto:info@flyvista.com" class="text-gray-300 hover:text-[#E62834] transition-colors pt-2">
-                                info@flyvista.com
+                            <a href="mailto:<?= esc($contact->email) ?>" class="text-gray-300 hover:text-[#E62834] transition-colors pt-2">
+                                <?= esc($contact->email) ?>
                             </a>
                         </li>
 
@@ -581,8 +604,8 @@
                     <span class="text-gray-300">|</span>
                     <span class="text-gray-300">Designed & Developed by</span>
 
-                    <a href="https://imrtechsolutions.com/"
-                        target="_blank" class="text-gray-300 hover:text-[#E62834] transition-colors">
+                    <a href="https://imrtechsolutions.com/" target="_blank"
+                        class="text-gray-300 hover:text-[#E62834] transition-colors">
                         IMR Tech Solution
                     </a>
                 </div>

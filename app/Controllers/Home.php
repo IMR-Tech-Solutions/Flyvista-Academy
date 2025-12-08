@@ -13,12 +13,21 @@ class Home extends BaseController
         $data = [];
 
         /* -----------------------------------------
- * HERO SECTION (Multiple Slides)
- * ----------------------------------------- */
+     * META TAGS (For SEO & Social Sharing)
+     * ----------------------------------------- */
+        $data['meta'] = [
+            'title'       => 'FlyVista – Aviation Training Institute', // Page title
+            'description' => 'Join FlyVista to advance your aviation career with expert trainers, top-notch courses, and hands-on experience.', // Meta description
+            'keywords'    => 'aviation training, pilot courses, aviation institute, flight school', // Meta keywords
+            'canonical'   => base_url() // Current page canonical URL
+        ];
+
+        /* -----------------------------------------
+     * HERO SECTION (Multiple Slides)
+     * ----------------------------------------- */
         $hero = $model->getTableData('hero_section', [], 'id', 0);
 
         foreach ($hero as $h) {
-
             // Button links
             $links = explode(',', $h->button_link);
             $h->btn1 = trim($links[0] ?? '#');
@@ -33,8 +42,8 @@ class Home extends BaseController
         $data['hero_slides'] = $hero;
 
         /* -----------------------------------------
-         * ABOUT SECTION
-         * ----------------------------------------- */
+     * ABOUT SECTION
+     * ----------------------------------------- */
         $about = $model->getTableData('about_section', [], '', 1);
         if (!empty($about)) {
             $about = $about[0];
@@ -46,8 +55,8 @@ class Home extends BaseController
         $data['about'] = $about;
 
         /* -----------------------------------------
-         * COURSES SECTION
-         * ----------------------------------------- */
+     * COURSES SECTION
+     * ----------------------------------------- */
         $courses = $model->getTableData('courses', ['status' => 1], 'id', 0);
         $data['courses'] = $courses;
 
@@ -59,8 +68,8 @@ class Home extends BaseController
         $data['course_subheading'] = $firstCourse ? $firstCourse->subheading : '';
 
         /* -----------------------------------------
-         * ADMISSION PROCESS
-         * ----------------------------------------- */
+     * ADMISSION PROCESS
+     * ----------------------------------------- */
         $admissionHeading = $model->getTableData('admission_process', [], 'step_number', 1);
         $data['admission_heading'] = !empty($admissionHeading) ? $admissionHeading[0] : null;
 
@@ -68,8 +77,8 @@ class Home extends BaseController
         $data['admission_steps'] = $steps;
 
         /* -----------------------------------------
-         * TESTIMONIAL SECTION
-         * ----------------------------------------- */
+     * TESTIMONIAL SECTION
+     * ----------------------------------------- */
         $testimonialHeading = $model->getTableData('testimonials', [], 'id', 1);
         $data['testimonial_heading'] = !empty($testimonialHeading) ? $testimonialHeading[0] : null;
 
@@ -77,14 +86,14 @@ class Home extends BaseController
         $data['testimonials'] = $testimonials;
 
         /* -----------------------------------------
-         * CONTACT INFO
-         * ----------------------------------------- */
+     * CONTACT INFO
+     * ----------------------------------------- */
         $contactInfo = $model->getTableData('contact_info', [], 'id', 1);
         $data['contact_info'] = !empty($contactInfo) ? $contactInfo[0] : null;
 
         /* -----------------------------------------
-         * BLOG SECTION
-         * ----------------------------------------- */
+     * BLOG SECTION
+     * ----------------------------------------- */
         $blogHeading = $model->getTableData('blog_posts', [], 'id', 1);
         $data['blog_heading'] = !empty($blogHeading) ? $blogHeading[0]->excerpt : '';
 
@@ -92,8 +101,8 @@ class Home extends BaseController
         $data['blogs'] = $blogs;
 
         /* -----------------------------------------
-         * MERGE GLOBAL HEADER DATA + PAGE DATA
-         * ----------------------------------------- */
+     * MERGE GLOBAL HEADER DATA + PAGE DATA
+     * ----------------------------------------- */
         return view('frontend/index', $this->data + $data);
     }
 
@@ -161,7 +170,7 @@ class Home extends BaseController
             // =========================
             // SEND MAILS
             // =========================
-            $adminEmail = "sanikac753@gmail.com";
+            $adminEmail = "admin@flyvistaacademy.com";
 
             // Admin notification
             sendMail(
@@ -217,22 +226,29 @@ class Home extends BaseController
         /* ---------------- COUNTER SECTION ---------------- */
         $counters = $model->getTableData('counters', [], 'id ASC');
 
-        /* ---------------- TEAM MEMBERS ---------------- */
-        // Get top member
-        $topTeamMemberData = $model->getTableData('team_members', ['id' => 2]);
-        $topTeamMember = !empty($topTeamMemberData) ? $topTeamMemberData[0] : null;
+        /* ---------------- LEADERSHIP TEAM ---------------- */
+        $leaders = $model->getTableData(
+            'leaders',
+            [],                  // no where condition, get all
+            'display_order ASC'  // order by display_order
+        );
 
-        // Get all other members excluding id = 1
-        $otherMembers = $model->getTableData('team_members', ['id !=' => 1]);
+        /* ---------------- META TAGS ---------------- */
+        $meta = [
+            'title'       => 'About FlyVista – Aviation Training Institute',
+            'description' => 'FlyVista Academy, headquartered in Pune, Maharashtra, is one of the fastest-growing and most reputable Air Hostess & Aviation Training Institutes. Established in 2023, we provide advanced infrastructure, certified trainers, and industry-aligned training modules to groom skilled aviation professionals.',
+            'keywords'    => 'About FlyVista, aviation training, air hostess courses, pilot training, hospitality training, cabin crew, aviation academy',
+            'canonical'   => base_url('about')
+        ];
 
         $data = [
-            'about' => $about,
-            'breadcrumb' => $breadcrumb,
-            'missionVision' => $missionVision,
-            'whyChoose' => $whyChoose,
-            'counters' => $counters,
-            'topTeamMember' => $topTeamMember,
-            'otherMembers'  => $otherMembers
+            'about'          => $about,
+            'breadcrumb'     => $breadcrumb,
+            'missionVision'  => $missionVision,
+            'whyChoose'      => $whyChoose,
+            'counters'       => $counters,
+            'leaders'        => $leaders, // pass to view
+            'meta'          => $meta
         ];
 
         return view('frontend/about', $this->data + $data);
@@ -248,6 +264,9 @@ class Home extends BaseController
         // Take the first course for section title (subheading & heading)
         $sectionTitle = !empty($allCourses) ? $allCourses[0] : null;
 
+        // Fetch all flagship programs (or the active one)
+        $programs = $model->getTableData('flagship_program');
+        $program = !empty($programs) ? $programs[0] : null;
         // Fetch all success stories
         $allStories = $model->getTableData('success_stories');
 
@@ -269,12 +288,22 @@ class Home extends BaseController
         $breadcrumb = $model->getTableData('breadcrumb_sections', ['slug' => 'courses'], '', 1);
         $breadcrumb = !empty($breadcrumb) ? $breadcrumb[0] : null;
 
+        // ---------------- META TAGS ----------------
+        $meta = [
+            'title'       => 'Professional Aviation Courses – FlyVista Academy',
+            'description' => 'Explore FlyVista Academy’s professional aviation training courses, including Complete Air Hostess Training, Airport Ground Handling, Hospitality Management, and Customer Service programs. Gain industry-ready skills and 100% placement assistance.',
+            'keywords'    => 'Aviation courses, Air Hostess Training, Airport Ground Handling, Hospitality Management, Customer Service, FlyVista Academy',
+            'canonical'   => base_url('courses')
+        ];
+
         $pageData = [
             'courses' => $allCourses,
             'sectionTitle' => $sectionTitle,
             'allStories' => $allStories,
+            'program' => $program,
             'featuredStory' => $featuredStory,
             'breadcrumb' => $breadcrumb,
+            'meta'          => $meta
         ];
 
         return view('frontend/courses', $this->data + $pageData);
@@ -325,12 +354,21 @@ class Home extends BaseController
         $breadcrumb = $model->getTableData('breadcrumb_sections', ['slug' => $slug], '', 1);
         $breadcrumb = !empty($breadcrumb) ? $breadcrumb[0] : null;
 
+        // ---------------- META TAGS ----------------
+        $meta = [
+            'title'       => $course->meta_title ?? $course->title ?? 'FlyVista – Aviation Course',
+            'description' => $course->meta_description ?? substr(strip_tags($course->short_description ?? ''), 0, 160),
+            'keywords'    => $course->meta_keywords ?? $course->title ?? 'aviation training, air hostess, cabin crew, airport ground handling',
+            'canonical'   => base_url('course/' . $course->slug)
+        ];
+
         // Send data to view
         $pageData = [
             'course'  => $course,
             'detail'  => $detail,
             'courses' => $model->getTableData('courses', ['status' => 1]),
             'breadcrumb' => $breadcrumb,
+            'meta'          => $meta
         ];
 
         return view('frontend/course-detail', $this->data + $pageData);
@@ -449,7 +487,7 @@ class Home extends BaseController
             </div>
             ";
             // Admin Email
-            $adminEmail = "sanikac753@gmail.com";
+            $adminEmail = "admin@flyvistaacademy.com";
 
             // Send mail to Admin
             sendMail(
@@ -506,6 +544,14 @@ class Home extends BaseController
 
         $breadcrumb = $model->getTableData('breadcrumb_sections', ['slug' => 'admission'], '', 1);
         $data['breadcrumb'] = !empty($breadcrumb) ? $breadcrumb[0] : null;
+
+        /* Meta tags */
+        $data['meta'] = [
+            'title' => 'Flyvista: Aviation Training Institute | World’s Leading Air Hostess Training Academy',
+            'description' => 'Step into a world of aviation excellence with FlyVista Academy. We prepare students for successful careers in aviation and hospitality through professional training, simulation labs, grooming, and placement support.',
+            'keywords' => 'Flyvista, Aviation Training, Air Hostess Training, Cabin Crew Courses, Airport Ground Handling, Hospitality Management, Customer Service, Aviation Academy India',
+            'canonical' => base_url('admission')  // Adjust this function if using a different URL helper
+        ];
 
         return view('frontend/admission', array_merge($this->data, $data));
     }
@@ -581,7 +627,7 @@ class Home extends BaseController
 ";
 
         sendMail(
-            "sanikac753@gmail.com",
+            "admin@flyvistaacademy.com",
             "New Admission Application – " . $data["full_name"],
             $adminBody,
             $data['email'],
@@ -622,7 +668,7 @@ class Home extends BaseController
             $data['email'],
             "FlyVista – Application Received",
             $userBody,
-            "sanikac753@gmail.com",
+            "admin@flyvistaacademy.com",
             "FlyVista Admin"
         );
 
@@ -637,13 +683,26 @@ class Home extends BaseController
         $breadcrumbData = $model->getTableData('breadcrumb_sections', ['slug' => 'careers'], '', 1);
         $breadcrumb = !empty($breadcrumbData) ? $breadcrumbData[0] : null;
 
-        // Fetch career features
+        // Fetch career features (CARD 1 & CARD 2 data)
         $careerFeatures = $model->getTableData('career_features', ['status' => 1]);
+
+        // Convert list_items new lines into array
+        if (!empty($careerFeatures) && isset($careerFeatures[0]->list_items)) {
+            $careerFeatures[0]->list_items = preg_split("/\r\n|\n|\r/", $careerFeatures[0]->list_items);
+        }
+
+        if (!empty($careerFeatures) && isset($careerFeatures[1]->list_items)) {
+            $careerFeatures[1]->list_items = preg_split("/\r\n|\n|\r/", $careerFeatures[1]->list_items);
+        }
+
+        // Fetch Placement + Career main section
+        $placementCareer = $model->getTableData('placement_career', ['status' => 1], '', 1);
+        $placement = !empty($placementCareer) ? $placementCareer[0] : null;
 
         // Fetch active jobs
         $jobs = $model->getTableData('jobs', ['status' => 1]);
 
-        // Extract unique categories dynamically
+        // Extract unique categories
         $categories = [];
         foreach ($jobs as $job) {
             if (!in_array($job->category, $categories)) {
@@ -651,11 +710,22 @@ class Home extends BaseController
             }
         }
 
+        // Meta tags for SEO
+        $meta = [
+            'title'       => 'Careers at Flyvista Academy | Join Our Aviation Training Team',
+            'description' => 'Explore exciting career opportunities at FlyVista Academy. Join a fast-growing aviation training brand, work with industry experts, and contribute to shaping future-ready aviation professionals.',
+            'keywords'    => 'Flyvista Careers, Aviation Jobs, Cabin Crew Training Jobs, Aviation Training Careers, Flyvista Placement Team, Aviation Education Jobs, Careers in Aviation India',
+            'canonical'   => base_url('career') // Update if your site uses a different URL helper
+        ];
+
+        // Final page data
         $pageData = [
             'breadcrumb'     => $breadcrumb,
             'careerFeatures' => $careerFeatures,
+            'placement'      => $placement,
             'jobs'           => $jobs,
-            'categories'     => $categories
+            'categories'     => $categories,
+            'meta'           => $meta
         ];
 
         helper('date');
@@ -750,7 +820,7 @@ class Home extends BaseController
 </div>";
 
             sendMail(
-                "sanikac753@gmail.com",
+                "admin@flyvistaacademy.com",
                 "New Job Application - FlyVista",
                 $adminContent,
                 $data['applicant_email'],
@@ -798,7 +868,7 @@ class Home extends BaseController
                 $data['applicant_email'],
                 "Your Application Has Been Received - FlyVista",
                 $userContent,
-                "no-reply@flyvista.com",
+                "admin@flyvistaacademy.com",
                 "FlyVista Careers"
             );
 
@@ -825,9 +895,18 @@ class Home extends BaseController
         $breadcrumbData = $model->getTableData('breadcrumb_sections', ['slug' => 'blog'], '', 1);
         $breadcrumb = !empty($breadcrumbData) ? $breadcrumbData[0] : null;
 
+        // Meta tags for SEO
+        $meta = [
+            'title'       => 'Flyvista Academy Blog | Insights on Aviation Training & Careers',
+            'description' => 'Read the latest updates, tips, and insights from FlyVista Academy’s aviation training experts. Explore career guidance, industry trends, and professional growth opportunities in aviation and hospitality.',
+            'keywords'    => 'Flyvista Blog, Aviation Training Blog, Cabin Crew Tips, Airport Operations Insights, Aviation Career Guidance, Airline Training Updates, Aviation Education India',
+            'canonical'   => base_url('blog') // Adjust if using a different URL helper
+        ];
+
         $pageData = [
             'blogPosts'  => $allPosts,
-            'breadcrumb' => $breadcrumb
+            'breadcrumb' => $breadcrumb,
+            'meta'       => $meta
         ];
 
         return view('frontend/blog', $this->data + $pageData);
@@ -874,6 +953,14 @@ class Home extends BaseController
         $breadcrumbData = $model->getTableData('breadcrumb_sections', ['slug' => $breadcrumbSlug], '', 1);
         $breadcrumb = !empty($breadcrumbData) ? $breadcrumbData[0] : null;
 
+        // Dynamic meta tags for the blog post
+        $meta = [
+            'title'       => $post->meta_title ?? $post->title ?? 'Flyvista Academy Blog',
+            'description' => $post->meta_description ?? substr(strip_tags($detail->description ?? ''), 0, 160),
+            'keywords'    => $post->meta_keywords ?? 'Flyvista Blog, Aviation Training, Cabin Crew, Airport Operations, Aviation Education',
+            'canonical'   => base_url('blog/' . $post->slug)
+        ];
+
         $pageData = [
             'post'          => $post,
             'detail'        => $detail,
@@ -883,7 +970,8 @@ class Home extends BaseController
             'specs'         => safeDecode($detail->simulator_specs ?? []),
             'description'   => $detail->description ?? '',
             'recentPosts'   => $model->getTableData('blog_posts', ['status' => 1], 'post_date DESC', 5),
-            'breadcrumb'    => $breadcrumb
+            'breadcrumb'    => $breadcrumb,
+            'meta'          => $meta
         ];
 
         return view('frontend/blog-detail', $this->data + $pageData);
@@ -923,6 +1011,14 @@ class Home extends BaseController
         } else {
             $data['opening_hours'] = [];
         }
+
+        // Meta tags for SEO
+        $data['meta'] = [
+            'title'       => 'Contact Flyvista Academy | Get in Touch for Aviation Training',
+            'description' => 'Reach out to FlyVista Academy for queries, admissions, or career guidance. Our team is ready to assist you with aviation courses, programs, and placement support.',
+            'keywords'    => 'Flyvista Contact, Aviation Training Enquiry, Cabin Crew Courses Contact, Aviation Academy Pune, Flyvista Support, Aviation Education India',
+            'canonical'   => base_url('contact') // Adjust if using a different URL helper
+        ];
 
         return view('frontend/contact', $data);
     }
@@ -1000,7 +1096,7 @@ class Home extends BaseController
 </div>";
 
         sendMail(
-            "sanikac753@gmail.com",
+            "admin@flyvistaacademy.com",
             "New Contact Message – " . $data["name"],
             $adminBody,
             $data['email'],
@@ -1073,7 +1169,7 @@ class Home extends BaseController
             $data['email'],
             "FlyVista – We Received Your Message",
             $userBody,
-            "sanikac753@gmail.com",
+            "admin@flyvistaacademy.com",
             "FlyVista Support"
         );
 
@@ -1101,10 +1197,19 @@ class Home extends BaseController
             }
         }
 
+        // Meta tags for SEO
+        $meta = [
+            'title'       => 'Terms & Conditions | Flyvista Academy',
+            'description' => 'Read the Terms & Conditions of FlyVista Academy. Learn about our policies, user guidelines, and rules for using our aviation training programs and website.',
+            'keywords'    => 'Flyvista Terms, Aviation Training Policies, Cabin Crew Training Rules, Flyvista Academy Guidelines, Aviation Education Policies',
+            'canonical'   => base_url('terms') // Adjust if your site uses a different URL helper
+        ];
+
         $data = [
             'breadcrumb' => $breadcrumb,
             'policies' => $policies,
-            'sections' => $sections
+            'sections' => $sections,
+            'meta' => $meta
         ];
 
         return view('frontend/terms', $this->data + $data);
@@ -1129,10 +1234,19 @@ class Home extends BaseController
             }
         }
 
+        // Meta tags for SEO
+        $meta = [
+            'title'       => 'Privacy Policy | Flyvista Academy',
+            'description' => 'Read the Privacy Policy of FlyVista Academy. Learn how we collect, use, and protect your personal information while accessing our aviation training programs and website.',
+            'keywords'    => 'Flyvista Privacy Policy, Data Protection, Aviation Training Privacy, Cabin Crew Training Policies, Flyvista Academy Data Guidelines',
+            'canonical'   => base_url('privacy-policy') // Adjust if your site uses a different URL helper
+        ];
+
         $data = [
             'breadcrumb' => $breadcrumb,
             'policies' => $policies,
-            'sections' => $sections
+            'sections' => $sections,
+            'meta' => $meta
         ];
 
         return view('frontend/privacy-policy', $this->data + $data);

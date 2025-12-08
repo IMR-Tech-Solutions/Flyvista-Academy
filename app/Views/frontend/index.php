@@ -28,157 +28,241 @@
 <section class="relative w-full min-h-screen overflow-hidden">
 
   <!-- Animated Background Shapes -->
-  <div class="absolute inset-0 -z-10">
+  <div class="absolute inset-0 -z-10 pointer-events-none">
     <div class="absolute w-96 h-96 bg-gradient-primary rounded-full opacity-30 animate-spin-slow top-10 left-10"></div>
-    <div class="absolute w-72 h-72 bg-secondary/20 rounded-full animate-pulse-slow bottom-20 right-16"></div>
+    <div class="absolute w-72 h-72 bg-primary/20 rounded-full animate-pulse-slow bottom-20 right-16"></div>
   </div>
 
   <div class="swiper professionalSlider w-full h-full relative z-10">
     <div class="swiper-wrapper">
 
-      <?php foreach ($hero_slides as $slide): ?>
-      <div class="swiper-slide relative w-full h-full pt-16 pb-24">
+      <?php foreach ($hero_slides as $index => $slide): ?>
+        <div class="swiper-slide relative w-full h-full pt-16 pb-24">
 
-        <!-- Background Image with Overlay -->
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image:url('<?= base_url("assets/img/home/" . $slide->bg_shape_image) ?>');"></div>
-        <div class="absolute inset-0 bg-black/40"></div> <!-- Dark overlay for readability -->
-
-        <div class="h-full flex flex-col justify-center items-start px-6 sm:px-12 lg:px-24 relative z-10">
-          <!-- Number Badge -->
-          <div class="flex items-center gap-4 mb-6">
-            <div class="text-5xl font-light text-white/50 tracking-tight">01</div>
-            <div class="w-16 h-px bg-white/40"></div>
-            <div class="text-sm font-medium text-white/70 tracking-wider uppercase">
-              <?= $slide->tagline ?>
-            </div>
+          <!-- Background Image + Gradient Overlay -->
+          <div class="absolute inset-0 bg-cover bg-center lazy-bg"
+            data-bg="<?= base_url("assets/img/home/" . $slide->bg_shape_image) ?>"
+            style="background-image:
+            linear-gradient(to right, rgba(15,61,95,0.85), rgba(15,61,95,0.4), rgba(15,61,95,0)),
+            url('hero-img');">
           </div>
 
-          <!-- Main Title -->
-          <h1 class="text-4xl md:text-5xl lg:text-6xl max-w-4xl font-serif font-bold text-white mb-3 leading-tight animate-fade-in-up drop-shadow-lg">
-            <?= $slide->title ?>
-          </h1>
+          <div class="h-full flex flex-col justify-center items-start px-6 sm:px-12 lg:px-24 relative z-10">
 
-          <!-- Elegant Divider -->
-          <div class="w-32 h-1 bg-secondary mb-6 animate-fade-in-up"></div>
-
-          <!-- Description -->
-          <p class="text-lg md:text-xl text-white mb-6 max-w-3xl text-justify animate-fade-in-up leading-relaxed">
-            <?= $slide->description ?>
-          </p>
-
-          <!-- Stats Boxes -->
-          <div class="grid grid-cols-3 gap-4 mb-8 animate-fade-in-up">
-            <div class="border-l-2 border-white/50 pl-4 py-2">
-              <div class="text-2xl font-bold text-white">95%</div>
-              <div class="text-xs text-white/70 uppercase tracking-wider">Success Rate</div>
+            <!-- Number Badge (Dynamic 1,2,3) -->
+            <div class="flex items-center gap-4 mb-6 opacity-0 slide-animate">
+              <div class="text-5xl font-light text-white/60 tracking-tight">
+                <?= $index + 1 ?>
+              </div>
+              <div class="w-16 h-px bg-white/40"></div>
+              <div class="text-sm font-medium text-white/70 tracking-wider uppercase">
+                <?= $slide->tagline ?>
+              </div>
             </div>
-            <div class="border-l-2 border-white/50 pl-4 py-2">
-              <div class="text-2xl font-bold text-white">2500+</div>
-              <div class="text-xs text-white/70 uppercase tracking-wider">Students</div>
-            </div>
-            <div class="border-l-2 border-white/50 pl-4 py-2">
-              <div class="text-2xl font-bold text-white">15+</div>
-              <div class="text-xs text-white/70 uppercase tracking-wider">Programs</div>
-            </div>
-          </div>
 
-          <!-- Buttons -->
-          <div class="flex flex-col sm:flex-row gap-4 animate-fade-in-up">
-            <a href="<?= $slide->btn1 ?>" class="group relative px-8 py-4 bg-gradient-to-r from-primary to-secondary text-white font-medium rounded-lg shadow-lg hover:scale-105 transition-all duration-300 overflow-hidden">
-              <span class="relative z-10 flex items-center gap-2">
-                <?= $slide->btn_text_1 ?>
-                <i class="fas fa-arrow-right text-sm group-hover:translate-x-1 transition-transform"></i>
-              </span>
-            </a>
-            <a href="<?= $slide->btn2 ?>" class="px-8 py-4 border-2 border-white text-white font-medium rounded-lg hover:border-transparent hover:bg-primary hover:text-white transition-all duration-300 flex items-center gap-2">
-              <?= $slide->btn_text_2 ?>
-              <i class="fas fa-external-link-alt text-xs"></i>
-            </a>
+            <!-- Title -->
+            <h1 class="text-3xl md:text-4xl lg:text-4xl max-w-4xl font-serif font-bold text-white mb-3 leading-tight opacity-0 slide-animate">
+              <?= $slide->title ?>
+            </h1>
+
+            <!-- Divider -->
+            <div class="w-32 h-1 bg-secondary mb-6 opacity-0 slide-animate"></div>
+
+            <!-- Description -->
+            <p class="text-md md:text-md text-white mb-6 max-w-3xl text-justify leading-relaxed opacity-0 slide-animate">
+              <?= $slide->description ?>
+            </p>
+
+            <!-- Stats -->
+            <div class="grid grid-cols-3 gap-4 mb-8 opacity-0 slide-animate">
+              <div class="border-l-2 border-white/50 pl-4 py-2">
+                <div class="text-2xl font-bold text-white">95%</div>
+                <div class="text-xs text-white/70 uppercase tracking-wider">Success Rate</div>
+              </div>
+              <div class="border-l-2 border-white/50 pl-4 py-2">
+                <div class="text-2xl font-bold text-white">2500+</div>
+                <div class="text-xs text-white/70 uppercase tracking-wider">Students</div>
+              </div>
+              <div class="border-l-2 border-white/50 pl-4 py-2">
+                <div class="text-2xl font-bold text-white">15+</div>
+                <div class="text-xs text-white/70 uppercase tracking-wider">Programs</div>
+              </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 opacity-0 slide-animate">
+              <a href="<?= $slide->btn1 ?>"
+                class="group relative px-8 py-4 
+          bg-gradient-to-r from-primary to-secondary 
+          text-white font-medium rounded-lg shadow-lg 
+          hover:scale-105 transition-all duration-300 overflow-hidden">
+                <span class="relative z-10 flex items-center gap-2">
+                  <?= $slide->btn_text_1 ?>
+                  <i class="fas fa-arrow-right text-sm group-hover:translate-x-1 transition-transform"></i>
+                </span>
+              </a>
+
+              <a href="<?= $slide->btn2 ?>"
+                class="px-8 py-4 border-2 border-white text-white font-medium rounded-lg hover:bg-primary hover:border-primary transition-all duration-300 flex items-center gap-2">
+                <?= $slide->btn_text_2 ?>
+                <i class="fas fa-external-link-alt text-xs"></i>
+              </a>
+            </div>
+
           </div>
         </div>
-      </div>
       <?php endforeach; ?>
     </div>
 
     <!-- Navigation Dots -->
     <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-6 z-30">
       <?php foreach ($hero_slides as $index => $slide): ?>
-      <button class="professional-dot w-8 h-0.5 bg-white/50 hover:bg-white transition-all duration-300" data-slide="<?= $index ?>"></button>
+        <button class="professional-dot w-8 h-0.5 bg-white/40 hover:bg-white transition-all duration-300"
+          data-slide="<?= $index ?>"
+          aria-label="Go to slide <?= $index + 1 ?>"></button>
       <?php endforeach; ?>
     </div>
 
     <!-- Navigation Arrows -->
-    <div class="absolute top-1/2 left-0 right-0 flex justify-between px-6 z-30">
-      <button class="professional-prev w-10 h-10 border border-white bg-white rounded-full flex items-center justify-center hover:bg-secondary hover:text-white transition-all duration-300">
+    <div class="absolute top-1/2 left-0 right-0 justify-between px-6 z-30 hidden sm:flex">
+      <button class="professional-prev w-10 h-10 border border-white bg-white rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300">
         <i class="fas fa-chevron-left text-sm"></i>
       </button>
-      <button class="professional-next w-10 h-10 border border-white bg-white rounded-full flex items-center justify-center hover:bg-secondary hover:text-white transition-all duration-300">
+      <button class="professional-next w-10 h-10 border border-white bg-white rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300">
         <i class="fas fa-chevron-right text-sm"></i>
       </button>
     </div>
 
   </div>
 </section>
-
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const lazyBg = document.querySelectorAll(".lazy-bg");
+    lazyBg.forEach(el => {
+      const img = new Image();
+      img.src = el.dataset.bg;
+      img.onload = () => {
+        el.style.backgroundImage =
+          `linear-gradient(to right, rgba(15,61,95,0.85), rgba(15,61,95,0.4), rgba(15,61,95,0)), url('${el.dataset.bg}')`;
+      };
+    });
+  });
+</script>
 <style>
-  /* Typography */
-  .font-serif { font-family: 'Playfair Display', serif; }
+  .font-serif {
+    font-family: 'Playfair Display', serif;
+  }
 
-  /* Animations */
-  @keyframes fadeInUpElegant { from { opacity:0; transform:translateY(40px);} to {opacity:1; transform:translateY(0);} }
-  .animate-fade-in-up { animation: fadeInUpElegant 0.8s cubic-bezier(0.19,1,0.22,1) forwards; }
+  /* Slide smooth animation */
+  @keyframes slideFadeUp {
+    0% {
+      opacity: 0;
+      transform: translateY(40px);
+    }
 
-  @keyframes spin-slow { 100% { transform: rotate(360deg); } }
-  @keyframes pulse-slow { 0%,100% { opacity:0.6;} 50%{opacity:1;} }
-  @keyframes float { 0%,100% { transform:translateY(0);} 50%{transform:translateY(-10px);} }
-  @keyframes float-slow { 0%,100% { transform:translateY(0);} 50%{transform:translateY(-5px);} }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
-  .animate-spin-slow { animation: spin-slow 80s linear infinite; }
-  .animate-pulse-slow { animation: pulse-slow 6s ease-in-out infinite; }
-  .animate-float { animation: float 6s ease-in-out infinite; }
-  .animate-float-slow { animation: float-slow 8s ease-in-out infinite; }
+  .slide-animate {
+    opacity: 0;
+    animation: slideFadeUp 1s ease forwards;
+  }
 
-  /* Image Aspect Ratio */
-  .aspect-\[4\/5\] { position:relative; padding-bottom:125%; }
-  .aspect-\[4\/5\] > * { position:absolute; top:0; left:0; width:100%; height:100%; }
+  .animate-spin-slow {
+    animation: spin-slow 90s linear infinite;
+  }
 
-  /* Dot active state */
-  .professional-dot.active { width:24px; background:linear-gradient(to right, #1a1a1a, #4a4a4a); }
+  @keyframes spin-slow {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .animate-pulse-slow {
+    animation: pulse-slow 6s ease-in-out infinite;
+  }
+
+  @keyframes pulse-slow {
+
+    0%,
+    100% {
+      opacity: .5;
+    }
+
+    50% {
+      opacity: 1;
+    }
+  }
+
+  /* Active dot */
+  .professional-dot.active {
+    width: 32px;
+    background: #fff;
+  }
 </style>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const swiper = new Swiper('.professionalSlider', {
-      effect: 'fade', fadeEffect: { crossFade:true }, speed:1000, loop:true,
-      autoplay: { delay:7000, disableOnInteraction:false },
-      navigation: { nextEl:'.professional-next', prevEl:'.professional-prev' },
-      on:{
-        init: function(){ updateNavigation(this); animateSlide(this.slides[this.activeIndex]); },
-        slideChange: function(){ updateNavigation(this); },
-        slideChangeTransitionStart: function(){ resetAnimations(this); },
-        slideChangeTransitionEnd: function(){ animateSlide(this.slides[this.activeIndex]); }
+      effect: 'fade',
+      fadeEffect: {
+        crossFade: true
+      },
+      speed: 900,
+      loop: true,
+      autoplay: {
+        delay: 6000,
+        disableOnInteraction: false
+      },
+      navigation: {
+        nextEl: '.professional-next',
+        prevEl: '.professional-prev'
+      },
+      on: {
+        init() {
+          updateDots(this);
+          animateSlide(this.slides[this.activeIndex]);
+        },
+        slideChange() {
+          updateDots(this);
+        },
+        slideChangeTransitionStart() {
+          resetAnimations(this);
+        },
+        slideChangeTransitionEnd() {
+          animateSlide(this.slides[this.activeIndex]);
+        }
       }
     });
 
-    function updateNavigation(swiperInstance){
-      document.querySelectorAll('.professional-dot').forEach((dot,index)=>{
-        dot.classList.toggle('active', index===swiperInstance.realIndex);
-        dot.onclick=()=>swiper.slideToLoop(index);
+    function updateDots(swiperInstance) {
+      document.querySelectorAll('.professional-dot').forEach((dot, index) => {
+        dot.classList.toggle('active', index === swiperInstance.realIndex);
+        dot.onclick = () => swiper.slideToLoop(index);
       });
     }
 
-    function animateSlide(slide){
-      const elements = slide.querySelectorAll('h1,p,.grid,.flex');
-      elements.forEach((el,index)=>{
-        setTimeout(()=>{ el.classList.add('animate-fade-in-up'); el.style.animationDelay = `${index*0.1}s`; },50);
+    function animateSlide(slide) {
+      const elements = slide.querySelectorAll('.slide-animate');
+      elements.forEach((el, i) => {
+        el.style.animationDelay = `${i * 0.1}s`;
+        el.classList.remove('opacity-0');
       });
     }
 
-    function resetAnimations(swiperInstance){
-      swiperInstance.slides.forEach(slide=>{
-        slide.querySelectorAll('.animate-fade-in-up').forEach(el=>{
-          el.style.animation='none';
-          el.style.opacity='0';
+    function resetAnimations(swiperInstance) {
+      swiperInstance.slides.forEach(slide => {
+        slide.querySelectorAll('.slide-animate').forEach(el => {
+          el.style.animation = 'none';
+          el.style.opacity = 0;
+
+          // Fix: Use requestAnimationFrame instead of offsetHeight
+          requestAnimationFrame(() => {
+            el.style.animation = null;
+          });
         });
       });
     }
@@ -241,80 +325,72 @@
       </div>
 
       <!-- Right Content Section -->
-      <div class="space-y-6 text-center sm:text-left">
-        <span class="inline-block px-6 py-2 bg-secondary/10 text-secondary rounded-full font-semibold tracking-wider border border-secondary/20 text-xs sm:text-sm">
-          <?= $about->tag_text ?>
-        </span>
+<div class="space-y-6 text-center sm:text-left">
+    <span class="inline-block px-6 py-2 bg-secondary/10 text-secondary rounded-full font-semibold tracking-wider border border-secondary/20 text-xs sm:text-sm">
+        <?= $about->tag_text ?>
+    </span>
 
-        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary leading-snug">
-          <?= ($about->heading) ?>
-          <div class="w-full flex items-center justify-center md:justify-start mt-2 gap-3">
-
-            <!-- Left Gradient Line -->
+    <!-- Main Section Heading -->
+    <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary leading-snug">
+        <?= ($about->heading) ?>
+        <div class="w-full flex items-center justify-center md:justify-start mt-2 gap-3">
             <div class="w-16 h-[2px] bg-gradient-to-r from-transparent to-primary"></div>
-
-            <!-- Left Dot -->
             <span class="h-1 w-1 bg-primary rounded-full"></span>
-
-            <!-- Center Circle -->
             <span class="h-3 w-3 border-2 border-primary rounded-full flex items-center justify-center">
-              <span class="h-1 w-1 bg-primary rounded-full"></span>
+                <span class="h-1 w-1 bg-primary rounded-full"></span>
             </span>
-
-            <!-- Right Dot -->
             <span class="h-1 w-1 bg-primary rounded-full"></span>
-
-            <!-- Right Gradient Line -->
             <div class="w-16 h-[2px] bg-gradient-to-l from-transparent to-primary"></div>
+        </div>
+    </h2>
 
-          </div>
-        </h2>
+    <p class="text-gray-600 leading-relaxed text-sm sm:text-base text-justify">
+        <?= ($about->description) ?>
+    </p>
 
-        <p class="text-gray-600 leading-relaxed text-sm sm:text-base text-justify">
-          <?= ($about->description) ?>
-        </p>
+    <div class="grid sm:grid-cols-2 gap-4 sm:gap-6 pt-4">
 
-        <div class="grid sm:grid-cols-2 gap-4 sm:gap-6 pt-4">
-
-          <!-- Feature 1 -->
-          <?php if (!empty($about->feature1_icon)): ?>
+        <!-- Feature 1 -->
+        <?php if (!empty($about->feature1_icon)): ?>
             <?php for ($i = 0; $i < count($about->feature1_icon); $i++): ?>
-              <div class="flex items-start gap-3 sm:gap-4">
-                <div class="bg-[#E8EEF7] rounded-lg p-1.5">
-                  <i class="<?= esc($about->feature1_icon[$i]) ?> text-primary text-lg sm:text-lg"></i>
-                </div>
+                <div class="flex items-start gap-3 sm:gap-4">
+                    <div class="bg-[#E8EEF7] rounded-lg p-1.5">
+                        <i class="<?= esc($about->feature1_icon[$i]) ?> text-primary text-lg sm:text-lg"></i>
+                    </div>
 
-                <div>
-                  <h5 class="font-semibold text-gray-900 text-sm sm:text-lg">
-                    <?= esc($about->feature1_title[$i]) ?>
-                  </h5>
+                    <div>
+                        <!-- Use h3 for feature titles instead of h5 -->
+                        <h3 class="font-semibold text-gray-900 text-sm sm:text-lg">
+                            <?= esc($about->feature1_title[$i]) ?>
+                        </h3>
+                    </div>
                 </div>
-              </div>
             <?php endfor; ?>
-          <?php endif; ?>
+        <?php endif; ?>
 
-        </div>
+    </div>
 
-        <div class="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8 pt-6">
-          <a href="<?= esc($about->learn_more_link) ?>"
-            class="bg-gradient-to-r from-[#335B95] to-[#142947] text-white px-6 sm:px-8 py-3 sm:py-4 
-                 rounded-full font-medium hover:opacity-90 transition-all duration-300 
-                 shadow-md text-center text-sm sm:text-base btn-pulse"
-            data-animate="fade-up" data-delay="500">
+    <div class="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8 pt-6">
+        <a href="<?= esc($about->learn_more_link) ?>"
+           class="bg-gradient-to-r from-[#335B95] to-[#142947] text-white px-6 sm:px-8 py-3 sm:py-4 
+                  rounded-full font-medium hover:opacity-90 transition-all duration-300 
+                  shadow-md text-center text-sm sm:text-base btn-pulse"
+           data-animate="fade-up" data-delay="500">
             Learn More
-          </a>
-          <div class="flex items-center gap-3 sm:gap-4">
+            <span class="sr-only">about <?= esc($about->heading) ?></span>
+        </a>
+        <div class="flex items-center gap-3 sm:gap-4">
             <img src="<?= base_url('assets/img/about/' . $about->instructor_image) ?>"
-              alt="Instructor"
-              class="w-12 sm:w-16 h-12 sm:h-16 rounded-full object-cover shadow">
+                 alt="Instructor"
+                 class="w-12 sm:w-16 h-12 sm:h-16 rounded-full object-cover shadow">
             <div>
-              <p class="text-xs sm:text-sm text-primary"><?= esc($about->instructor_title) ?></p>
-              <h4 class="font-semibold text-gray-900 text-sm sm:text-base"><?= esc($about->instructor_name) ?></h4>
+                <p class="text-xs sm:text-sm text-primary"><?= esc($about->instructor_title) ?></p>
+                <!-- Use h3 instead of h4 for instructor name to follow hierarchy -->
+                <h3 class="font-semibold text-gray-900 text-sm sm:text-base"><?= esc($about->instructor_name) ?></h3>
             </div>
-          </div>
-
         </div>
-      </div>
+    </div>
+</div>
     </div>
 
     <!-- Animations (remain unchanged) -->
@@ -387,15 +463,13 @@
     <!-- Section Header -->
     <div class="text-center mb-16 fade-up delay-2">
       <?php if (!empty($course_subheading)): ?>
-        <span class="uppercase inline-block px-6 py-2 bg-secondary/10 text-secondary rounded-full font-semibold text-sm tracking-wider border border-secondary/20 mb-4 fade-up delay-1"
-          data-animate="fade-up" data-delay="100">
+        <span class="uppercase inline-block px-6 py-2 bg-secondary/10 text-secondary rounded-full font-semibold text-sm tracking-wider border border-secondary/20 mb-4 fade-up delay-1">
           <?= esc($course_subheading) ?>
         </span>
       <?php endif; ?>
       <?php if (!empty($course_heading)): ?>
-        <h2 class="text-3xl lg:text-4xl font-bold text-primary mt-4 fade-up delay-2"
-          data-animate="fade-up" data-delay="200">
-          <?= ($course_heading) ?>
+        <h2 class="text-3xl lg:text-4xl font-bold text-primary mt-4 fade-up delay-2">
+          <?= esc($course_heading) ?>
           <div class="w-full flex items-center justify-center mt-2 gap-3">
 
             <!-- Left Gradient Line -->
@@ -425,18 +499,15 @@
       <div class="swiper-wrapper">
 
         <?php if (!empty($courses)): ?>
-
           <?php foreach ($courses as $index => $course): ?>
             <div class="swiper-slide">
-
               <div class="group relative bg-white rounded-3xl mt-16 pt-32 pb-8 px-6 shadow-lg hover:shadow-2xl 
-                transition-all duration-500 border border-gray-100 hover:border-primary/20 
-                overflow-visible fade-up delay-<?= $index ?>"
+                transition-all duration-500 border border-gray-100 hover:border-primary/20 overflow-visible fade-up"
                 data-animate="fade-up" data-delay="<?= 300 + ($index * 100) ?>">
 
                 <!-- Image -->
                 <div class="absolute -top-12 left-1/2 transform -translate-x-1/2 w-[95%] rounded-2xl overflow-hidden shadow-xl">
-                  <img src="<?= base_url('assets/img/courses/' . $course->image) ?>"
+                  <img src="<?= base_url('assets/img/courses/' . ($course->image ?? 'default.png')) ?>"
                     alt="<?= esc($course->title) ?>"
                     class="w-full h-40 object-cover transition-transform duration-700 group-hover:scale-110">
                   <div class="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
@@ -485,8 +556,7 @@
 
                     <div class="w-full bg-gray-200 rounded-full h-2">
                       <div class="bg-gradient-to-r from-secondary-light/80 to-secondary h-2 rounded-full 
-                                transition-all duration-1000 group-hover:w-[<?= esc($course->progress) ?>%] 
-                                w-[<?= esc($course->progress) ?>%]">
+                                transition-all duration-1000 w-[<?= esc($course->progress) ?>%]">
                       </div>
                     </div>
                   </div>
@@ -505,7 +575,6 @@
                 <div class="absolute inset-0 rounded-3xl border-2 border-transparent group-hover:border-primary/10 
                     transition-all duration-500 pointer-events-none"></div>
               </div>
-
             </div>
           <?php endforeach; ?>
         <?php endif; ?>
@@ -523,8 +592,9 @@
   <div class="absolute top-0 left-0 w-72 h-72 bg-primary/5 rounded-full -translate-x-1/2 -translate-y-1/2 blur-3xl"></div>
   <div class="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full translate-x-1/2 translate-y-1/2 blur-3xl"></div>
 </section>
+
 <script>
-  var courseSwiper = new Swiper(".courseSwiper", {
+  const courseSwiper = new Swiper(".courseSwiper", {
     slidesPerView: 3,
     spaceBetween: 30,
     loop: true,
@@ -545,16 +615,18 @@
       },
       1280: {
         slidesPerView: 3
-      }
+      },
     },
     pagination: {
       el: ".swiper-pagination",
-      clickable: true,
+      clickable: true
     },
+    // Prevent forced reflow: use `observer` only if dynamic content changes
+    observer: true,
+    observeParents: true,
   });
 </script>
 
-<!-- ANIMATION STYLES -->
 <style>
   /* Fade-up animation */
   @keyframes fadeUp {
@@ -574,6 +646,7 @@
     animation: fadeUp 1s ease-out forwards;
   }
 
+  /* Delays */
   .delay-1 {
     animation-delay: .2s;
   }
@@ -611,7 +684,7 @@
     animation: zoomFade 1s ease-out forwards;
   }
 
-  /* Image hover animation */
+  /* Image hover */
   .image-hover:hover {
     transform: scale(1.05);
     transition: .4s ease;
@@ -723,7 +796,7 @@
 
     <!-- CTA Button -->
     <div class="text-center mt-10 fade-up delay-2"
-      data-animate="fade-up" data-delay="800">
+      data-animate="fade-up" data-delay="800" aria-label="Learn more about admission process">
       <a href="<?= base_url('admission') ?>"
         class="inline-block px-8 py-4 bg-secondary border-2 border-secondary-dark hover:border-primary-dark 
                text-white font-bold rounded-full shadow-lg hover:bg-primary transition-all duration-300 
@@ -979,45 +1052,38 @@
   const slides = document.querySelectorAll(".testimonial-slide");
   const totalSlides = slides.length;
 
-  function updateSlider() {
-    // Desktop = 2 cards → slide 50% per move
-    // Mobile = 1 card → slide 100% per move
-    const slideWidth = window.innerWidth <= 768 ? 100 : 50;
+  let slideWidthDesktop = 0;
+  let slideWidthMobile = 0;
 
-    track.style.transform = `translateX(-${currentSlide * slideWidth}%)`;
+  // Cache widths once per resize
+  function cacheWidths() {
+    if (slides.length > 0) {
+      slideWidthMobile = slides[0].offsetWidth; // 1 card width
+      slideWidthDesktop = slides[0].offsetWidth / 2; // slide 50% per move
+    }
+  }
+  cacheWidths();
+  window.addEventListener("resize", cacheWidths);
+
+  function updateSlider() {
+    // Use requestAnimationFrame to batch DOM writes
+    window.requestAnimationFrame(() => {
+      const slideWidth = window.innerWidth <= 768 ? slideWidthMobile : slideWidthDesktop;
+      track.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+    });
   }
 
   document.getElementById("next-btn").addEventListener("click", () => {
-    const maxIndex = window.innerWidth <= 768 ?
-      totalSlides - 1 // mobile: 1-by-1
-      :
-      totalSlides - 2; // desktop: 2 visible at once
-
-    if (currentSlide < maxIndex) {
-      currentSlide++;
-    } else {
-      currentSlide = 0; // loop back
-    }
-
+    const maxIndex = window.innerWidth <= 768 ? totalSlides - 1 : totalSlides - 2;
+    currentSlide = currentSlide < maxIndex ? currentSlide + 1 : 0;
     updateSlider();
   });
 
   document.getElementById("prev-btn").addEventListener("click", () => {
-    const maxIndex = window.innerWidth <= 768 ?
-      totalSlides - 1 :
-      totalSlides - 2;
-
-    if (currentSlide > 0) {
-      currentSlide--;
-    } else {
-      currentSlide = maxIndex;
-    }
-
+    const maxIndex = window.innerWidth <= 768 ? totalSlides - 1 : totalSlides - 2;
+    currentSlide = currentSlide > 0 ? currentSlide - 1 : maxIndex;
     updateSlider();
   });
-
-  // Recalculate on resize
-  window.addEventListener("resize", updateSlider);
 </script>
 
 <style>
@@ -1276,10 +1342,10 @@
 
     <!-- Centered Heading -->
     <div class="text-center mb-12">
-      <h4 class="uppercase inline-block px-6 py-2 bg-secondary/10 text-secondary rounded-full font-semibold text-sm tracking-wider border border-secondary/20 mb-4"
+      <h3 class="uppercase inline-block px-6 py-2 bg-secondary/10 text-secondary rounded-full font-semibold text-sm tracking-wider border border-secondary/20 mb-4"
         data-animate="fade-up" data-delay="100">
         Our Blog
-      </h4>
+      </h3>
 
       <h2 class="text-4xl font-bold text-primary"
         data-animate="fade-up" data-delay="200">

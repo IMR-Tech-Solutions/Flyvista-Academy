@@ -36,6 +36,146 @@
     </div>
 </section>
 
+<?php 
+
+// Convert literal \r\n into real newlines
+$card1_raw = !empty($placement->card1_items) 
+    ? str_replace(['\\r\\n', '\\n', '\\r'], "\n", $placement->card1_items) 
+    : '';
+
+$card2_raw = !empty($placement->card2_items) 
+    ? str_replace(['\\r\\n', '\\n', '\\r'], "\n", $placement->card2_items)
+    : '';
+
+$card3_raw = !empty($placement->card3_items) 
+    ? str_replace(['\\r\\n', '\\n', '\\r'], "\n", $placement->card3_items)
+    : '';
+
+// Split into points
+$card1_items = preg_split("/\n+/", trim($card1_raw));
+$card2_items = preg_split("/\n+/", trim($card2_raw));
+$card3_items = preg_split("/\n+/", trim($card3_raw));
+
+?>
+
+<section class="py-10 bg-background-light fade-in-section">
+    <div class="max-w-7xl mx-auto px-6">
+
+        <!-- Heading -->
+        <div class="text-center mb-20">
+            <div class="inline-block px-6 py-2 bg-secondary/5 rounded-full border border-secondary/20 text-secondary text-sm font-semibold tracking-wide mb-4">
+                <?= $placement->section_subheading ?? 'CAREER ELEVATION' ?>
+            </div>
+
+            <h2 class="text-3xl md:text-4xl font-extrabold text-primary">
+                <?= $placement->section_heading ?? 'Placement & Career Development' ?>
+                <div class="w-full flex items-center justify-center mt-2 gap-3">
+
+                    <!-- Left Gradient Line -->
+                    <div class="w-16 h-[2px] bg-gradient-to-r from-transparent to-primary"></div>
+
+                    <!-- Left Dot -->
+                    <span class="h-1 w-1 bg-primary rounded-full"></span>
+
+                    <!-- Center Circle -->
+                    <span class="h-3 w-3 border-2 border-primary rounded-full flex items-center justify-center">
+                        <span class="h-1 w-1 bg-primary rounded-full"></span>
+                    </span>
+
+                    <!-- Right Dot -->
+                    <span class="h-1 w-1 bg-primary rounded-full"></span>
+
+                    <!-- Right Gradient Line -->
+                    <div class="w-16 h-[2px] bg-gradient-to-l from-transparent to-primary"></div>
+
+                </div>
+            </h2>
+
+            <p class="text-textbody-light max-w-3xl mx-auto mt-5 text-lg">
+                <?= $placement->section_description ?? '' ?>
+            </p>
+        </div>
+
+        <!-- Cards -->
+        <div class="grid lg:grid-cols-3 gap-10">
+
+
+            <!-- CARD 1 -->
+            <div class="group bg-white rounded-3xl shadow-lg border border-gray-200 border-t-4 border-t-primary p-10 hover:shadow-2xl transition">
+                
+                <h3 class="text-2xl font-bold text-primary mb-6 flex items-center gap-2">
+                    <span class="text-primary text-3xl leading-none">•</span>
+                    <?= $placement->card1_title ?>
+                </h3>
+
+                <ul class="space-y-4 text-textbody-light leading-relaxed">
+                    <?php foreach ($card1_items as $item): ?>
+                        <?php 
+                            $clean = trim($item, "\" \t\n\r\0\x0B");
+                            if ($clean === '') continue;
+                        ?>
+                        <li class="flex gap-3">
+                            <span class="text-secondary text-xl">✔</span>
+                            <span><?= $clean ?></span>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+
+
+            <!-- CARD 2 -->
+            <div class="group bg-white rounded-3xl shadow-xl border border-primary/30 border-t-4 border-t-primary p-10 hover:shadow-2xl transition">
+                
+                <h3 class="text-2xl font-bold text-primary mb-6 flex items-center gap-2">
+                    <span class="text-primary text-3xl leading-none">•</span>
+                    <?= $placement->card2_title ?>
+                </h3>
+
+                <p class="text-textbody-light mb-6 text-justify"><?= $placement->card2_description ?></p>
+
+                <ul class="space-y-4 text-textbody-light">
+                    <?php foreach ($card2_items as $point): ?>
+                        <?php 
+                            $clean = trim($point, "\" \t\n\r\0\x0B");
+                            if ($clean === '') continue;
+                        ?>
+                        <li class="flex gap-3">
+                            <span class="text-secondary font-bold text-xl">➤</span>
+                            <span><?= $clean ?></span>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+
+
+            <!-- CARD 3 -->
+            <div class="group bg-white rounded-3xl shadow-lg border border-gray-200 border-t-4 border-t-primary p-10 hover:shadow-2xl transition">
+                
+                <h3 class="text-2xl font-bold text-primary mb-6 flex items-center gap-2">
+                    <span class="text-primary text-3xl leading-none">•</span>
+                    <?= $placement->card3_title ?>
+                </h3>
+
+                <p class="text-textbody-light mb-6 text-justify"><?= $placement->card3_description ?></p>
+
+                <div class="space-y-5">
+                    <?php foreach ($card3_items as $value): ?>
+                        <?php 
+                            $clean = trim($value, "\" \t\n\r\0\x0B");
+                            if ($clean === '') continue;
+                        ?>
+                        <div class="p-4 rounded-xl bg-graylight border border-gray-200 hover:bg-primary/5 transition">
+                            <?= $clean ?>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
 <!-- Why Join FlyVista Section -->
 <section id="why-flyvista" class="py-16 bg-gray-50 fade-in-section">
     <div class="container mx-auto px-4">

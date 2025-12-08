@@ -13,13 +13,13 @@ function sendMail($to, $subject, $body, $replyEmail = null, $replyName = null)
         $mail->isSMTP();
         $mail->Host       = 'smtp.gmail.com';   // change as per your SMTP
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'schougule572@gmail.com'; // admin email
+        $mail->Username   = 'admin@flyvistaacademy.com'; // admin email
         $mail->Password   = 'umod kgei jceu vyak';  // Gmail App Password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port       = 465;
 
         // Sender
-        $mail->setFrom('sanikac753@gmail.com', 'FlyVista Website');
+        $mail->setFrom('admin@flyvistaacademy.com', 'FlyVista Website');
 
         // Reply-to (user who filled form)
         if ($replyEmail) {

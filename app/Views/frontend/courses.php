@@ -52,7 +52,7 @@
                 <?= esc($sectionTitle->subheading ?? 'Our Courses') ?>
             </span>
 
-            <h2 class="text-3xl lg:text-4xl font-bold text-primary mt-3 mb-[8rem]">
+            <h2 class="text-3xl lg:text-4xl font-bold text-primary mt-3 mb-[4rem]">
                 <?= esc($sectionTitle->heading ?? 'Empowering Aviation Careers with FlyVista') ?>
 
                 <div class="w-full flex items-center justify-center mt-2 gap-3">
@@ -68,11 +68,11 @@
         </div>
 
         <!-- Course Cards Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mt-8 sm:mt-12">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mt-12 sm:mt-12">
 
             <?php if (!empty($courses)): ?>
                 <?php foreach ($courses as $i => $course): ?>
-                    <div class="group relative bg-white border-gray-300 mt-12 sm:mt-12 border-2 rounded-2xl pt-24 pb-16 px-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:bg-gradient-to-r hover:from-[#335B95] hover:to-[#142947] overflow-visible text-left">
+                    <div class="group relative bg-white border-gray-300 mt-12 sm:mt-12 lg:mt-16 border-2 rounded-2xl pt-24 pb-16 px-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:bg-gradient-to-r hover:from-[#335B95] hover:to-[#142947] overflow-visible text-left">
 
                         <!-- Course Image -->
                         <div class="absolute -top-16 left-1/2 transform -translate-x-1/2 w-[90%] rounded-xl overflow-hidden shadow-lg">
@@ -179,6 +179,230 @@
     }
 </style>
 
+<section class="py-10 bg-gradient-to-b from-graylight to-background-light relative overflow-hidden fade-in-section">
+    <!-- Background decorative elements -->
+    <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute -top-40 -right-40 w-80 h-80 bg-primary/5 rounded-full blur-3xl opacity-70"></div>
+        <div class="absolute top-1/3 -left-40 w-80 h-80 bg-secondary/5 rounded-full blur-3xl opacity-70"></div>
+        <div class="absolute bottom-40 right-1/4 w-40 h-40 bg-primary/10 rounded-full blur-2xl opacity-60"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+        <?php if ($program): ?>
+
+            <!-- Program Header -->
+            <div class="text-center mb-16 animate-fade-in-up">
+
+                <div class="uppercase inline-flex items-center gap-2 bg-secondary/10 text-secondary px-6 py-3 border border-secondary/20 rounded-full mb-6 shadow-lg">
+                    <span class="font-semibold text-sm tracking-wider">
+                        PREMIUM AVIATION PROGRAM
+                    </span>
+                </div>
+
+                <h2 class="text-3xl md:text-3xl lg:text-4xl font-bold text-primary mb-6">
+                    <?= htmlspecialchars($program->title) ?>
+                    <div class="w-full flex items-center justify-center mt-2 gap-3">
+                        <div class="w-16 h-[2px] bg-gradient-to-r from-transparent to-primary"></div>
+                        <span class="h-1 w-1 bg-primary rounded-full"></span>
+                        <span class="h-3 w-3 border-2 border-primary rounded-full flex items-center justify-center">
+                            <span class="h-1 w-1 bg-primary rounded-full"></span>
+                        </span>
+                        <span class="h-1 w-1 bg-primary rounded-full"></span>
+                        <div class="w-16 h-[2px] bg-gradient-to-l from-transparent to-primary"></div>
+                    </div>
+                </h2>
+            </div>
+
+            <!-- Main Grid -->
+            <div class="grid lg:grid-cols-2 gap-12 items-start mb-8">
+
+                <!-- LEFT SIDE -->
+                <div class="space-y-12">
+
+                    <!-- Complete Transformation Card -->
+                    <div class="group relative">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-primary to-primary-dark rounded-3xl blur opacity-25"></div>
+                        <div class="relative bg-white rounded-3xl p-10 shadow-2xl border border-gray-100">
+
+                            <div class="flex items-center gap-4 mb-8">
+                                <div class="p-3 bg-gradient-to-br from-primary/5 to-primary/10 rounded-2xl">
+                                    <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-bold text-heading-light">Complete Transformation Journey</h3>
+                            </div>
+
+                            <p class="text-textbody-light leading-relaxed text-justify text-md">
+                                <?= nl2br(htmlspecialchars($program->overview)) ?>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Training Highlights -->
+                    <div class="group relative">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-secondary to-secondary-dark rounded-3xl blur opacity-20"></div>
+                        <div class="relative bg-white rounded-3xl p-10 shadow-2xl border border-gray-100">
+
+                            <div class="flex items-center gap-4 mb-8">
+                                <div class="p-3 bg-gradient-to-br from-secondary/5 to-secondary/10 rounded-2xl">
+                                    <svg class="w-4 h-4 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-bold text-heading-light">Training Highlights</h3>
+                            </div>
+
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <?php
+                                $highlights = array_filter(explode("\n", $program->training_highlights));
+                                foreach ($highlights as $highlight): ?>
+                                    <div class="flex items-start gap-3">
+                                        <div class="w-3 h-3 mt-2 bg-gradient-to-r from-secondary to-secondary-light rounded-full flex items-center justify-center">
+                                            <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                                    d="M5 13l4 4L19 7"></path>
+                                            </svg>
+                                        </div>
+                                        <span class="text-textbody-light text-md"><?= htmlspecialchars($highlight) ?></span>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT SIDE -->
+                <div class="space-y-8">
+
+                    <!-- Image Box -->
+                    <div class="group relative">
+                        <div class="absolute -inset-4 bg-gradient-to-r from-primary to-secondary rounded-3xl blur-xl opacity-20"></div>
+
+                        <div class="relative overflow-hidden rounded-3xl shadow-2xl">
+
+                            <img src="<?= base_url('assets/img/courses/' . htmlspecialchars($program->image)) ?>"
+                                alt="<?= htmlspecialchars($program->title) ?>"
+                                class="w-full h-full object-cover">
+
+                            <div class="absolute inset-0 bg-gradient-to-t from-heading-light/60 via-transparent"></div>
+
+                            <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <div class="w-8 h-1 bg-secondary rounded-full"></div>
+                                    <span class="text-sm font-semibold tracking-wider">
+                                        FLAGSHIP PROGRAM
+                                    </span>
+                                </div>
+
+                                <h4 class="text-2xl font-bold">
+                                    <?= htmlspecialchars($program->tagline) ?>
+                                </h4>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Distinctive Features -->
+                    <div class="group relative">
+                        <div class="absolute -inset-1 bg-gradient-primary rounded-3xl blur opacity-30"></div>
+
+                        <div class="relative bg-gradient-primary text-white rounded-3xl p-10 shadow-2xl">
+
+                            <div class="flex items-center gap-4 mb-8">
+                                <div class="p-3 bg-white/10 rounded-2xl">
+                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-bold">What Makes This Program Distinctive?</h3>
+                            </div>
+
+                            <ul class="space-y-4">
+                                <?php
+                                $features = array_filter(explode("\n", $program->distinctive_features));
+                                foreach ($features as $feature): ?>
+                                    <li class="flex items-start gap-4">
+                                        <div class="w-3 h-3 mt-2 bg-white/20 rounded-full flex items-center justify-center">
+                                            <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                                    d="M5 13l4 4L19 7"></path>
+                                            </svg>
+                                        </div>
+                                        <span class="text-white/90 text-justify"><?= htmlspecialchars($feature) ?></span>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+
+                        </div>
+                    </div>
+
+                    <!-- Outcome -->
+                    <div class="group relative">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-primary-light to-primary-dark rounded-3xl blur opacity-20"></div>
+
+                        <div class="relative bg-white rounded-3xl p-10 shadow-2xl border border-gray-100">
+
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="p-3 bg-gradient-to-br from-primary/5 to-primary/10 rounded-2xl">
+                                    <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-bold text-heading-light">Program Outcome</h3>
+                            </div>
+
+                            <div class="relative mb-4">
+                                <div class="absolute -left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-primary to-secondary rounded-full"></div>
+
+                                <p class="text-textbody-light text-md leading-relaxed pl-6 text-justify">
+                                    <?= nl2br(htmlspecialchars($program->outcome_description)) ?>
+                                </p>
+                            </div>
+
+                            <div class="pt-2 border-t-2 border-gray-200">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-textbody-light">Success Rate</span>
+                                    <span class="text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                                        <?= htmlspecialchars($program->success_rate) ?>%
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        <?php endif; ?>
+
+    </div>
+
+    <style>
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fade-in-up 0.8s ease-out forwards;
+        }
+    </style>
+</section>
+
 <!-- Student Success Stories Section -->
 <section class="py-10 bg-gradient-to-br from-white to-gray-100 relative overflow-hidden fade-in-section">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -203,9 +427,9 @@
             </h2>
 
             <p class="text-lg text-gray-600 max-w-3xl mx-auto">
-                Each student at Flyvista begins with a dream and graduates with a career. 
-                These case stories highlight real journeys how students overcame challenges, 
-                enhanced their skills, and secured reputable positions in the aviation industry 
+                Each student at Flyvista begins with a dream and graduates with a career.
+                These case stories highlight real journeys how students overcame challenges,
+                enhanced their skills, and secured reputable positions in the aviation industry
                 through structured training, mentorship, and hands-on exposure at Flyvista.
             </p>
         </div>
@@ -328,7 +552,7 @@
                         card.className = "story-card bg-white rounded-xl shadow-lg p-6 cursor-pointer";
                         card.dataset.id = story.id;
 
-                        const initials = story.name.split(" ").map(n => n[0]).join("").substring(0,2).toUpperCase();
+                        const initials = story.name.split(" ").map(n => n[0]).join("").substring(0, 2).toUpperCase();
 
                         card.innerHTML = `
                             <div class="flex items-start">
@@ -419,7 +643,11 @@
 <style>
     .line-clamp-2 {
         display: -webkit-box;
+        display: box;
+        /* optional fallback for older non-webkit browsers */
         -webkit-line-clamp: 2;
+        line-clamp: 2;
+        /* standard property */
         -webkit-box-orient: vertical;
         overflow: hidden;
     }

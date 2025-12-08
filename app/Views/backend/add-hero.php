@@ -96,41 +96,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Left Image -->
-                    <div class="md:col-span-1">
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Left Image</label>
-                        <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg relative">
-
-                            <img id="left-preview" class="hidden mx-auto mb-4 max-h-48 rounded-md object-contain" />
-
-                            <div class="space-y-1 text-center">
-                                <label class="relative cursor-pointer bg-white rounded-md font-medium text-primary">
-                                    <span>Upload a file</span>
-                                    <input type="file" name="left_image" class="sr-only" accept="image/*"
-                                           onchange="previewFlyvistaImage(event,'left-preview')">
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Right Image -->
-                    <div class="md:col-span-1">
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Right Image</label>
-                        <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg relative">
-
-                            <img id="right-preview" class="hidden mx-auto mb-4 max-h-48 rounded-md object-contain" />
-
-                            <div class="space-y-1 text-center">
-                                <label class="relative cursor-pointer bg-white rounded-md font-medium text-primary">
-                                    <span>Upload a file</span>
-                                    <input type="file" name="right_image" class="sr-only" accept="image/*"
-                                           onchange="previewFlyvistaImage(event,'right-preview')">
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
 
                 <!-- Buttons -->

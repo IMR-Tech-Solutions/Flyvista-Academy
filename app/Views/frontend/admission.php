@@ -73,10 +73,16 @@
                 <?php foreach (array_slice($admission_steps, 0, 2) as $step): ?>
                     <div class="relative bg-graylight rounded-2xl min-h-[350px] p-6 pt-16
                                 border border-primary-light/20 overflow-visible">
-                        <!-- Floating Icon -->
-                        <div class="absolute -top-8 left-6 w-16 h-16 rounded-xl border-2 border-primary/50 bg-primary-light/10 
-                                    flex items-center justify-center shadow-lg">
-                            <i class="<?= esc($step->icon) ?> text-primary text-2xl"></i>
+                        <!-- Centered Floating Icon -->
+                        <div class="absolute -top-8 left-1/2 transform -translate-x-1/2 w-20 h-20 
+                                    rounded-full bg-gradient-to-br from-primary/10 to-white
+                                    border-4 border-white shadow-2xl
+                                    flex items-center justify-center">
+                            <!-- Icon Container with gradient border -->
+                            <div class="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-primary-dark
+                                        flex items-center justify-center shadow-inner">
+                                <i class="<?= esc($step->icon) ?> text-white text-xl"></i>
+                            </div>
                         </div>
 
                         <!-- Watermark Number -->
@@ -86,7 +92,7 @@
                         </div>
 
                         <!-- Title -->
-                        <h3 class="text-xl font-bold text-heading-light mb-2">
+                        <h3 class="text-xl font-bold text-heading-light mb-2 text-center mt-4">
                             <?= esc($step->title) ?>
                         </h3>
 
@@ -99,19 +105,91 @@
             </div>
 
             <!-- Center Circular Button (visible on large screens) -->
-            <div class="hidden lg:flex items-center justify-center w-2/12">
-                <button onclick="openAdmissionModal()" 
-                        class="w-32 h-32 rounded-full bg-gradient-to-br from-primary via-primary to-primary-dark text-white 
-                               flex flex-col items-center justify-center
-                               shadow-2xl hover:shadow-4xl hover:scale-110 
-                               active:scale-95 transition-all duration-300
-                               border-8 border-white/50 cursor-pointer
-                               focus:outline-none focus:ring-8 focus:ring-primary/50
-                               hover:rotate-12 transition-transform duration-500">
-                    <span class="text-2xl font-bold leading-tight">Apply</span>
-                    <span class="text-2xl font-bold leading-tight">Now</span>
-                    <i class="fas fa-arrow-right mt-2 text-lg"></i>
+            <div class="hidden lg:flex items-center justify-center w-2/12 relative">
+                <!-- Elegant background glow -->
+                <div class="absolute w-64 h-64 rounded-full bg-white" style="z-index: 1;"></div>
+
+                <button onclick="openAdmissionModal()" class="relative w-40 h-40 rounded-full
+                   bg-gradient-to-br from-primary via-primary-dark to-secondary
+                   text-white 
+                   flex flex-col items-center justify-center
+                   shadow-2xl hover:shadow-3xl 
+                   transform hover:scale-105 
+                   active:scale-95 transition-all duration-500
+                   border-2 border-white/20
+                   cursor-pointer
+                   group overflow-hidden shine" style="z-index: 2;">
+
+                    <!-- Inner gradient ring -->
+                    <div class="absolute inset-0 rounded-full border-4 border-gradient-to-br from-white/30 via-white/20 to-white/30"></div>
+
+                    <!-- Button content -->
+                    <div class="relative z-10 flex flex-col items-center justify-center space-y-1">
+                        <span class="text-2xl font-bold bg-gradient-to-r from-white via-white/80 to-white 
+                         bg-clip-text text-transparent font-serif tracking-wider">
+                            APPLY
+                        </span>
+                        <span class="text-3xl font-bold bg-gradient-to-r from-white via-white/80 to-white 
+                         bg-clip-text text-transparent font-serif tracking-wider mt-[-4px]">
+                            NOW
+                        </span>
+
+                        <!-- Arrow -->
+                        <!--<div class="mt-2 w-12 h-12 rounded-full bg-white/20 flex items-center justify-center-->
+                        <!--group-hover:bg-white/30 transition-all duration-300">-->
+                        <!--    <i class="fas fa-arrow-right text-white text-lg group-hover:translate-x-1 transition-transform duration-300"></i>-->
+                        <!--</div>-->
+                    </div>
                 </button>
+            </div>
+
+            <!-- Mobile Circular Button (visible on small screens) -->
+            <div class="lg:hidden mt-12 relative">
+                <!-- Glow background -->
+                <div class="absolute left-1/2 transform -translate-x-1/2 
+                w-36 h-36 rounded-full bg-gradient-to-r from-primary/20 via-primary/30 to-secondary/20 blur-xl animate-pulse-slow"></div>
+
+                <button onclick="openAdmissionModal()" class="relative w-32 h-32 rounded-full 
+                   bg-gradient-to-br from-primary via-primary-dark to-secondary
+                   text-white 
+                   flex flex-col items-center justify-center
+                   shadow-2xl hover:shadow-3xl 
+                   transform hover:scale-105 hover:-translate-y-1
+                   active:scale-95 transition-all duration-500
+                   border-4 border-white/20
+                   cursor-pointer
+                   group overflow-hidden shine mx-auto z-10">
+
+                    <!-- Shine overlay effect -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-white/10 via-white/20 to-white/10 
+                    -translate-x-full group-hover:translate-x-full transition-transform duration-700 rounded-full"></div>
+
+                    <!-- Button content -->
+                    <div class="relative z-10 flex flex-col items-center justify-center">
+                        <span class="text-lg font-bold leading-tight bg-gradient-to-r from-white to-white/90 
+                         bg-clip-text text-transparent">
+                            Apply
+                        </span>
+                        <span class="text-lg font-bold leading-tight bg-gradient-to-r from-white to-white/90 
+                         bg-clip-text text-transparent">
+                            Now
+                        </span>
+                        <div class="mt-2 w-9 h-9 rounded-full bg-white/20 flex items-center justify-center
+                        group-hover:bg-white/30 transition-all duration-300">
+                            <i class="fas fa-arrow-right text-white text-base 
+                          group-hover:translate-x-1 transition-transform duration-300"></i>
+                        </div>
+                    </div>
+
+                    <!-- Pulsing dot -->
+                    <div class="absolute -top-1 -right-1 w-3 h-3 bg-white rounded-full 
+                    animate-ping opacity-75"></div>
+                </button>
+
+                <!-- Helper text -->
+                <div class="text-center mt-4">
+                    <p class="text-sm text-primary/80 font-medium">Start Your Journey</p>
+                </div>
             </div>
 
             <!-- Right Column - Cards 3 & 4 -->
@@ -119,10 +197,16 @@
                 <?php foreach (array_slice($admission_steps, 2, 2) as $step): ?>
                     <div class="relative bg-graylight rounded-2xl min-h-[350px] p-6 pt-16
                                 border border-primary-light/20 overflow-visible">
-                        <!-- Floating Icon -->
-                        <div class="absolute -top-8 left-6 w-16 h-16 rounded-xl border-2 border-primary/50 bg-primary-light/10 
-                                    flex items-center justify-center shadow-lg">
-                            <i class="<?= esc($step->icon) ?> text-primary text-2xl"></i>
+                        <!-- Centered Floating Icon -->
+                        <div class="absolute -top-8 left-1/2 transform -translate-x-1/2 w-20 h-20 
+                                    rounded-full bg-gradient-to-br from-primary/10 to-white
+                                    border-4 border-white shadow-2xl
+                                    flex items-center justify-center">
+                            <!-- Icon Container with gradient border -->
+                            <div class="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-primary-dark
+                                        flex items-center justify-center shadow-inner">
+                                <i class="<?= esc($step->icon) ?> text-white text-xl"></i>
+                            </div>
                         </div>
 
                         <!-- Watermark Number -->
@@ -132,7 +216,7 @@
                         </div>
 
                         <!-- Title -->
-                        <h3 class="text-xl font-bold text-heading-light mb-2">
+                        <h3 class="text-xl font-bold text-heading-light mb-2 text-center mt-4">
                             <?= esc($step->title) ?>
                         </h3>
 
@@ -144,30 +228,49 @@
                 <?php endforeach; ?>
             </div>
 
-            <!-- Mobile Circular Button (visible on small screens) -->
-            <div class="lg:hidden mt-12">
-                <button onclick="openAdmissionModal()" 
-                        class="w-28 h-28 rounded-full bg-gradient-to-br from-primary to-primary-dark text-white 
-                               flex flex-col items-center justify-center
-                               shadow-2xl hover:shadow-3xl hover:scale-110 
-                               active:scale-95 transition-all duration-300
-                               border-8 border-white/40 cursor-pointer
-                               focus:outline-none focus:ring-8 focus:ring-primary/40
-                               mx-auto">
-                    <span class="text-xl font-bold leading-tight">Apply</span>
-                    <span class="text-xl font-bold leading-tight">Now</span>
-                    <i class="fas fa-arrow-right mt-2 text-base"></i>
-                </button>
-            </div>
-
         </div>
     </div>
 </section>
+
+<!-- ================== ADD CSS ANIMATIONS ================== -->
+<style>
+    @keyframes spin-slow {
+        from {
+            transform: rotate(0deg);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes spin-slower {
+        from {
+            transform: rotate(360deg);
+        }
+
+        to {
+            transform: rotate(0deg);
+        }
+    }
+
+    .animate-spin-slow {
+        animation: spin-slow 20s linear infinite;
+    }
+
+    .animate-spin-slower {
+        animation: spin-slower 30s linear infinite;
+    }
+</style>
 
 <!-- ================== SCRIPT ================== -->
 <script>
     function openAdmissionModal() {
         document.getElementById('admissionModal').classList.remove("hidden");
+        // Optional: Add button click animation
+        const btn = event.currentTarget;
+        btn.classList.add('scale-95');
+        setTimeout(() => btn.classList.remove('scale-95'), 150);
     }
 
     function closeAdmissionModal() {
@@ -375,8 +478,8 @@
             </div>
 
             <div>
-                <label class="block text-sm font-medium mb-1">Subject</label>
-                <input name="subject" type="text" class="w-full p-3 rounded-lg border" placeholder="Enter subject" required>
+                <label class="block text-sm font-medium mb-1">Message</label>
+                <textarea name="subject" class="w-full p-3 rounded-lg border" placeholder="Enter Message" required></textarea>
             </div>
 
             <button type="submit" class="w-full bg-primary text-white py-3 rounded-lg hover:bg-primary-dark">
