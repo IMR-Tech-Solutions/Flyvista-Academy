@@ -122,28 +122,36 @@
                         </h2>
 
                         <div class="space-y-6">
+
                             <!-- Location -->
                             <?php if (!empty($c->location)): ?>
-                                <div class="flex items-start space-x-4 group">
-                                    <div class="w-12 h-12 rounded-lg bg-primary-light flex items-center justify-center text-white group-hover:bg-secondary transition-colors duration-300">
-                                        <i class="fas fa-map-marker-alt"></i>
+                                <div class="flex items-start gap-4 group">
+                                    <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-primary-light 
+                        flex items-center justify-center text-white 
+                        group-hover:bg-secondary transition-colors duration-300">
+                                        <i class="fas fa-map-marker-alt text-lg"></i>
                                     </div>
-                                    <div>
+
+                                    <div class="leading-relaxed break-words">
                                         <h3 class="font-bold text-lg">Our Location</h3>
-                                        <p class="text-textbody-light"><?= esc($c->location) ?></p>
+                                        <p class="text-textbody-light break-words"><?= esc($c->location) ?></p>
                                     </div>
                                 </div>
                             <?php endif; ?>
 
                             <!-- Phone -->
                             <?php if (!empty($c->phone)): ?>
-                                <div class="flex items-start space-x-4 group">
-                                    <div class="w-12 h-12 rounded-lg bg-primary-light flex items-center justify-center text-white group-hover:bg-secondary transition-colors duration-300">
-                                        <i class="fas fa-phone"></i>
+                                <div class="flex items-start gap-4 group">
+                                    <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-primary-light 
+                        flex items-center justify-center text-white 
+                        group-hover:bg-secondary transition-colors duration-300">
+                                        <i class="fas fa-phone text-lg"></i>
                                     </div>
-                                    <div>
+
+                                    <div class="leading-relaxed break-words">
                                         <h3 class="font-bold text-lg">Phone Number</h3>
-                                        <a href="tel:<?= esc($c->phone) ?>" class="text-textbody-light hover:text-secondary transition-colors">
+                                        <a href="tel:<?= esc($c->phone) ?>"
+                                            class="text-textbody-light hover:text-secondary transition-colors break-words">
                                             <?= esc($c->phone) ?>
                                         </a>
                                     </div>
@@ -152,13 +160,17 @@
 
                             <!-- Email -->
                             <?php if (!empty($c->email)): ?>
-                                <div class="flex items-start space-x-4 group">
-                                    <div class="w-12 h-12 rounded-lg bg-primary-light flex items-center justify-center text-white group-hover:bg-secondary transition-colors duration-300">
-                                        <i class="fas fa-envelope"></i>
+                                <div class="flex items-start gap-4 group">
+                                    <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-primary-light 
+                        flex items-center justify-center text-white 
+                        group-hover:bg-secondary transition-colors duration-300">
+                                        <i class="fas fa-envelope text-lg"></i>
                                     </div>
-                                    <div>
+
+                                    <div class="leading-relaxed break-words">
                                         <h3 class="font-bold text-lg">Email Address</h3>
-                                        <a href="mailto:<?= esc($c->email) ?>" class="text-textbody-light hover:text-secondary transition-colors">
+                                        <a href="mailto:<?= esc($c->email) ?>"
+                                            class="text-textbody-light hover:text-secondary transition-colors break-words">
                                             <?= esc($c->email) ?>
                                         </a>
                                     </div>
@@ -331,16 +343,26 @@
                         </div>
                     <?php endif; ?>
 
-                    <!-- Location -->
                     <?php if (!empty($c->location)): ?>
-                        <div class="flex items-start space-x-4 p-4 rounded-xl hover:bg-white transition-all duration-300 group">
-                            <div class="w-10 h-10 rounded-lg bg-secondary/20 flex items-center justify-center text-secondary group-hover:scale-110 transition-transform">
-                                <i class="fas fa-map-marker-alt"></i>
+                        <div class="flex items-start gap-4 p-4 rounded-xl hover:bg-white transition-all duration-300 group">
+
+                            <!-- Icon -->
+                            <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-secondary/20 
+                    flex items-center justify-center text-secondary 
+                    group-hover:scale-110 transition-transform">
+                                <i class="fas fa-map-marker-alt text-lg"></i>
                             </div>
-                            <div>
-                                <h3 class="font-semibold text-heading-light group-hover:text-primary transition-colors">Location</h3>
-                                <p class="text-sm text-textbody-light mt-1"><?= esc($c->location) ?></p>
+
+                            <!-- Text -->
+                            <div class="leading-relaxed break-words">
+                                <h3 class="font-semibold text-heading-light group-hover:text-primary transition-colors">
+                                    Location
+                                </h3>
+                                <p class="text-sm text-textbody-light mt-1 break-words">
+                                    <?= esc($c->location) ?>
+                                </p>
                             </div>
+
                         </div>
                     <?php endif; ?>
                 </div>

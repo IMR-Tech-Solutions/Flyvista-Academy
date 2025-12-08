@@ -889,7 +889,7 @@ class Home extends BaseController
         $model = new FlyvistaModel();
 
         // Fetch all active blog posts
-        $allPosts = $model->getTableData('blog_posts', ['status' => 1], 'post_date DESC');
+        $allPosts = $model->getTableData('blog_posts', 'post_date DESC');
 
         // Fetch breadcrumb section for Blog page
         $breadcrumbData = $model->getTableData('breadcrumb_sections', ['slug' => 'blog'], '', 1);
@@ -919,7 +919,7 @@ class Home extends BaseController
         // Fetch Post
         $postData = $model->getTableData(
             'blog_posts',
-            ['slug' => $slug, 'status' => 1],
+            ['slug' => $slug],
             'id',
             1
         );

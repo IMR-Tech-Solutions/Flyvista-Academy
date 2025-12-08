@@ -13,7 +13,7 @@ function sendMail($to, $subject, $body, $replyEmail = null, $replyName = null)
         $mail->isSMTP();
         $mail->Host       = 'smtp.gmail.com';   // change as per your SMTP
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'admin@flyvistaacademy.com'; // admin email
+        $mail->Username   = 'schougule572@gmail.com'; // admin email
         $mail->Password   = 'umod kgei jceu vyak';  // Gmail App Password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port       = 465;

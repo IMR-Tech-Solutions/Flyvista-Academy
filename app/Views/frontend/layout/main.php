@@ -432,7 +432,7 @@
             <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full border border-white/10"></div>
         </div>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-6 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-4 relative z-10">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
 
                 <!-- Logo & About -->
@@ -553,29 +553,43 @@
 
                     <ul class="space-y-5">
 
-                        <li class="flex items-center group">
-                            <div class="w-10 md:w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mr-4 group-hover:bg-[#E62834] transition-colors duration-300">
-                                <i class="fa-solid fa-location-dot text-white group-hover:text-white text-base leading-none"></i>
+                        <!-- Location -->
+                        <li class="flex items-start gap-4 group">
+                            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-white/10 
+                    flex items-center justify-center 
+                    group-hover:bg-[#E62834] transition-colors duration-300">
+                                <i class="fa-solid fa-location-dot text-white text-base"></i>
                             </div>
-                            <span class="text-gray-200 pt-2">
+
+                            <span class="text-gray-200 text-sm leading-relaxed break-words">
                                 <?= esc($contact->location ?? 'N/A') ?>
                             </span>
                         </li>
 
-                        <li class="flex items-center group">
-                            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mr-4 group-hover:bg-[#E62834] transition-colors duration-300">
-                                <i class="fa-solid fa-phone text-white group-hover:text-white transition-colors duration-300"></i>
+                        <!-- Phone -->
+                        <li class="flex items-start gap-4 group">
+                            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-white/10 
+                    flex items-center justify-center 
+                    group-hover:bg-[#E62834] transition-colors duration-300">
+                                <i class="fa-solid fa-phone text-white"></i>
                             </div>
-                            <a href="tel:<?= esc($contact->phone) ?>" class="text-gray-300 hover:text-[#E62834] transition-colors pt-2">
+
+                            <a href="tel:<?= esc($contact->phone) ?>"
+                                class="text-gray-300 text-md leading-relaxed hover:text-[#E62834] break-words transition-colors">
                                 <?= esc($contact->phone) ?>
                             </a>
                         </li>
 
-                        <li class="flex items-center group">
-                            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mr-4 group-hover:bg-[#E62834] transition-colors duration-300">
-                                <i class="fa-solid fa-envelope text-white group-hover:text-white transition-colors duration-300"></i>
+                        <!-- Email -->
+                        <li class="flex items-start gap-4 group">
+                            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-white/10 
+                    flex items-center justify-center 
+                    group-hover:bg-[#E62834] transition-colors duration-300">
+                                <i class="fa-solid fa-envelope text-white"></i>
                             </div>
-                            <a href="mailto:<?= esc($contact->email) ?>" class="text-gray-300 hover:text-[#E62834] transition-colors pt-2">
+
+                            <a href="mailto:<?= esc($contact->email) ?>"
+                                class="text-gray-300 text-sm leading-relaxed hover:text-[#E62834] break-words transition-colors">
                                 <?= esc($contact->email) ?>
                             </a>
                         </li>
@@ -747,9 +761,58 @@
         const chatbotInput = document.getElementById("chatbot-input");
         const chatbotSend = document.getElementById("chatbot-send");
 
-        chatbotBtn.onclick = () => chatbotBox.classList.toggle("hidden");
+        // Open / Close Chatbot
+        if (chatbotBtn) chatbotBtn.onclick = () => chatbotBox.classList.toggle("hidden");
         chatbotClose.onclick = () => chatbotBox.classList.add("hidden");
 
+        // FAQ Data
+        const faqResponses = [{
+                q: ["what courses", "courses offered", "flyvista courses", "course list"],
+                a: "FlyVista offers Aviation & Cabin Crew Training, Ground Staff Training, Grooming & Personality Development, and Communication Enhancement Programs. Would you like to know which course suits you best?"
+            },
+            {
+                q: ["who can join", "eligibility", "join flyvista", "can i apply"],
+                a: "Anyone with passion and confidence can join! Students after 10th, 12th, or graduation are eligible. No aviation background is required we train you from the basics!"
+            },
+            {
+                q: ["course duration", "how long", "duration"],
+                a: "Our aviation programs range from 6 months to 1 year. We also offer short-term grooming & personality development modules."
+            },
+            {
+                q: ["placement", "job assistance", "do you provide placement"],
+                a: "Yes! FlyVista offers 100% placement assistance, interview preparation, grooming sessions, and guidance until you receive interview opportunities."
+            },
+            {
+                q: ["interview preparation", "airline interview", "mock interview"],
+                a: "Absolutely! We conduct mock interviews, group discussions, grooming checks, communication training, and personality development sessions."
+            },
+            {
+                q: ["why flyvista", "difference", "special about flyvista"],
+                a: "FlyVista focuses on complete transformation—grooming, communication, confidence-building, and personality development—along with aviation knowledge, making you truly job-ready."
+            },
+            {
+                q: ["practical training", "real training", "hands on"],
+                a: "Yes! We provide scenario-based training, role plays, customer handling practice, airport operations knowledge, and grooming workshops."
+            },
+            {
+                q: ["certificate", "certification"],
+                a: "Yes, all students receive a FlyVista Certification after successful completion of the course."
+            }
+        ];
+
+        function getBotResponse(text) {
+            const cleaned = text.toLowerCase();
+
+            for (const faq of faqResponses) {
+                if (faq.q.some(q => cleaned.includes(q))) {
+                    return faq.a;
+                }
+            }
+
+            return "I’m here to help! 😊 Could you please rephrase your question or ask about our courses, eligibility, fees, or placements?";
+        }
+
+        // Add message to UI
         function addMessage(content, type) {
             const div = document.createElement("div");
             div.className = "flex items-start space-x-2 " + (type === "user" ? "justify-end" : "");
@@ -763,7 +826,8 @@
             chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
         }
 
-        async function sendChat() {
+        // Handle Send
+        function sendChat() {
             const text = chatbotInput.value.trim();
             if (text === "") return;
 
@@ -777,29 +841,20 @@
             chatbotMessages.appendChild(loading);
             chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
 
-            // Send to backend
-            const response = await fetch("<?= base_url('chatbot-api') ?>", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    message: text
-                })
-            });
-
-            chatbotMessages.removeChild(loading);
-
-            const data = await response.json();
-            addMessage(data.reply, "bot");
+            setTimeout(() => {
+                chatbotMessages.removeChild(loading);
+                const reply = getBotResponse(text);
+                addMessage(reply, "bot");
+            }, 700);
         }
 
         chatbotSend.onclick = sendChat;
-
-        chatbotInput.addEventListener("keypress", (e) => {
+        chatbotInput.addEventListener("keypress", e => {
             if (e.key === "Enter") sendChat();
         });
     </script>
+
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const elements = document.querySelectorAll('.fade-in-section');
